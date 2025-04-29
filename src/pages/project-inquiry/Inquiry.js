@@ -175,13 +175,26 @@ export const Inquiry = () => {
                 files: fileInfo,
             }
 
-            const response = await fetch("project-inquiry", {
+            const response = await fetch("/api/project-inquiry", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formDataWithFiles),
             })
 
-            const result = await response.json()
+            // Check if response is ok before trying to parse JSON
+            if (!response.ok) {
+                const errorText = await response.text()
+                console.error("Server error response:", errorText)
+                throw new Error(`Server error: ${response.status} ${response.statusText}`)
+            }
+
+            let result
+            try {
+                result = await response.json()
+            } catch (parseError) {
+                console.error("Error parsing JSON response:", parseError)
+                throw new Error("Invalid response from server. Please try again.")
+            }
 
             if (!result.success) {
                 throw new Error(result.message || "Failed to send project inquiry")

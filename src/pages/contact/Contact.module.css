@@ -7,23 +7,21 @@
   margin-left: 78px; /* Account for side nav */
   width: calc(100% - 78px);
   position: relative;
-  background-image: radial-gradient(circle at 80% 10%, rgba(0, 210, 255, 0.08) 0%, transparent 60%);
 }
 
 .contactContainer {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 80px 60px;
+  padding: 120px 80px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 60px;
 }
 
 .contactHeader {
   text-align: left;
   max-width: 800px;
-  margin-bottom: 20px;
 }
 
 .title {
@@ -42,48 +40,10 @@
   max-width: 600px;
 }
 
-/* Content Layout */
-.contentLayout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: flex-start;
-}
-
-.formWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
 /* Contact Form */
 .contactForm {
+  max-width: 900px;
   width: 100%;
-  background: rgba(30, 30, 30, 0.5);
-  border-radius: 16px;
-  padding: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.formHeader {
-  margin-bottom: 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 16px;
-}
-
-.formTitle {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: rgb(255, 255, 255);
-  margin: 0 0 8px;
-}
-
-.formSubtitle {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
-  margin: 0;
 }
 
 .formGrid {
@@ -103,16 +63,9 @@
 }
 
 .formLabel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   font-size: 0.95rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
-}
-
-.labelIcon {
-  color: rgb(0, 210, 255);
 }
 
 .formInput,
@@ -120,8 +73,8 @@
 .formTextarea {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 14px 16px;
+  border-radius: 4px;
+  padding: 12px 16px;
   font-size: 1rem;
   color: rgb(255, 255, 255);
   transition: all 0.3s ease;
@@ -150,20 +103,317 @@
   color: rgb(255, 86, 86);
   font-size: 0.85rem;
   margin: 4px 0 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
-.errorMessage {
+.formActions {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitButton {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  background-color: rgba(255, 86, 86, 0.1);
-  border-left: 3px solid rgb(255, 86, 86);
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: rgb(0, 210, 255);
+  color: rgb(17, 17, 17);
+  border: none;
   border-radius: 4px;
-  color: rgb(255, 86, 86);
-  margin-bottom: 20px;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: rgba(0, 210, 255, 0.9);
+  transform: translateY(-2px);
+}
+
+.submitButton:disabled {
+  background-color: rgba(0, 210, 255, 0.5);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spinnerIcon {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Success Message */
+.successContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+.successIcon {
+  color: rgb(0, 210, 255);
+  margin-bottom: 24px;
+}
+
+.successTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  margin: 0 0 16px;
+}
+
+.successText {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 32px;
+}
+
+.resetButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.resetButton:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Contact Info */
+.contactInfo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+  padding-top: 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contactInfoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contactInfoTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  margin: 0;
+}
+
+.contactInfoText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.contactInfoLink {
+  font-size: 1rem;
+  color: rgb(0, 210, 255);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contactInfoLink:hover {
+  color: rgba(0, 210, 255, 0.8);
+  text-decoration: underline;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 16px;
+}
+
+.socialLink {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.socialLink:hover {
+  color: rgb(0, 210, 255);
+}
+
+/* Project Section */
+.projectSection {
+  margin-top: 40px;
+  padding: 60px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0, 210, 255, 0.1), rgba(0, 210, 255, 0.05));
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.projectSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(0, 210, 255, 0.15) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.projectSectionContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.projectSectionIcon {
+  color: rgb(0, 210, 255);
+  margin-bottom: 24px;
+  background: rgba(0, 210, 255, 0.1);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+}
+
+.projectSectionTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  margin: 0 0 16px;
+}
+
+.projectSectionText {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 32px;
+}
+
+.projectButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background-color: rgb(0, 210, 255);
+  color: rgb(17, 17, 17);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(0, 210, 255, 0.3);
+}
+
+.projectButton:hover {
+  background-color: rgba(0, 210, 255, 0.9);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 210, 255, 0.4);
+}
+
+.projectButtonIcon {
+  transition: transform 0.3s ease;
+}
+
+.projectButton:hover .projectButtonIcon {
+  transform: translateX(4px);
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .contactContainer {
+    padding: 100px 60px;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .projectSection {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contactSection {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .contactContainer {
+    padding: 100px 40px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .fullWidth {
+    grid-column: span 1;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .contactInfo {
+    grid-template-columns: 1fr;
+  }
+
+  .projectSectionTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactContainer {
+    padding: 80px 20px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .formActions {
+    justify-content: center;
+  }
+
+  .submitButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .projectSection {
+    padding: 30px 20px;
+  }
+
+  .projectButton {
+    width: 100%;
+    justify-content: center;
+  }
 }
