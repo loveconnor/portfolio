@@ -1,0 +1,185 @@
+.fileUploadContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.dropzone {
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+.dropzone:hover {
+  border-color: rgba(0, 210, 255, 0.4);
+  background-color: rgba(0, 210, 255, 0.05);
+}
+
+.dragging {
+  border-color: rgb(0, 210, 255);
+  background-color: rgba(0, 210, 255, 0.1);
+}
+
+.fileInput {
+  display: none;
+}
+
+.dropzoneContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.uploadIcon {
+  color: rgb(0, 210, 255);
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.dropzoneText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.highlight {
+  color: rgb(0, 210, 255);
+  font-weight: 500;
+}
+
+.dropzoneHint {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.fileItem:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.filePreview {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 210, 255);
+  flex-shrink: 0;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fileInfo {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.fileName {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileSize {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.removeButton {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.removeButton:hover {
+  background-color: rgba(255, 86, 86, 0.2);
+  color: rgb(255, 86, 86);
+}
+
+.addMoreButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: rgb(0, 210, 255);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 8px 0;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+}
+
+.addMoreButton:hover {
+  color: rgba(0, 210, 255, 0.8);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .dropzone {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dropzone {
+    padding: 16px;
+  }
+
+  .dropzoneText {
+    font-size: 0.9rem;
+  }
+
+  .dropzoneHint {
+    font-size: 0.8rem;
+  }
+}

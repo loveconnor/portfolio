@@ -1,0 +1,17 @@
+.home {
+  overflow-x: hidden;
+  background: var(--colorBackground);
+  position: relative;
+}
+
+.backgroundGradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 15% 50%, rgb(var(--rgbAccent) / 0.04) 0%, transparent 80%),
+    radial-gradient(circle at 85% 30%, rgb(var(--rgbAccent) / 0.04) 0%, transparent 80%);
+  z-index: -1;
+  pointer-events: none;
+}

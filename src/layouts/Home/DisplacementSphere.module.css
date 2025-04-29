@@ -1,0 +1,15 @@
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;          /* fill viewport so the sphere is never clipped */
+  opacity: 0;
+  transition: opacity 2s var(--bezierFastoutSlowin);
+  will-change: opacity, transform;
+  pointer-events: none;   /* canvas is visual only */
+  z-index: -1;            /* sits behind page content */
+}
+
+.canvas[data-visible='true'] {
+  opacity: 1;
+}

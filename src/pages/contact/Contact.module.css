@@ -1,0 +1,169 @@
+.contactSection {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: rgb(17, 17, 17);
+  color: rgb(255, 255, 255);
+  margin-left: 78px; /* Account for side nav */
+  width: calc(100% - 78px);
+  position: relative;
+  background-image: radial-gradient(circle at 80% 10%, rgba(0, 210, 255, 0.08) 0%, transparent 60%);
+}
+
+.contactContainer {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.contactHeader {
+  text-align: left;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: rgb(255, 255, 255);
+  background: linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+}
+
+/* Content Layout */
+.contentLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Contact Form */
+.contactForm {
+  width: 100%;
+  background: rgba(30, 30, 30, 0.5);
+  border-radius: 16px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.formHeader {
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 16px;
+}
+
+.formTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  margin: 0 0 8px;
+}
+
+.formSubtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fullWidth {
+  grid-column: span 2;
+}
+
+.formLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.labelIcon {
+  color: rgb(0, 210, 255);
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: rgb(0, 210, 255);
+  box-shadow: 0 0 0 2px rgba(0, 210, 255, 0.2);
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.formError {
+  color: rgb(255, 86, 86);
+  font-size: 0.85rem;
+  margin: 4px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background-color: rgba(255, 86, 86, 0.1);
+  border-left: 3px solid rgb(255, 86, 86);
+  border-radius: 4px;
+  color: rgb(255, 86, 86);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}

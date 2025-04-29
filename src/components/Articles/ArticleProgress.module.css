@@ -1,0 +1,22 @@
+.progressContainer {
+  position: fixed;
+  top: 0;
+  left: 78px; /* Account for side nav */
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 1000;
+}
+
+.progressBar {
+  height: 100%;
+  background: rgb(0, 210, 255);
+  transform-origin: 0%;
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .progressContainer {
+    left: 0;
+  }
+}
