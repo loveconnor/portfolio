@@ -61,11 +61,12 @@ export const Contact = () => {
         setSubmitError(null)
 
         try {
-            await fetch("project-inquiry", {
+            const response = await fetch("project-inquiry", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             });
+            const result = await response.json();
 
             if (!result.success) {
                 throw new Error(result.message || "Failed to send message")
@@ -111,7 +112,7 @@ export const Contact = () => {
                         <DecoderText text="Get in Touch" start={isHeaderVisible} delay={300} />
                     </Heading>
                     <Text size="l" as="p" className={styles.subtitle}>
-                        Have a question or just want to say hello? I'd love to hear from you.
+                        Have a question or just want to say hello? I&apos;d love to hear from you.
                     </Text>
                 </motion.div>
 
@@ -133,7 +134,7 @@ export const Contact = () => {
                                         Message Sent Successfully
                                     </Heading>
                                     <Text size="m" as="p" className={styles.successText}>
-                                        Thank you for reaching out! I'll get back to you as soon as possible.
+                                        Thank you for reaching out! I&apos;ll get back to you as soon as possible.
                                     </Text>
                                     <Button className={styles.resetButton} onClick={handleReset} icon="arrowLeft">
                                         Send another message
@@ -150,7 +151,7 @@ export const Contact = () => {
                                 >
                                     <div className={styles.formHeader}>
                                         <h3 className={styles.formTitle}>Send a Message</h3>
-                                        <p className={styles.formSubtitle}>I'll respond within 24-48 hours</p>
+                                        <p className={styles.formSubtitle}>I&apos;ll respond within 24-48 hours</p>
                                     </div>
 
                                     {submitError && (
@@ -301,7 +302,7 @@ export const Contact = () => {
                                 Have a project in mind?
                             </Heading>
                             <Text size="m" as="p" className={styles.projectSectionText}>
-                                Let's work together to bring your vision to life. Start the conversation by sharing your project
+                                Let&apos;s work together to bring your vision to life. Start the conversation by sharing your project
                                 details.
                             </Text>
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>

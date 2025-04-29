@@ -4,14 +4,14 @@ export async function sendContactEmail(formData) {
     try {
         // Validate required fields
         if (!formData.name || !formData.email || !formData.message) {
-            return { success: false, message: "Missing required fields" }
+            return { success: false, message: "Missing required fields" };
         }
 
         // Dynamically import SendGrid only on the server
-        const sgMail = (await import("@sendgrid/mail")).default
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+        const sgMail = (await import("@sendgrid/mail")).default;
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-        const subject = `New Contact Form Submission from ${formData.name}`
+        const subject = `New Contact Form Submission from ${formData.name}`;
         const emailContent = `
       <h2>New Contact Form Submission</h2>
       <p><strong>Name:</strong> ${formData.name}</p>
@@ -26,15 +26,15 @@ export async function sendContactEmail(formData) {
             from: process.env.SENDER_EMAIL || "noreply@yourwebsite.com",
             subject: subject,
             html: emailContent,
-        }
+        };
 
         // Send email
-        await sgMail.send(msg)
+        await sgMail.send(msg);
 
-        return { success: true, message: "Email sent successfully" }
+        return { success: true, message: "Email sent successfully" };
     } catch (error) {
-        console.error("Error sending contact email:", error)
-        return { success: false, message: "Failed to send email", error: error.message }
+        console.error("Error sending contact email:", error);
+        return { success: false, message: "Failed to send email", error: error.message };
     }
 }
 
@@ -42,14 +42,14 @@ export async function sendProjectInquiry(formData, files) {
     try {
         // Validate required fields
         if (!formData.name || !formData.email || !formData.projectName || !formData.projectDescription) {
-            return { success: false, message: "Missing required fields" }
+            return { success: false, message: "Missing required fields" };
         }
 
         // Dynamically import SendGrid only on the server
-        const sgMail = (await import("@sendgrid/mail")).default
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+        const sgMail = (await import("@sendgrid/mail")).default;
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-        const subject = `New Project Inquiry from ${formData.name}: ${formData.projectName}`
+        const subject = `New Project Inquiry from ${formData.name}: ${formData.projectName}`;
         const emailContent = `
       <h2>New Project Inquiry</h2>
       <h3>Project Details</h3>
@@ -75,14 +75,14 @@ export async function sendProjectInquiry(formData, files) {
             from: process.env.SENDER_EMAIL || "noreply@yourwebsite.com",
             subject: subject,
             html: emailContent,
-        }
+        };
 
         // Send email
-        await sgMail.send(msg)
+        await sgMail.send(msg);
 
-        return { success: true, message: "Project inquiry sent successfully" }
+        return { success: true, message: "Project inquiry sent successfully" };
     } catch (error) {
-        console.error("Error sending project inquiry:", error)
-        return { success: false, message: "Failed to send project inquiry", error: error.message }
+        console.error("Error sending project inquiry:", error);
+        return { success: false, message: "Failed to send project inquiry", error: error.message };
     }
 }

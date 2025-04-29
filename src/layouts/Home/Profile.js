@@ -58,7 +58,7 @@ const ProfileText = ({ visible, titleId }) => {
         initial="hidden"
         animate={visible ? "visible" : "hidden"}
       >
-        <span className={styles.greetingText}>Hello, I'm</span>
+        <span className={styles.greetingText}>Hello, I&apos;m</span>
       </motion.div>
 
       <Heading className={styles.title} data-visible={visible} level={1} id={titleId}>

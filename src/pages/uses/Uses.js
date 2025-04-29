@@ -212,7 +212,7 @@ export const Uses = () => {
             <div className={styles.noResults}>
               <Search size={40} className={styles.noResultsIcon} />
               <h3>No tools found</h3>
-              <p>Try adjusting your search or filter to find what you're looking for.</p>
+              <p>Try adjusting your search or filter to find what you&apos;re looking for.</p>
               <button
                 className={styles.resetButton}
                 onClick={() => {

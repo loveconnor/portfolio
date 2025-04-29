@@ -1,16 +1,18 @@
-import { Button } from 'components/Button';
-import { useAppContext } from 'hooks';
-import { useId } from 'react';
-import styles from './ThemeToggle.module.css';
+"use client"
+
+import { Button } from "components/Button"
+import { useAppContext } from "hooks"
+import { useId } from "react"
+import styles from "./ThemeToggle.module.css"
 
 export const ThemeToggle = ({ isMobile, ...rest }) => {
-  const { dispatch } = useAppContext();
-  const id = useId();
-  const maskId = `${id}theme-toggle-mask`;
+  const { dispatch } = useAppContext()
+  const id = useId()
+  const maskId = `${id}theme-toggle-mask`
 
   const handleClick = () => {
-    dispatch({ type: 'toggleTheme' });
-  };
+    dispatch({ type: "toggleTheme" })
+  }
 
   return (
     <Button
@@ -32,14 +34,8 @@ export const ThemeToggle = ({ isMobile, ...rest }) => {
           className={styles.path}
           d="M19 3v7M19 35v-7M32.856 11l-6.062 3.5M5.144 27l6.062-3.5M5.144 11l6.062 3.5M32.856 27l-6.062-3.5"
         />
-        <circle
-          className={styles.circle}
-          mask={`url(#${maskId})`}
-          cx="19"
-          cy="19"
-          r="12"
-        />
+        <circle className={styles.circle} mask={`url(#${maskId})`} cx="19" cy="19" r="12" />
       </svg>
     </Button>
-  );
-};
+  )
+}

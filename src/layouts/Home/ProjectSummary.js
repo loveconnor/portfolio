@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ExternalLink, Github } from 'lucide-react'
 import { Button } from "components/Button"

@@ -169,11 +169,19 @@ export const Inquiry = () => {
                 type: file.type,
             }))
 
-            await fetch("project-inquiry", {
+            // Include file info in the data
+            const formDataWithFiles = {
+                ...data,
+                files: fileInfo,
+            }
+
+            const response = await fetch("project-inquiry", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
+                body: JSON.stringify(formDataWithFiles),
+            })
+
+            const result = await response.json()
 
             if (!result.success) {
                 throw new Error(result.message || "Failed to send project inquiry")
@@ -303,7 +311,7 @@ export const Inquiry = () => {
                         </Heading>
 
                         <div className={styles.optionSection}>
-                            <h4 className={styles.optionSectionTitle}>What's your budget range?</h4>
+                            <h4 className={styles.optionSectionTitle}>What&apos;s your budget range?</h4>
                             <div className={styles.optionsGrid}>
                                 {budgetRanges.map((budget) => (
                                     <motion.div
@@ -335,7 +343,7 @@ export const Inquiry = () => {
                         </div>
 
                         <div className={styles.optionSection}>
-                            <h4 className={styles.optionSectionTitle}>What's your timeline?</h4>
+                            <h4 className={styles.optionSectionTitle}>What&apos;s your timeline?</h4>
                             <div className={styles.optionsGrid}>
                                 {timelineOptions.map((timeline) => (
                                     <motion.div
@@ -461,7 +469,7 @@ export const Inquiry = () => {
         <Section className={styles.projectInquirySection}>
             <Meta
                 title="Start a Project | Connor Love"
-                description="Share your project details and let's create something amazing together."
+                description="Share your project details and let&apos;s create something amazing together."
             />
 
             <div className={styles.projectInquiryContainer}>
@@ -481,7 +489,7 @@ export const Inquiry = () => {
                                 Project Inquiry Submitted!
                             </Heading>
                             <Text size="m" as="p" className={styles.successText}>
-                                Thank you for sharing your project details. I'll review your inquiry and get back to you within 1-2
+                                Thank you for sharing your project details. I&apos;ll review your inquiry and get back to you within 1-2
                                 business days to discuss next steps.
                             </Text>
                             <Button className={styles.backButton} onClick={handleBackToHome}>
@@ -500,7 +508,7 @@ export const Inquiry = () => {
                                     Start a Project
                                 </Heading>
                                 <Text size="m" as="p" className={styles.subtitle}>
-                                    Tell me about your project and I'll help bring your vision to life.
+                                    Tell me about your project and I&apos;ll help bring your vision to life.
                                 </Text>
                             </div>
 
