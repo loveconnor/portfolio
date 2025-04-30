@@ -1,60 +1,71 @@
-"use client"
-import sprTexturePlaceholder from "assets/spr-lesson-builder-dark-placeholder.jpg"
-import sprTexture from "assets/flowpoint.png"
-import { Footer } from "components/Footer"
-import { Meta } from "components/Meta"
-import { Intro } from "layouts/Home/Intro"
-import { Profile } from "layouts/Home/Profile"
-import { ProjectSummary } from "layouts/Home/ProjectSummary"
-import { useEffect, useRef, useState } from "react"
-import styles from "./Home.module.css"
+'use client';
+import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
+import sprTexture from 'assets/flowpoint.png';
+import { Footer } from 'components/Footer';
+import { Meta } from 'components/Meta';
+import { Intro } from 'layouts/Home/Intro';
+import { Profile } from 'layouts/Home/Profile';
+import { ProjectSummary } from 'layouts/Home/ProjectSummary';
+import { useEffect, useRef, useState } from 'react';
+import styles from './Home.module.css';
 
-const disciplines = ["Developer", "Photoshopper", "UI/UX Expert", "SEO Optimizer", "Brand-Builder"]
+const baseDisciplines = [
+  'VUkvVVggRXhwZXJ0',
+  'RGV2ZWxvcGVy',
+  'U0VPIE9wdGltaXplcg==',
+  'QnJhbmQtQnVpbGRlcg==',
+  'UGhvdG9zaG9wcGVy',
+];
+
+// hehe we decode the base64 strings to get the actual disciplines hehe
+const disciplines = baseDisciplines.map(b64 =>
+  Buffer.from(b64, 'base64').toString('utf-8')
+);
 
 export const Home = () => {
-  const [visibleSections, setVisibleSections] = useState([])
-  const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false)
-  const intro = useRef(null)
-  const projectOne = useRef(null)
-  const details = useRef(null)
+  const [visibleSections, setVisibleSections] = useState([]);
+  const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
+  const intro = useRef(null);
+  const projectOne = useRef(null);
+  const details = useRef(null);
 
   useEffect(() => {
-    const sections = [intro, projectOne, details]
+    const sections = [intro, projectOne, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const section = entry.target
-            observer.unobserve(section)
-            if (visibleSections.includes(section)) return
-            setVisibleSections((prevSections) => [...prevSections, section])
+            const section = entry.target;
+            observer.unobserve(section);
+            if (visibleSections.includes(section)) return;
+            setVisibleSections(prevSections => [...prevSections, section]);
           }
-        })
+        });
       },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
-    )
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    );
 
     const indicatorObserver = new IntersectionObserver(
       ([entry]) => {
-        setScrollIndicatorHidden(!entry.isIntersecting)
+        setScrollIndicatorHidden(!entry.isIntersecting);
       },
-      { rootMargin: "-100% 0px 0px 0px" },
-    )
+      { rootMargin: '-100% 0px 0px 0px' }
+    );
 
-    sections.forEach((section) => {
+    sections.forEach(section => {
       if (section.current) {
-        sectionObserver.observe(section.current)
+        sectionObserver.observe(section.current);
       }
-    })
+    });
 
-    indicatorObserver.observe(intro.current)
+    indicatorObserver.observe(intro.current);
 
     return () => {
-      sectionObserver.disconnect()
-      indicatorObserver.disconnect()
-    }
-  }, [visibleSections])
+      sectionObserver.disconnect();
+      indicatorObserver.disconnect();
+    };
+  }, [visibleSections]);
 
   return (
     <div className={styles.home}>
@@ -64,7 +75,12 @@ export const Home = () => {
         title="Designer + Developer"
         description="Design Portfolio of Connor Love — An innovative web and graphic designer specializing in creating dynamic web and mobile applications, with an emphasis on user-centric design, motion graphics, and universal accessibility."
       />
-      <Intro id="intro" sectionRef={intro} disciplines={disciplines} scrollIndicatorHidden={scrollIndicatorHidden} />
+      <Intro
+        id="intro"
+        sectionRef={intro}
+        disciplines={disciplines}
+        scrollIndicatorHidden={scrollIndicatorHidden}
+      />
       <ProjectSummary
         id="project-1"
         sectionRef={projectOne}
@@ -75,8 +91,8 @@ export const Home = () => {
         buttonText="View Case Study"
         buttonLink="/projects/flowpoint"
         model={{
-          type: "laptop",
-          alt: "A project management tool",
+          type: 'laptop',
+          alt: 'A project management tool',
           textures: [
             {
               srcSet: [sprTexture],
@@ -92,5 +108,5 @@ export const Home = () => {
       />
       <Footer />
     </div>
-  )
-}
+  );
+};
