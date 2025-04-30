@@ -10,12 +10,11 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './Home.module.css';
 
 const baseDisciplines = [
-  'RGV2ZWxvcGVy',
-  'UGhvdG9zaG9wcGVy',
   'VUkvVVggRXhwZXJ0',
+  'RGV2ZWxvcGVy',
   'U0VPIE9wdGltaXplcg==',
   'QnJhbmQtQnVpbGRlcg==',
-  'R29hdC1GdWNrZXI=',
+  'UGhvdG9zaG9wcGVy',
 ];
 
 // hehe we decode the base64 strings to get the actual disciplines hehe
