@@ -16,6 +16,7 @@ import { formatTimecode } from "utils/timecode"
 import { Post, postMarkdown } from "layouts/Post"
 import { ArticleProgress } from "components/Articles/ArticleProgress"
 import { ArticleShare } from "components/Articles/ArticleShare"
+import { SEO } from "components/Seo"
 
 export default function PostPage({ frontmatter, code, timecode }) {
   // Memoize the MDX component
@@ -34,8 +35,24 @@ export default function PostPage({ frontmatter, code, timecode }) {
     },
   }
 
+  // Extract tags from frontmatter if they exist
+  const tags = frontmatter.tags || []
+
+  // Create a description from the abstract or use a fallback
+  const description =
+    frontmatter.abstract || `Read ${frontmatter.title} - an article by Connor Love about ${tags.join(", ")}.`
+
   return (
     <>
+      <SEO
+        title={`${frontmatter.title} | Connor Love`}
+        description={description}
+        image={frontmatter.banner ? `${process.env.NEXT_PUBLIC_SITE_URL}${frontmatter.banner}` : undefined}
+        article={true}
+        publishedTime={frontmatter.date}
+        modifiedTime={frontmatter.updatedAt}
+        tags={tags}
+      />
       <ArticleProgress />
       <motion.div initial="hidden" animate="visible" variants={variants}>
         <Post timecode={timecode} {...frontmatter}>
@@ -80,6 +97,12 @@ export const getStaticProps = async ({ params }) => {
         ...frontmatter,
         slug: params.slug,
         date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
+        // Add updatedAt if it exists in frontmatter, otherwise use date
+        updatedAt: frontmatter.updatedAt
+          ? new Date(frontmatter.updatedAt).toISOString()
+          : frontmatter.date
+            ? new Date(frontmatter.date).toISOString()
+            : null,
       },
       timecode,
     },

@@ -13,13 +13,14 @@ import { Text } from "components/Text"
 import { useWindowSize } from "hooks"
 import { formatDate } from "utils/date"
 import { useIntersectionObserver } from "hooks/use-intersection-observer"
-import { Calendar, Clock, ArrowRight, TrendingUp } from 'lucide-react'
+import { Calendar, Clock, ArrowRight, TrendingUp } from "lucide-react"
+import { SEO } from "components/Seo"
 import styles from "./Articles.module.css"
 
 // Modern text animation component
 const AnimatedText = ({ text, visible, delay = 0 }) => {
   // Split text into words
-  const words = text.split(" ");
+  const words = text.split(" ")
 
   const container = {
     hidden: { opacity: 0 },
@@ -27,7 +28,7 @@ const AnimatedText = ({ text, visible, delay = 0 }) => {
       opacity: 1,
       transition: { staggerChildren: 0.12, delayChildren: delay * i },
     }),
-  };
+  }
 
   const child = {
     hidden: {
@@ -45,7 +46,7 @@ const AnimatedText = ({ text, visible, delay = 0 }) => {
         stiffness: 100,
       },
     },
-  };
+  }
 
   return (
     <motion.span
@@ -55,17 +56,13 @@ const AnimatedText = ({ text, visible, delay = 0 }) => {
       animate={visible ? "visible" : "hidden"}
     >
       {words.map((word, index) => (
-        <motion.span
-          key={index}
-          style={{ display: "inline-block", marginRight: "0.4em" }}
-          variants={child}
-        >
+        <motion.span key={index} style={{ display: "inline-block", marginRight: "0.4em" }} variants={child}>
           {word}
         </motion.span>
       ))}
     </motion.span>
-  );
-};
+  )
+}
 
 const ArticlesPost = ({ slug, title, abstract, date, featured, banner, timecode, index }) => {
   const [hovered, setHovered] = useState(false)
@@ -91,7 +88,7 @@ const ArticlesPost = ({ slug, title, abstract, date, featured, banner, timecode,
     hidden: {
       opacity: 0,
       y: 50,
-      scale: 0.95
+      scale: 0.95,
     },
     visible: {
       opacity: 1,
@@ -100,7 +97,7 @@ const ArticlesPost = ({ slug, title, abstract, date, featured, banner, timecode,
       transition: {
         duration: 0.6,
         delay: index * 0.1,
-        ease: [0.25, 0.1, 0.25, 1.0]
+        ease: [0.25, 0.1, 0.25, 1.0],
       },
     },
   }
@@ -124,7 +121,7 @@ const ArticlesPost = ({ slug, title, abstract, date, featured, banner, timecode,
                   play={hovered}
                   src={{ src: banner || "/placeholder.svg" }}
                   placeholder={{ src: `${banner.split(".")[0]}-placeholder.jpg` }}
-                  alt=""
+                  alt={title}
                   role="presentation"
                 />
                 {featured && (
@@ -218,8 +215,17 @@ export const Articles = ({ posts, featured }) => {
   const filteredPosts =
     activeFilter === "latest" ? allPosts : [...allPosts].sort((a, b) => (b.views || 0) - (a.views || 0))
 
+  // Create a description for the articles page
+  const articlesDescription =
+    "Explore articles and insights on design, development, and the digital landscape. Technical articles, tutorials, and thoughts on modern web development."
+
   return (
     <article className={styles.articles}>
+      <SEO
+        title="Articles & Insights | Connor Love"
+        description={articlesDescription}
+        canonicalUrl={`${process.env.NEXT_PUBLIC_SITE_URL}/articles`}
+      />
       <Meta
         title="Articles"
         description="A collection of technical design and development articles. May contain incoherent ramblings."
@@ -237,7 +243,11 @@ export const Articles = ({ posts, featured }) => {
               <AnimatedText text="Articles & Insights" visible={isHeaderVisible} delay={0.3} />
             </Heading>
             <Text size="l" as="p" className={styles.heroSubtitle}>
-              <AnimatedText text="Thoughts on design, development, and the digital landscape" visible={isHeaderVisible} delay={0.5} />
+              <AnimatedText
+                text="Thoughts on design, development, and the digital landscape"
+                visible={isHeaderVisible}
+                delay={0.5}
+              />
             </Text>
           </motion.div>
 
