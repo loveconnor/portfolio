@@ -14,10 +14,12 @@ import { NavToggle } from "./NavToggle"
 import styles from "./Navbar.module.css"
 import { ThemeToggle } from "./ThemeToggle"
 import { navLinks, socialLinks } from "./navData"
+import { InstagramIcon, LinkedInIcon, GitHubIcon } from "components/Icon"
 
 export const Navbar = () => {
   const [current, setCurrent] = useState()
   const [target, setTarget] = useState()
+  const [scrolled, setScrolled] = useState(false)
   const { themeId } = useTheme()
   const { menuOpen, dispatch } = useAppContext()
   const { route, asPath } = useRouter()
@@ -30,6 +32,21 @@ export const Navbar = () => {
     // Prevent ssr mismatch by storing this in state
     setCurrent(asPath)
   }, [asPath])
+
+  // Handle scroll events
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY
+      if (scrollPosition > 50) {
+        setScrolled(true)
+      } else {
+        setScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // Handle smooth scroll nav items
   useEffect(() => {
@@ -137,13 +154,24 @@ export const Navbar = () => {
   }
 
   return (
-    <header className={styles.navbar} ref={headerRef}>
+    <header
+      className={styles.navbar}
+      ref={headerRef}
+      style={
+        scrolled
+          ? {
+            background: `rgb(var(--rgbBackground) / 0.95)`,
+            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+            padding: `calc(var(--spaceXS) * 0.8) var(--spaceL)`,
+          }
+          : {}
+      }
+    >
       <RouterLink href={route === "/" ? "/#intro" : "/"} scroll={false}>
         <a data-navbar-item className={styles.logo} aria-label="Connor Love, Designer" onClick={handleMobileNavClick}>
           <Monogram highlight />
         </a>
       </RouterLink>
-      <NavToggle onClick={() => dispatch({ type: "toggleMenu" })} menuOpen={menuOpen} />
       <nav className={styles.nav}>
         <div className={styles.navList}>
           {navLinks.map(({ label, pathname }) => (
@@ -159,11 +187,16 @@ export const Navbar = () => {
             </RouterLink>
           ))}
         </div>
-        <div className={styles.navFooter}>
-          {!isMobile && <ThemeToggle data-navbar-item />}
-          <NavbarIcons desktop />
-        </div>
       </nav>
+      <div className={styles.navFooter}>
+        {!isMobile && (
+          <div className={styles.themeToggleWrapper}>
+            <ThemeToggle data-navbar-item />
+          </div>
+        )}
+        <NavbarIcons desktop />
+        <NavToggle onClick={() => dispatch({ type: "toggleMenu" })} menuOpen={menuOpen} />
+      </div>
       <Transition unmount in={menuOpen} timeout={msToNum(tokens.base.durationL)}>
         {(visible) => (
           <nav className={styles.mobileNav} data-visible={visible}>
@@ -183,7 +216,9 @@ export const Navbar = () => {
               </RouterLink>
             ))}
             <NavbarIcons />
-            <ThemeToggle isMobile />
+            <div className={styles.mobileThemeToggleWrapper}>
+              <ThemeToggle isMobile />
+            </div>
           </nav>
         )}
       </Transition>
@@ -191,20 +226,37 @@ export const Navbar = () => {
   )
 }
 
-const NavbarIcons = ({ desktop }) => (
-  <div className={styles.navIcons}>
-    {socialLinks.map(({ label, url, icon }) => (
-      <a
-        key={label}
-        data-navbar-item={desktop || undefined}
-        className={styles.navIconLink}
-        aria-label={label}
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Icon className={styles.navIcon} icon={icon} />
-      </a>
-    ))}
-  </div>
-)
+const NavbarIcons = ({ desktop }) => {
+  // Map social links to their respective icons
+  const getIconComponent = (iconName) => {
+    switch (iconName) {
+      case "instagram":
+        return <InstagramIcon className={styles.navIcon} />
+      case "linkedin":
+        return <LinkedInIcon className={styles.navIcon} />
+      case "github":
+        return <GitHubIcon className={styles.navIcon} />
+      default:
+        // Fallback to the original Icon component for other icons
+        return <Icon className={styles.navIcon} icon={iconName} />
+    }
+  }
+
+  return (
+    <div className={styles.navIcons}>
+      {socialLinks.map(({ label, url, icon }) => (
+        <a
+          key={label}
+          data-navbar-item={desktop || undefined}
+          className={styles.navIconLink}
+          aria-label={label}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {getIconComponent(icon)}
+        </a>
+      ))}
+    </div>
+  )
+}

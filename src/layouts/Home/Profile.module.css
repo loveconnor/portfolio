@@ -1,7 +1,7 @@
 .profile {
   width: 100%;
   min-height: 100vh;
-  padding: 140px 0 100px;
+  padding: 80px 16px;
   display: flex;
   justify-content: center;
   position: relative;
@@ -9,27 +9,27 @@
   background: rgb(var(--rgbBackground));
 
   @media (--mediaTablet) {
-    padding: 120px 40px;
+    padding: 60px 16px;
     min-height: auto;
   }
 
   @media (--mediaMobile) {
-    padding: 100px var(--spaceOuter);
+    padding: 40px 16px;
   }
 }
 
 .content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 100px;
-  max-width: var(--maxWidthL);
+  gap: 40px;
+  max-width: 1000px;
   width: 100%;
   position: relative;
   z-index: 1;
 
   @media (--mediaTablet) {
     grid-template-columns: 1fr;
-    gap: 80px;
+    gap: 40px;
   }
 }
 
@@ -38,45 +38,53 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
 }
 
 .greeting {
   display: inline-block;
-  margin-bottom: 16px;
-  padding: 8px 16px;
+  margin-bottom: 12px;
+  padding: 6px 12px;
   background: rgb(var(--rgbAccent) / 0.1);
-  border-radius: 8px;
-  font-size: 1.1rem;
+  border-radius: 6px;
+  font-size: 1rem;
   font-weight: 500;
   color: rgb(var(--rgbAccent));
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(var(--rgbAccent) / 0.1);
 }
 
 .title {
-  margin-bottom: 16px;
+  margin-bottom: 0;
   position: relative;
-  font-size: 4.5rem;
+  font-size: 5rem;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, rgb(var(--rgbText)), rgb(var(--rgbText) / 0.7));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: rgb(var(--rgbText));
+  width: 100%;
+  font-weight: 700;
 
   @media (--mediaMobile) {
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
 }
 
+.firstName,
+.lastName {
+  display: block;
+}
+
 .role {
+  margin-top: 16px;
   margin-bottom: 32px;
   padding-bottom: 32px;
   border-bottom: 1px solid rgb(var(--rgbText) / 0.1);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: rgb(var(--rgbText) / 0.7);
+  width: 100%;
 
   @media (--mediaMobile) {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
   }
 }
 
@@ -85,16 +93,16 @@
 }
 
 .description {
-  margin-bottom: var(--spaceL);
-  line-height: 1.8;
-  font-size: 1.1rem;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  font-size: 1rem;
   color: rgb(var(--rgbText) / 0.8);
   max-width: 100%;
 }
 
 .skillsContainer {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .skillsTitle {
@@ -117,55 +125,87 @@
   border-radius: 3px;
 }
 
-.skillBars {
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+
+  @media (--mediaMobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skillCard {
+  background: rgb(var(--rgbText) / 0.03);
+  border: 1px solid rgb(var(--rgbText) / 0.08);
+  border-radius: 10px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 100%;
+  transition: all 0.3s ease;
 }
 
-.skillBar {
-  width: 100%;
-}
-
-.skillInfo {
+.skillCardHeader {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.skillIcon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(var(--rgbAccent) / 0.1);
+  color: rgb(var(--rgbAccent));
+  border-radius: 6px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.skillNameContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .skillName {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: rgb(var(--rgbText) / 0.9);
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(var(--rgbText));
+  margin-bottom: 2px;
 }
 
 .skillPercentage {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: rgb(var(--rgbAccent));
 }
 
-.skillProgress {
-  width: 100%;
-  height: 10px;
-  background: rgb(var(--rgbText) / 0.08);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+.skillLevel {
+  margin-top: auto;
 }
 
-.skillProgressBar {
+.skillLevelBar {
+  height: 6px;
+  background: rgb(var(--rgbText) / 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.skillLevelFill {
   height: 100%;
-  background: linear-gradient(to right, rgb(var(--rgbAccent)), rgb(var(--rgbAccent) / 0.7));
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(var(--rgbAccent) / 0.3);
+  background: rgb(var(--rgbAccent));
+  border-radius: 3px;
 }
 
 .actions {
   display: flex;
-  gap: 16px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 16px;
 
   @media (--mediaMobile) {
     flex-direction: column;
@@ -191,9 +231,10 @@
 .image {
   position: relative;
   width: 100%;
-  border-radius: 24px;
+  max-width: 400px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 20px 70px rgb(var(--rgbText) / 0.15);
+  box-shadow: 0 15px 30px rgb(var(--rgbText) / 0.1);
   transform: translateZ(0);
   transition: transform 0.5s ease, box-shadow 0.5s ease;
 }

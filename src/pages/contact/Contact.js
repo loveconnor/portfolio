@@ -42,7 +42,6 @@ export const Contact = () => {
     },
   })
 
-
   const onSubmit = async ({ name, email, message }) => {
     setIsSubmitting(true)
     setSubmitError(null)
@@ -100,7 +99,7 @@ export const Contact = () => {
             <DecoderText text="Get in Touch" start={isHeaderVisible} delay={300} />
           </Heading>
           <Text size="l" as="p" className={styles.subtitle}>
-            Have a question or just want to say hello? I'd love to hear from you.
+            Have a question or just want to say hello? I&apos;d love to hear from you.
           </Text>
         </motion.div>
 
@@ -120,7 +119,7 @@ export const Contact = () => {
                 Message Sent Successfully
               </Heading>
               <Text size="m" as="p" className={styles.successText}>
-                Thank you for reaching out! I'll get back to you as soon as possible.
+                Thank you for reaching out! I&apos;ll get back to you as soon as possible.
               </Text>
               <Button className={styles.resetButton} onClick={handleReset} icon="arrowLeft">
                 Send another message
@@ -268,7 +267,8 @@ export const Contact = () => {
               Have a project in mind?
             </Heading>
             <Text size="m" as="p" className={styles.projectSectionText}>
-              Let's work together to bring your vision to life. Start the conversation by sharing your project details.
+              Let&apos;s work together to bring your vision to life. Start the conversation by sharing your project
+              details.
             </Text>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
               <Button className={styles.projectButton} onClick={handleStartProject}>
@@ -284,4 +284,3 @@ export const Contact = () => {
     </Section>
   )
 }
-

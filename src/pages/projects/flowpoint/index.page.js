@@ -1,1 +1,1 @@
-export { Slice as default } from './Slice';
+export { Slice as default } from './FlowPoint';

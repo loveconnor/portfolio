@@ -1,14 +1,17 @@
 .uses {
-  width: calc(100vw - var(--space2XL));
-  margin-left: var(--space2XL);
+  width: 100%;
   min-height: 100vh;
   padding: var(--spaceXL) var(--spaceXL) var(--space4XL);
   background: var(--colorBackground);
   position: relative;
+  max-width: calc(100% - 90px); /* Adjust max-width to account for sidebar */
+  margin: 0 auto 0 90px;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .header {
-  margin-bottom: var(--space3XL);
+  margin-bottom: var(--space2XL);
   max-width: 800px;
 }
 
@@ -16,6 +19,8 @@
   font-size: 2.5rem;
   margin-bottom: var(--spaceM);
   color: var(--colorTextTitle);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .description {
@@ -23,18 +28,31 @@
   color: var(--colorTextLight);
   line-height: 1.6;
   max-width: 640px;
+  margin-bottom: var(--spaceXL);
+}
+
+.searchAndCategories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spaceL);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.searchContainer {
+  max-width: 400px;
+  flex-grow: 1;
 }
 
 .categories {
   display: flex;
   gap: var(--spaceM);
-  margin: var(--space2XL) 0 var(--spaceXL);
   flex-wrap: wrap;
 }
 
 .category {
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--colorBackground);
   border: 1px solid var(--colorBorder);
   color: var(--colorTextBody);
@@ -50,12 +68,14 @@
 .category:hover {
   border-color: var(--colorTextLight);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.1);
 }
 
 .category[data-active="true"] {
   background: rgb(var(--rgbPrimary) / 0.1);
   border-color: rgb(var(--rgbPrimary) / 0.3);
   color: rgb(var(--rgbPrimary));
+  box-shadow: 0 4px 12px -4px rgb(var(--rgbPrimary) / 0.2);
 }
 
 .category[data-active="true"] .categoryIcon {
@@ -68,9 +88,10 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spaceL);
   margin-top: var(--spaceXL);
+  width: 100%;
 }
 
 .card {
@@ -82,6 +103,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.05);
+  width: 100%; /* Ensure cards take full width of their grid cell */
 }
 
 .card:hover {
@@ -90,18 +113,13 @@
   border-color: var(--colorTextLight);
 }
 
-.cardImage {
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  object-fit: cover;
-  border-bottom: 1px solid var(--colorBorder);
-}
-
 .cardContent {
   padding: var(--spaceL);
   flex: 1;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .cardHeader {
@@ -112,19 +130,20 @@
 }
 
 .cardIconWrap {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
   background: rgb(var(--rgbPrimary) / 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgb(var(--rgbPrimary));
   flex-shrink: 0;
+  box-shadow: 0 4px 8px -4px rgb(var(--rgbPrimary) / 0.2);
 }
 
 .cardTitle {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: var(--fontWeightMedium);
   color: var(--colorTextTitle);
   margin: 0;
@@ -136,6 +155,8 @@
   line-height: 1.6;
   margin-bottom: var(--spaceL);
   flex: 1;
+  word-wrap: break-word; /* Ensure long words break */
+  overflow-wrap: break-word;
 }
 
 .cardLink {
@@ -146,12 +167,16 @@
   font-size: 0.9rem;
   font-weight: var(--fontWeightMedium);
   text-decoration: none;
-  transition: gap 0.2s ease;
+  transition: all 0.2s ease;
   align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgb(var(--rgbPrimary) / 0.05);
 }
 
 .cardLink:hover {
   gap: 8px;
+  background: rgb(var(--rgbPrimary) / 0.1);
 }
 
 .sectionTitle {
@@ -160,6 +185,7 @@
   color: var(--colorTextTitle);
   position: relative;
   display: inline-block;
+  font-weight: 600;
 }
 
 .sectionTitle::after {
@@ -168,19 +194,25 @@
   bottom: -8px;
   left: 0;
   width: 40px;
-  height: 2px;
+  height: 3px;
   background: rgb(var(--rgbPrimary));
+  border-radius: 2px;
 }
 
 .noResults {
   text-align: center;
   padding: var(--space3XL) 0;
   color: var(--colorTextLight);
+  background: var(--colorBackgroundLight);
+  border-radius: 12px;
+  border: 1px dashed var(--colorBorder);
+  margin-top: var(--spaceXL);
 }
 
 .noResultsIcon {
   color: var(--colorTextLight);
   margin-bottom: var(--spaceM);
+  opacity: 0.6;
 }
 
 .resetButton {
@@ -198,11 +230,7 @@
 .resetButton:hover {
   background: rgb(var(--rgbPrimary) / 0.15);
   transform: translateY(-2px);
-}
-
-.searchContainer {
-  max-width: 400px;
-  margin: var(--spaceXL) 0;
+  box-shadow: 0 4px 8px -4px rgb(var(--rgbPrimary) / 0.3);
 }
 
 .searchInputWrapper {
@@ -220,7 +248,7 @@
 .searchInput {
   width: 100%;
   padding: 10px 12px 10px 36px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid var(--colorBorder);
   background: var(--colorBackground);
   font-size: 0.95rem;
@@ -231,7 +259,7 @@
 .searchInput:focus {
   outline: none;
   border-color: rgb(var(--rgbPrimary) / 0.5);
-  box-shadow: 0 0 0 2px rgb(var(--rgbPrimary) / 0.1);
+  box-shadow: 0 0 0 3px rgb(var(--rgbPrimary) / 0.1);
 }
 
 .searchInput::placeholder {
@@ -249,8 +277,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   transition: all 0.2s ease;
 }
@@ -264,6 +292,7 @@
 body[data-theme="dark"] .card {
   background: var(--colorBackgroundLight);
   border-color: var(--colorBorder);
+  box-shadow: 0 4px 20px -6px rgba(0, 0, 0, 0.2);
 }
 
 body[data-theme="dark"] .card:hover {
@@ -271,21 +300,21 @@ body[data-theme="dark"] .card:hover {
   box-shadow: 0 12px 24px -12px rgb(0 0 0 / 0.3);
 }
 
-:global(body[data-theme="dark"]).searchInput {
+body[data-theme="dark"] .searchInput {
   background: var(--colorBackgroundLight);
 }
 
 @media (max-width: 1100px) {
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
   .uses {
-    width: 100%;
-    margin-left: 0;
     padding: var(--spaceXL) var(--spaceM);
+    margin-left: 90px; /* Maintain the margin on mobile */
+    max-width: calc(100% - 90px);
   }
 
   .title {
@@ -294,5 +323,16 @@ body[data-theme="dark"] .card:hover {
 
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .searchAndCategories {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .searchContainer {
+    width: 100%;
+    max-width: none;
   }
 }

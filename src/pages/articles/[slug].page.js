@@ -3,6 +3,7 @@
 import fs from "fs"
 import path from "path"
 import { useMemo } from "react"
+import { motion } from "framer-motion"
 import { bundleMDX } from "mdx-bundler"
 import { getMDXComponent } from "mdx-bundler/client"
 import readingTime from "reading-time"
@@ -20,13 +21,28 @@ export default function PostPage({ frontmatter, code, timecode }) {
   // Memoize the MDX component
   const MDXComponent = useMemo(() => getMDXComponent(code), [code])
 
+  // Add animation effects
+  const variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.1, 0.25, 1.0],
+      },
+    },
+  }
+
   return (
     <>
       <ArticleProgress />
-      <Post timecode={timecode} {...frontmatter}>
-        <MDXComponent components={postMarkdown} />
-        <ArticleShare title={frontmatter.title} slug={frontmatter.slug} />
-      </Post>
+      <motion.div initial="hidden" animate="visible" variants={variants}>
+        <Post timecode={timecode} {...frontmatter}>
+          <MDXComponent components={postMarkdown} />
+          <ArticleShare title={frontmatter.title} slug={frontmatter.slug} />
+        </Post>
+      </motion.div>
     </>
   )
 }
@@ -63,6 +79,7 @@ export const getStaticProps = async ({ params }) => {
       frontmatter: {
         ...frontmatter,
         slug: params.slug,
+        date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
       },
       timecode,
     },

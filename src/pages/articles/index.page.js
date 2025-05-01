@@ -24,7 +24,9 @@ export function getStaticProps() {
         ...data,
         timecode,
         slug: filePath.replace(/\.mdx?$/, ''),
+        date: data.date ? new Date(data.date).toISOString() : null,
       };
+
     } catch (error) {
       // Log the error and skip the post
       console.error(`Error processing file ${filePath}:`, error);

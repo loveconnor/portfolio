@@ -50,8 +50,26 @@
   line-height: 1.1;
   margin-bottom: 24px;
   color: rgb(255, 255, 255);
+  position: relative;
 }
 
+.heroTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, rgb(0, 210, 255), rgba(0, 210, 255, 0.3));
+  border-radius: 2px;
+}
+
+.heroSubtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 500px;
+  margin-top: 20px;
+}
 .heroSubtitle {
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.7);
