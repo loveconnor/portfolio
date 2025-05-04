@@ -1,4 +1,3 @@
-import sliceAnnotationPlaceholder from "assets/flowpoint-annotation-placeholder.png"
 import sliceAppPlaceholder from "assets/flowpoint-app-placeholder.jpg"
 import sliceBackgroundBarPlaceholder from "assets/flowpoint-background-bar-placeholder.jpg"
 import sliceIrlPlaceholder from "assets/flowpoint-irl-placeholder.jpg"
@@ -73,7 +72,7 @@ export const Slice = () => {
                   tailored to individual learning styles and progress.
                 </ProjectSectionText>
                 <ProjectSectionText>
-                  As the Co-founder and Frontend Lead, I was instrumental in shaping the product&aposs vision, designing its
+                  As the Co-founder and Frontend Lead, I was instrumental in shaping the product&apos;s vision, designing its
                   user interface, and implementing a responsive and scalable frontend architecture.
                 </ProjectSectionText>
               </div>
@@ -81,7 +80,7 @@ export const Slice = () => {
                 <Image
                   srcSet="/list.png"
                   placeholder={sliceSlidesPlaceholder}
-                  alt="User interacting with EduSynapse&aposs adaptive learning interface"
+                  alt="User interacting with EduSynapse's adaptive learning interface"
                   sizes={`(max-width: ${media.mobile}px) 500px, (max-width: ${media.tablet}px) 800px, 1000px`}
                   className={styles.journeyImage}
                 />
@@ -324,12 +323,12 @@ export const Slice = () => {
             <div className={styles.reflectionSection}>
               <h3 className={styles.reflectionHeading}>Reflection</h3>
               <blockquote className={styles.reflectionQuote}>
-                &quotBuilding EduSynapse taught me that great educational tools come from deeply understanding the learner&aposs
-                journey.&quot
+                &quot;Building EduSynapse taught me that great educational tools come from deeply understanding the learner&apos;s
+                journey.&quot;
               </blockquote>
               <p className={styles.reflectionText}>
                 Creating EduSynapse has been a journey of continuous learning and iteration. By focusing on the needs of
-                learners and leveraging the latest in AI technology, we&aposve built a platform that truly adapts to
+                learners and leveraging the latest in AI technology, we&apos;ve built a platform that truly adapts to
                 individual learning styles. The scalable frontend architecture we developed will support future AI
                 personalization features and third-party integrations, ensuring EduSynapse can grow and evolve with
                 educational needs.
