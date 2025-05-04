@@ -1,0 +1,198 @@
+---
+title: "Creating Interactive 3D Experiences with Three.js"
+abstract: "Three.js lets you bring real-time 3D visuals and physics to the browser. In this post, I explain how I used it in my portfolio and walk through the design and development of a fully interactive 3D badge demo — built with React, shaders, and physics."
+date: 2025-05-04
+---
+
+When you think about websites, you probably think of scrollable pages, static images, and maybe some slick animations. But the modern browser can do much more — including running full-blown **3D environments**, right inside the page.
+
+In this post, I want to show you how I’m using **Three.js** to push the boundaries of frontend design. I’ll walk you through:
+- What Three.js is and how it works
+- Why I use it in my portfolio to create depth and interaction
+- How I built a floating 3D badge from scratch using physics, lighting, and React
+- The tools and techniques that made it all come together
+
+---
+
+## So, What Is Three.js?
+
+**Three.js** is a JavaScript library that lets you build and render 3D graphics in the browser using **WebGL** — the web standard that gives you direct access to the GPU.
+
+Now, WebGL on its own is incredibly low-level and hard to use. You need to manage your own shaders, buffers, textures, camera projection matrices — it's like building a car engine just to drive to the store.
+
+Three.js wraps all of that complexity in a friendly, developer-first API. Instead of writing raw shaders, you’re working with objects like:
+
+- `Scene`
+- `Mesh`
+- `PerspectiveCamera`
+- `DirectionalLight`
+- `MeshStandardMaterial`
+
+This abstraction lets you focus on design, animation, and interactivity — not boilerplate.
+
+---
+
+## Why I Use Three.js in My Portfolio
+
+As a frontend developer and designer, I care about creating experiences that feel **alive** — ones that surprise, engage, and invite interaction.
+
+Three.js helps me do exactly that.
+
+In my portfolio, I’ve used it in multiple places:
+- A **realistic 3D MacBook and phone** setup to showcase my design/dev toolkit
+- Immersive scroll-triggered scenes
+- And most recently — a standalone, interactive **floating badge**
+
+Each use of Three.js brings motion, depth, and a physicality that flat UIs often lack.
+
+And the best part? All of it runs **in the browser** — no plugins, no external apps, just HTML + JavaScript + WebGL.
+
+---
+
+## The Badge Demo: What I Built
+
+The centerpiece of this post is a personal project I built to experiment with **real-time physics, 3D animation, and interactivity** in a browser environment.
+
+It's a floating **conference-style badge**, and it behaves like something you’d actually wear at an event.
+
+Here's what it does:
+- It **swings and reacts** to physics when you click and drag it
+- It’s attached to a **rope-style lanyard** that flexes and moves realistically
+- It uses **metallic, clearcoated materials** and **environmental lighting**
+- It’s fully interactive, **rendered in WebGL**, and **built with React**
+
+You can see it live here:
+
+### [View the 3D Badge Demo](https://threejs-badge.vercel.app)
+
+---
+
+## The Tools I Used
+
+To build this, I used a stack of modern 3D tools that all work beautifully together in React:
+
+- [`@react-three/fiber`](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction): React’s way of writing Three.js scenes
+- [`@react-three/drei`](https://docs.pmnd.rs/drei/introduction): A collection of helpful abstractions for materials, lights, loading, etc.
+- [`@react-three/rapier`](https://github.com/pmndrs/react-three-rapier): A full-featured physics engine for things like gravity, rigid bodies, joints, and collisions
+- [`meshline`](https://github.com/spite/THREE.MeshLine): For rendering thick lines (like ropes) in 3D space with width and texture
+
+These libraries saved me hundreds of lines of boilerplate and made building the scene feel like composing a set of UI components.
+
+---
+
+## How I Built It — A Technical Breakdown
+
+The structure of the scene is fairly straightforward, but powerful:
+
+### The Scene
+
+At the base of the app is a `<Canvas>` component provided by `@react-three/fiber`. This is like your WebGL “viewport.”
+
+```jsx
+<Canvas camera={{ position: [0, 0, 13], fov: 25 }}>
+  <Physics gravity={[0, -40, 0]}>
+    <Band />
+  </Physics>
+</Canvas>
+````
+
+* The camera floats back at Z = 13 with a wide field of view
+* Gravity is set downward with strong force to emphasize motion
+* All physics-based objects are wrapped in a `<Physics>` provider
+
+---
+
+### The Rope System
+
+The badge hangs from three invisible, rigid joints connected using `useRopeJoint`. These simulate the behavior of a lanyard that can bend and swing.
+
+```jsx
+useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1])
+useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1])
+useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.45, 0]])
+```
+
+Each joint behaves like a mini physics object with defined constraints — they allow rotation, movement, and recoil just like a rope would.
+
+---
+
+### The Badge
+
+The badge model is loaded via `useGLTF`, and includes multiple parts:
+
+* A **card** base (like your name tag)
+* A **metal clip**
+* A **plastic clamp** where the rope attaches
+
+I applied physically-based materials like this:
+
+```jsx
+<meshPhysicalMaterial
+  map={materials.base.map}
+  clearcoat={1}
+  roughness={0.3}
+  metalness={0.5}
+/>
+```
+
+This gives the plastic parts shine and depth, and makes the metal actually reflect its environment.
+
+---
+
+### Lighting & Atmosphere
+
+I used `Lightformer` and `Environment` from `drei` to simulate an HDR-lit environment with subtle light casting across the surface of the badge.
+
+```jsx
+<Lightformer intensity={10} position={[-10, 0, 14]} scale={[100, 10, 1]} />
+```
+
+This provides soft shadows and subtle specular highlights on edges — the kind of polish that brings realism to digital surfaces.
+
+---
+
+### The Rope (Visually)
+
+While the physics handles movement, I needed a **visible white rope** to render. For this, I used `meshline`, which allows thick, styled 3D lines (unlike the native `THREE.Line`).
+
+```jsx
+<meshLineMaterial
+  color="white"
+  map={texture}
+  repeat={[-3, 1]}
+  lineWidth={1}
+/>
+```
+
+The line repeats a fabric texture, giving the illusion of woven material. It animates naturally because it's tied to the same joint positions.
+
+---
+
+## Why This Matters
+
+This demo might seem small, but it represents a much bigger idea:
+
+> **The web is a canvas, not just a container.**
+
+We’re no longer limited to flat text and buttons. With libraries like Three.js and tools like React, we can bring interfaces to life — and craft real moments of interactivity and emotion.
+
+This badge project:
+
+* Showcases a real-time physics simulation
+* Demonstrates high-quality materials and lighting
+* Reflects my style of development — clean, thoughtful, detail-oriented
+
+Whether I’m designing UI, building complex product dashboards, or creating 3D art, the goal is the same: make the experience *feel* better.
+
+---
+
+## Final Thoughts
+
+Three.js has opened up a whole new creative lane in my frontend work. It's not just about flash — it's about giving ideas **weight**, **motion**, and **presence**.
+
+If you're curious to try this out in your own projects — or you're building a site and want it to feel unique — I’d love to chat or collaborate.
+
+Thanks for reading.
+
+– Connor
+
