@@ -1,6 +1,6 @@
 'use client';
 import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
-import sprTexture from 'assets/flowpoint.png';
+import sprTexture from 'assets/landing.png';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
 import { Intro } from 'layouts/Home/Intro';
@@ -86,10 +86,10 @@ export const Home = () => {
         sectionRef={projectOne}
         {...(visibleSections.includes(projectOne.current) ? { visible: true } : {})}
         index={1}
-        title="Flowpoint"
-        description="A project management tool"
+        title="EduSynapse"
+        description="An AI Powered Learning Platform"
         buttonText="View Case Study"
-        buttonLink="/projects/flowpoint"
+        buttonLink="/projects/edusynapse"
         model={{
           type: 'laptop',
           alt: 'A project management tool',

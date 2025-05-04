@@ -19,7 +19,7 @@ import {
   MeshDepthMaterial,
   OrthographicCamera,
   PerspectiveCamera,
-  PlaneBufferGeometry,
+  PlaneGeometry,
   Scene,
   ShaderMaterial,
   Vector3,
@@ -141,7 +141,7 @@ export const Model = ({
     renderTargetBlur.current.texture.generateMipmaps = false;
 
     // Make a plane and make it face up
-    const planeGeometry = new PlaneBufferGeometry(planeWidth, planeHeight).rotateX(
+    const planeGeometry = new PlaneGeometry(planeWidth, planeHeight).rotateX(
       Math.PI / 2
     );
 
@@ -194,9 +194,9 @@ export const Model = ({
       shader.fragmentShader = `
         uniform float darkness;
         ${shader.fragmentShader.replace(
-          'gl_FragColor = vec4( vec3( 1.0 - fragCoordZ ), opacity );',
-          'gl_FragColor = vec4( vec3( 0.0 ), ( 1.0 - fragCoordZ ) * darkness );'
-        )}
+        'gl_FragColor = vec4( vec3( 1.0 - fragCoordZ ), opacity );',
+        'gl_FragColor = vec4( vec3( 0.0 ), ( 1.0 - fragCoordZ ) * darkness );'
+      )}
       `;
     };
     depthMaterial.current.depthTest = false;

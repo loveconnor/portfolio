@@ -211,7 +211,10 @@ varying vec3 vViewPosition;
 
 void main() {
 	#include <uv_vertex>
-	#include <uv2_vertex>
+	#ifdef USE_UV2
+  attribute vec2 uv2;
+  varying vec2 vUv2;
+#endif
 	#include <color_vertex>
 	#include <morphcolor_vertex>
 	#include <beginnormal_vertex>
