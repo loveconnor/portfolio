@@ -1,20 +1,18 @@
 "use client"
 
-import { Icon } from "components/Icon"
+import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { Instagram, Linkedin, Github, Menu, X } from 'lucide-react'
 import { Monogram } from "components/Monogram"
 import { useTheme } from "components/ThemeProvider"
-import { tokens } from "components/ThemeProvider/theme"
-import { Transition } from "components/Transition"
 import { useAppContext, useScrollToHash, useWindowSize } from "hooks"
-import RouterLink from "next/link"
-import { useRouter } from "next/router"
-import { useEffect, useRef, useState } from "react"
-import { cssProps, media, msToNum, numToMs } from "utils/style"
-import { NavToggle } from "./NavToggle"
-import styles from "./Navbar.module.css"
 import { ThemeToggle } from "./ThemeToggle"
 import { navLinks, socialLinks } from "./navData"
-import { InstagramIcon, LinkedInIcon, GitHubIcon } from "components/Icon"
+import { msToNum, numToMs } from "utils/style"
+import { tokens } from "components/ThemeProvider/theme"
+import { Transition } from "components/Transition"
+import styles from "./Navbar.module.css"
 
 export const Navbar = () => {
   const [current, setCurrent] = useState()
@@ -25,119 +23,61 @@ export const Navbar = () => {
   const { route, asPath } = useRouter()
   const windowSize = useWindowSize()
   const headerRef = useRef()
-  const isMobile = windowSize.width <= media.mobile || windowSize.height <= 696
+  const isMobile = windowSize.width <= 768 || windowSize.height <= 696
   const scrollToHash = useScrollToHash()
 
+  // Prevent scrolling when mobile menu is open
   useEffect(() => {
-    // Prevent ssr mismatch by storing this in state
+    if (menuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [menuOpen])
+
+  useEffect(() => {
     setCurrent(asPath)
   }, [asPath])
 
-  // Handle scroll events
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
-      if (scrollPosition > 50) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
+      setScrolled(scrollPosition > 20)
     }
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Handle smooth scroll nav items
   useEffect(() => {
     if (!target || route !== "/") return
     setCurrent(`${route}${target}`)
     scrollToHash(target, () => setTarget(null))
   }, [route, scrollToHash, target])
 
-  // Handle swapping the theme when intersecting with inverse themed elements
+  // Add viewport meta tag check to ensure proper mobile rendering
   useEffect(() => {
-    const navItems = document.querySelectorAll("[data-navbar-item]")
-    const inverseTheme = themeId === "dark" ? "light" : "dark"
-    const { innerHeight } = window
-
-    let inverseMeasurements = []
-    let navItemMeasurements = []
-
-    const isOverlap = (rect1, rect2, scrollY) => {
-      return !(rect1.bottom - scrollY < rect2.top || rect1.top - scrollY > rect2.bottom)
+    // Check if viewport meta tag exists and is properly set
+    const viewportMeta = document.querySelector('meta[name="viewport"]')
+    if (!viewportMeta) {
+      const meta = document.createElement("meta")
+      meta.name = "viewport"
+      meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      document.getElementsByTagName("head")[0].appendChild(meta)
+    } else if (!viewportMeta.content.includes("width=device-width")) {
+      viewportMeta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     }
+  }, [])
 
-    const resetNavTheme = () => {
-      for (const measurement of navItemMeasurements) {
-        measurement.element.dataset.theme = ""
-      }
-    }
-
-    const handleInversion = () => {
-      const invertedElements = document.querySelectorAll(`[data-theme='${inverseTheme}'][data-invert]`)
-
-      if (!invertedElements) return
-
-      inverseMeasurements = Array.from(invertedElements).map((item) => ({
-        element: item,
-        top: item.offsetTop,
-        bottom: item.offsetTop + item.offsetHeight,
-      }))
-
-      const { scrollY } = window
-
-      resetNavTheme()
-
-      for (const inverseMeasurement of inverseMeasurements) {
-        if (inverseMeasurement.top - scrollY > innerHeight || inverseMeasurement.bottom - scrollY < 0) {
-          continue
-        }
-
-        for (const measurement of navItemMeasurements) {
-          if (isOverlap(inverseMeasurement, measurement, scrollY)) {
-            measurement.element.dataset.theme = inverseTheme
-          } else {
-            measurement.element.dataset.theme = ""
-          }
-        }
-      }
-    }
-
-    // Currently only the light theme has dark full-width elements
-    if (themeId === "light") {
-      navItemMeasurements = Array.from(navItems).map((item) => {
-        const rect = item.getBoundingClientRect()
-
-        return {
-          element: item,
-          top: rect.top,
-          bottom: rect.bottom,
-        }
-      })
-
-      document.addEventListener("scroll", handleInversion)
-      handleInversion()
-    }
-
-    return () => {
-      document.removeEventListener("scroll", handleInversion)
-      resetNavTheme()
-    }
-  }, [themeId, windowSize, asPath])
-
-  // Check if a nav item should be active
   const getCurrent = (url = "") => {
     const nonTrailing = current?.endsWith("/") ? current?.slice(0, -1) : current
-
-    if (url === nonTrailing) {
-      return "page"
-    }
-
-    return ""
+    return url === nonTrailing ? "page" : ""
   }
 
-  // Store the current hash to scroll to
   const handleNavItemClick = (event) => {
     const hash = event.currentTarget.href.split("#")[1]
     setTarget(null)
@@ -154,91 +94,119 @@ export const Navbar = () => {
   }
 
   return (
-    <header
-      className={styles.navbar}
-      ref={headerRef}
-      style={
-        scrolled
-          ? {
-            background: `rgb(var(--rgbBackground) / 0.95)`,
-            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
-            padding: `calc(var(--spaceXS) * 0.8) var(--spaceL)`,
-          }
-          : {}
-      }
-    >
-      <RouterLink href={route === "/" ? "/#intro" : "/"} scroll={false}>
-        <a data-navbar-item className={styles.logo} aria-label="Connor Love, Designer" onClick={handleMobileNavClick}>
-          <Monogram highlight />
-        </a>
-      </RouterLink>
-      <nav className={styles.nav}>
-        <div className={styles.navList}>
-          {navLinks.map(({ label, pathname }) => (
-            <RouterLink href={pathname} scroll={false} key={label}>
-              <a
-                data-navbar-item
-                className={styles.navLink}
-                aria-current={getCurrent(pathname)}
-                onClick={handleNavItemClick}
-              >
-                {label}
-              </a>
-            </RouterLink>
-          ))}
-        </div>
-      </nav>
-      <div className={styles.navFooter}>
-        {!isMobile && (
-          <div className={styles.themeToggleWrapper}>
-            <ThemeToggle data-navbar-item />
-          </div>
-        )}
-        <NavbarIcons desktop />
-        <NavToggle onClick={() => dispatch({ type: "toggleMenu" })} menuOpen={menuOpen} />
-      </div>
-      <Transition unmount in={menuOpen} timeout={msToNum(tokens.base.durationL)}>
-        {(visible) => (
-          <nav className={styles.mobileNav} data-visible={visible}>
-            {navLinks.map(({ label, pathname }, index) => (
-              <RouterLink href={pathname} scroll={false} key={label}>
-                <a
-                  className={styles.mobileNavLink}
-                  data-visible={visible}
-                  aria-current={getCurrent(pathname)}
-                  onClick={handleMobileNavClick}
-                  style={cssProps({
-                    transitionDelay: numToMs(Number(msToNum(tokens.base.durationS)) + index * 50),
-                  })}
-                >
-                  {label}
-                </a>
-              </RouterLink>
-            ))}
-            <NavbarIcons />
-            <div className={styles.mobileThemeToggleWrapper}>
-              <ThemeToggle isMobile />
+    <>
+      <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`} ref={headerRef}>
+        <div className={styles.navbarContainer}>
+          <Link href={route === "/" ? "/#intro" : "/"} scroll={false}>
+            <a
+              data-navbar-item
+              className={styles.logo}
+              aria-label="Connor Love, Designer"
+              onClick={handleMobileNavClick}
+            >
+              <Monogram highlight />
+            </a>
+          </Link>
+
+          <nav className={styles.nav}>
+            <div className={styles.navList}>
+              {navLinks.map(({ label, pathname }) => (
+                <Link href={pathname} scroll={false} key={label}>
+                  <a
+                    data-navbar-item
+                    className={styles.navLink}
+                    aria-current={getCurrent(pathname)}
+                    onClick={handleNavItemClick}
+                  >
+                    {label}
+                  </a>
+                </Link>
+              ))}
             </div>
           </nav>
+
+          <div className={styles.navFooter}>
+            {!isMobile && (
+              <div className={styles.socialAndTheme}>
+                <NavbarIcons desktop />
+                <div className={styles.themeToggleWrapper}>
+                  <ThemeToggle data-navbar-item />
+                </div>
+              </div>
+            )}
+
+            <button
+              className={styles.mobileMenuButton}
+              onClick={() => dispatch({ type: "toggleMenu" })}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? <X size={24} className={styles.menuIcon} /> : <Menu size={24} className={styles.menuIcon} />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Enhanced Full-screen mobile menu */}
+      <Transition unmount in={menuOpen} timeout={msToNum(tokens.base.durationL)}>
+        {(visible) => (
+          <div className={`${styles.mobileNavOverlay} ${visible ? styles.mobileNavVisible : ""}`}>
+            {/* Decorative elements */}
+            <div className={`${styles.decorCircle} ${styles.decorCircle1}`}></div>
+            <div className={`${styles.decorCircle} ${styles.decorCircle2}`}></div>
+
+            <button
+              className={styles.closeButton}
+              onClick={() => dispatch({ type: "toggleMenu" })}
+              aria-label="Close menu"
+            >
+              <X size={24} />
+            </button>
+
+            <nav className={styles.mobileNav} data-visible={visible}>
+              <div className={styles.mobileNavContent}>
+                {navLinks.map(({ label, pathname }, index) => (
+                  <Link href={pathname} scroll={false} key={label}>
+                    <a
+                      className={styles.mobileNavLink}
+                      data-visible={visible}
+                      aria-current={getCurrent(pathname)}
+                      onClick={handleMobileNavClick}
+                      style={{
+                        transitionDelay: visible ? numToMs(Number(msToNum(tokens.base.durationS)) + index * 70) : "0ms",
+                      }}
+                    >
+                      {label}
+                    </a>
+                  </Link>
+                ))}
+
+                <div className={styles.mobileNavFooter}>
+                  <NavbarIcons />
+                  <div className={styles.mobileThemeToggleWrapper}>
+                    <ThemeToggle isMobile />
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
         )}
       </Transition>
-    </header>
+    </>
   )
 }
 
 const NavbarIcons = ({ desktop }) => {
-  // Map social links to their respective icons
-  const getIconComponent = (iconName) => {
+  const getIcon = (iconName) => {
     switch (iconName) {
       case "instagram":
-        return <InstagramIcon className={styles.navIcon} />
+        return <Instagram size={desktop ? 22 : 24} />
       case "linkedin":
-        return <LinkedInIcon className={styles.navIcon} />
+        return <Linkedin size={desktop ? 22 : 24} />
       case "github":
-        return <GitHubIcon className={styles.navIcon} />
+        return <Github size={desktop ? 22 : 24} />
       default:
-        // Fallback to the original Icon component for other icons
-        return <Icon className={styles.navIcon} icon={iconName} />
+        return null
     }
   }
 
@@ -254,7 +222,7 @@ const NavbarIcons = ({ desktop }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {getIconComponent(icon)}
+          {getIcon(icon)}
         </a>
       ))}
     </div>
