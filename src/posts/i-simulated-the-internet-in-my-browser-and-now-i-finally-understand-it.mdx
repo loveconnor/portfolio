@@ -1,0 +1,134 @@
+---
+title: "I Simulated the Internet in My Browser — and Now I Finally Understand It"
+abstract: "In this post, I walk through how I built an internet simulation inside a Next.js app — visualizing everything from packet routing to TCP retries. You don’t need to be a networking expert to appreciate what really happens every time you open a website."
+date: 2025-05-11
+---
+
+Most of us use the internet every day.
+
+We stream, scroll, click, and upload — but we rarely stop to ask **how** it actually works under the hood. What *really* happens when you type a URL and press Enter?
+
+I wanted to understand that for myself — not just by reading diagrams, but by actually **building it**.
+
+So I created an interactive simulation inside a Next.js app. You can **watch data get split into packets**, **bounce across routers**, **deal with latency**, and finally arrive at its destination — just like the real internet.
+
+Here’s how it works, and what I learned building it.
+
+---
+
+## The Big Idea
+
+I built a **visual model of the internet’s communication process** — from typing in a domain to receiving a response.
+
+The app shows:
+- **DNS lookups**
+- **TCP handshakes**
+- **Packet fragmentation**
+- **Routing hops**
+- **Latency and packet loss**
+- **Reassembly of data at the destination**
+
+All of it is animated and explained step-by-step.
+
+You don’t need to know anything about networking to follow it — the whole point is to make those invisible processes *feel* real.
+
+---
+
+## 🌐 What Happens When You Load a Web Page?
+
+Here’s the simplified chain of events I modeled:
+
+1. **You type a URL.**
+2. **DNS Lookup**: Your device asks a DNS server for the IP address of that domain.
+3. **TCP Handshake**: A connection is established between your computer and the server.
+4. **Your message is split into packets** (like tiny pieces of a letter).
+5. **Packets are sent across routers and nodes** to reach the destination.
+6. **Some packets may get delayed or lost** and need to be retried.
+7. **Once all packets arrive**, they’re reassembled into the full message.
+
+I wanted to animate all of this in the browser — and I did.
+
+---
+
+## Building It in Next.js
+
+I used **Next.js + React + CSS animations** (no Three.js) to build a clean, fast, and responsive simulation.
+
+### Key elements I built:
+
+#### 1. Visual Node Network
+- Rectangles representing:
+  - **Your Computer**
+  - **DNS Server**
+  - **ISP**
+  - **Routers**
+  - **Destination Server**
+- Each node has animated lines showing data moving through it.
+
+#### 2. Packet System
+- The message (e.g., “GET /index.html”) is broken into **color-coded packets**.
+- Packets animate from node to node.
+- You can simulate **packet loss** — some packets disappear and get resent.
+
+#### 3. TCP vs UDP Mode
+- Toggle between:
+  - **TCP (reliable, ordered)**
+  - **UDP (fast, fire-and-forget)**
+- In TCP mode, lost packets are **retried and re-ordered**.
+- In UDP mode, lost packets are **gone forever** — which is fine for things like video or voice.
+
+#### 4. Timeline Controls
+- **Step-by-step mode**: Watch every hop one click at a time.
+- **Live play mode**: See the full journey animated.
+- **Latency slider**: Add artificial delays between hops.
+- **“DDoS mode” toggle**: Simulate packet overload across a network.
+
+---
+
+## Why I Built This
+
+I was tired of reading shallow networking tutorials that just say “packets go across the internet.”
+
+That doesn’t *mean* anything until you see it.
+
+When I built this simulation:
+- I finally understood why **TCP is more reliable but slower**.
+- I saw how **routing isn’t always a straight line**.
+- I realized how much **invisible complexity** powers everyday web use.
+
+And more importantly — I built something that helps *others* understand it too.
+
+---
+
+## Key Takeaways
+
+- The internet is just a **series of tiny decisions**, happening at the speed of light.
+- Networking isn’t magic — it’s a series of structured protocols and systems.
+- Visualizing these processes makes them **real**, **memorable**, and even **emotional**.
+
+I’ve always been a frontend developer — but building this helped me **respect the backend of the world** in a whole new way.
+
+---
+
+## 🚀 Try It Yourself
+
+Want to see it in action?
+
+👉 [Launch the Simulation](https://internet-simulator.vercel.app)
+
+You can:
+- Switch between TCP and UDP
+- Watch packets fly, fail, retry, and succeed
+- Actually feel the difference between “reliable” and “fast”
+
+---
+
+## Final Thoughts
+
+This was one of the most rewarding things I’ve built — not because it was technically complicated, but because it turned something **abstract** into something you can **feel**.
+
+If you’ve ever struggled to understand how the internet works, I hope this project helps.  
+If you want to build your own — reach out. I’d love to help or collaborate.
+
+Thanks for reading.  
+– Connor
