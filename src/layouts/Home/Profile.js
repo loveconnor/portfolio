@@ -10,9 +10,9 @@ import { Text } from "components/Text"
 import { Transition } from "components/Transition"
 import { useIntersectionObserver } from "hooks/use-intersection-observer"
 import { media } from "utils/style"
-import profileImgLarge from "assets/connor.jpeg"
+import profileImgLarge from "assets/connor.jpg"
 import profileImgPlaceholder from "assets/profile-placeholder.jpg"
-import profileImg from "assets/connor.jpeg"
+import profileImg from "assets/connor.jpg"
 import styles from "./Profile.module.css"
 
 const ProfileText = ({ visible, titleId }) => {

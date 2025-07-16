@@ -212,7 +212,7 @@ export const Contact = () => {
         <div className={styles.contactInfo}>
           <div className={styles.contactInfoItem}>
             <h3 className={styles.contactInfoTitle}>Email</h3>
-            <a href="mailto:hello@connorlove.com" className={styles.contactInfoLink}>
+            <a href="mailto:loveconnor2005@gmail.com" className={styles.contactInfoLink}>
               hello@connorlove.com
             </a>
           </div>

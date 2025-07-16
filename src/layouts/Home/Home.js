@@ -1,6 +1,7 @@
 'use client';
 import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
 import sprTexture from 'assets/landing.png';
+import chatLanding from 'assets/chatLanding.png';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
 import { Intro } from 'layouts/Home/Intro';
@@ -27,10 +28,11 @@ export const Home = () => {
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
   const intro = useRef(null);
   const projectOne = useRef(null);
+  const projectTwo = useRef(null);
   const details = useRef(null);
 
   useEffect(() => {
-    const sections = [intro, projectOne, details];
+    const sections = [intro, projectOne, projectTwo, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -101,6 +103,27 @@ export const Home = () => {
           ],
         }}
       />
+      <ProjectSummary
+        id="project-2"
+        sectionRef={projectTwo}
+        {...(visibleSections.includes(projectTwo.current) ? { visible: true } : {})}
+        index={2}
+        title="LoveChat"
+        description="T3 Chat cloneathon submission"
+        buttonText="View Case Study"
+        buttonLink="/projects/lovechat"
+        model={{
+          type: 'laptop',
+          alt: 'T3 Chat Cloneathon Submission',
+          textures: [
+            {
+              srcSet: [chatLanding],
+              placeholder: sprTexturePlaceholder,
+            },
+          ]
+        }}
+      />
+
       <Profile
         sectionRef={details}
         {...(visibleSections.includes(details.current) ? { visible: true } : {})}
