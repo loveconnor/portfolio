@@ -1,0 +1,202 @@
+---
+title: "Java at 30: The Language Everyone Loves to Hate (But Can’t Get Rid Of)"
+abstract: "Java has been called slow, verbose, and outdated — yet it turned 30 this year and is still powering banks, Netflix, Minecraft, and entire industries. In this post, I dig into why Java survived while other languages faded, how it’s evolved, and why it still matters for developers today."
+date: 2025-09-11
+---
+
+If you spend time in programming communities, you’ve probably heard it all before:  
+- “Java is slow.”  
+- “Java is too verbose.”  
+- “Java is corporate garbage.”  
+
+I’ll be honest — I’ve said some of those things myself.  
+
+But here’s the twist: Java just turned **30 years old**, and despite the constant criticism, it’s still everywhere. Your bank likely runs on it. Netflix streams on it. And *Minecraft*, one of the most influential games of all time, is built on it.  
+
+That raises a question: if Java is really as “bad” as people say, how has it not only survived, but thrived for three decades?  
+
+Let’s unpack the full story.  
+
+---
+
+## First Things First: The Criticism Isn’t Wrong
+
+Let’s be clear: a lot of the criticism of Java is fair. It **is** verbose. Sometimes it feels like you’re filling out government paperwork just to print something to the console.
+
+Example: printing “Hello, World” in Java:
+
+```java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World");
+    }
+}
+````
+
+Five lines of code. Compare that to Python:
+
+```python
+print("Hello, World")
+```
+
+It’s not hard to see why beginners get frustrated.
+
+Reading a file in Java? Be ready for multiple imports and `try/catch` blocks. Making an HTTP request? Prepare to pull in half the standard library.
+
+So yes, Java is wordy. Yes, it sometimes feels ceremonial. And yes, it can feel like the language is fighting you.
+
+But here’s the catch: none of that stopped Java from becoming one of the most successful languages in history.
+
+---
+
+## Why Didn’t It Die Like the Others?
+
+This is where the story gets interesting. Many languages were built around the same time as Java. Some promised to be easier, faster, or more modern. But most of them are gone now.
+
+Think about it:
+
+* **Flash/ActionScript** — in the 2000s, Flash ruled the web. If you wanted animations, games, or interactive content, you used Flash. It was everywhere… until it wasn’t.
+* **Microsoft Silverlight** — Microsoft’s big push to compete in enterprise web apps. They integrated it into everything. They threw their full weight behind it. Dead.
+* **ColdFusion** — a “rapid web development” tool in the late ’90s that promised faster results than Java servlets and JSP. Barely remembered today.
+
+These platforms weren’t all direct competitors to Java, but they lived in the same space: trying to power large-scale, cross-platform applications.
+
+And yet, all of them are gone. Java is still here. Still used. Still paying six-figure salaries.
+
+Why?
+
+---
+
+## Back to 1995: “Write Once, Run Anywhere”
+
+To understand Java’s survival, you have to go back to 1995.
+
+At the time, the internet was exploding, but software was locked to operating systems.
+
+* Windows apps only ran on Windows.
+* Mac apps only ran on Mac.
+* Unix was its own island.
+
+Then Sun Microsystems came along with a radical idea:
+
+> **Write once, run anywhere.**
+
+This wasn’t just a catchy slogan. It was made possible by the **Java Virtual Machine (JVM)**. The JVM acted like a universal layer between your program and the computer. As long as the machine had the JVM installed, your Java program could run on it — whether it was Windows, Mac, or Linux.
+
+That might sound obvious today, but in 1995 it was revolutionary.
+
+And here’s the key difference: while other languages tried to win over individual developers, Java aimed directly at **enterprises**.
+
+Banks, governments, and Fortune 500 companies cared about one thing above all else: **reliability**. Not speed. Not elegance. Not developer happiness. They wanted software that would run the same way for decades. Java gave them that.
+
+That’s why a lot of Java code written in the late ’90s still runs today. Try that with Flash. Or Python 2. Or even some modern JavaScript frameworks that push breaking changes every few months.
+
+---
+
+## The Oracle Era: Java Keeps Moving
+
+Fast forward 15 years. In 2010, Sun Microsystems was bought by Oracle for \$7.4 billion. Along with it came Java.
+
+And here’s the surprising part: despite Oracle’s reputation for being heavy-handed, they’ve kept Java alive and moving forward.
+
+While people were busy complaining about verbosity, Java was **evolving quietly**:
+
+* **Lambda expressions** (Java 8) brought functional programming ideas.
+* **`var` type inference** (Java 10) reduced the need for long type declarations.
+* **Streams API** made working with data much simpler.
+* **Spring Boot** made building production-ready apps faster than ever.
+
+Here’s a comparison to show how far it’s come.
+
+**Old-style loop to sum even numbers:**
+
+```java
+int sum = 0;
+for (int n : numbers) {
+    if (n % 2 == 0) {
+        sum += n;
+    }
+}
+```
+
+**Modern Streams API:**
+
+```java
+int sum = numbers.stream()
+                 .filter(n -> n % 2 == 0)
+                 .mapToInt(Integer::intValue)
+                 .sum();
+```
+
+Same result. Half the code. Easier to understand.
+
+This isn’t the Java of your parents’ generation. It’s modern, flexible, and much more powerful.
+
+---
+
+## The JVM Becomes a Platform
+
+One of the smartest moves Java made was turning the JVM into more than just a runtime.
+
+Today, the JVM powers not just Java but also:
+
+* **Kotlin** (the go-to for Android apps)
+* **Scala** (used in big data and functional programming)
+* **Clojure** (a Lisp-style language with modern features)
+* Even some JavaScript implementations
+
+That means you can use the JVM ecosystem — which includes thousands of libraries and frameworks — without actually writing Java.
+
+And with **GraalVM**, Java code can now be compiled into native executables that start up in milliseconds. That’s a huge deal for cloud applications.
+
+What people once mocked as Java’s weakness (the virtual machine “layer”) turned out to be its biggest strength.
+
+---
+
+## The Performance Debate
+
+Another classic criticism: “Java is slow.”
+
+That may have been true decades ago, but modern Java with JIT (Just-In-Time) compilation is **fast**. Really fast.
+
+And with GraalVM or tools like Quarkus, you can get startup times and performance that rival C or Go. That’s why companies like Netflix trust Java to handle billions of requests every single day.
+
+They don’t use Java because they “like” verbosity. They use it because it scales.
+
+---
+
+## Reliability Over Flash
+
+Here’s the lesson I’ve learned: the languages that last aren’t the ones that look the coolest or feel the easiest. They’re the ones that solve real problems for real businesses.
+
+Your bank doesn’t care about fancy syntax. It cares that the system works the same today as it did yesterday.
+
+That’s why Java thrives. It’s boring — in a good way.
+
+---
+
+## Why Developers Still Learn Java
+
+So what does this mean if you’re a developer today?
+
+It means Java is still worth learning. Even if you prefer newer languages like Python, JavaScript, or Rust, knowing Java opens doors to:
+
+* **High-paying enterprise jobs** (banks, insurance, healthcare)
+* **Android development** (Kotlin is common, but the roots are still Java)
+* **Backend frameworks** like Spring that power massive systems
+
+And honestly? Once you get past the verbosity, modern Java is actually fun to work with.
+
+---
+
+## Final Thoughts
+
+Java has spent 30 years being underestimated. It’s been called verbose, slow, and outdated. But while other languages came and went, Java quietly built the backbone of modern technology.
+
+It survived because it gave enterprises what they wanted most: **reliability, stability, and longevity**. And it kept evolving, modernizing its syntax, and expanding its ecosystem.
+
+So here’s to Java at 30. You may not be flashy, but you’re still running banks, streaming billions of hours of video, processing trillions of dollars, and teaching millions of people to code.
+
+And something tells me you’ll still be here when today’s “shiny new languages” are long forgotten.
+
+– Connor

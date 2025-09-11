@@ -4,15 +4,15 @@
   left: 78px; /* Account for side nav */
   right: 0;
   height: 4px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgb(var(--rgbText) / 0.05);
   z-index: 1000;
 }
 
 .progressBar {
   height: 100%;
-  background: rgb(0, 210, 255);
+  background: rgb(var(--rgbAccent));
   transform-origin: 0%;
-  box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+  box-shadow: 0 0 10px rgb(var(--rgbAccent) / 0.5);
 }
 
 @media (max-width: 768px) {
