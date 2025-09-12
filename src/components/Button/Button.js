@@ -39,7 +39,7 @@ const ButtonContent = forwardRef(
       target,
       href,
       disabled,
-      small, // ✅ ADD THIS
+      // small,
       ...rest
     },
     ref

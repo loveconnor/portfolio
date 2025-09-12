@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useForm } from "react-hook-form"
-import { Send, CheckCircle, Loader2, ArrowRight, Briefcase } from "lucide-react"
+import { Send, CheckCircle, Loader2 } from "lucide-react"
 import { Meta } from "components/Meta"
 import { Section } from "components/Section"
 import { Heading } from "components/Heading"
@@ -19,15 +19,15 @@ export const Contact = () => {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [submitError, setSubmitError] = useState(null)
+  const [, setSubmitError] = useState(null)
   const [isHeaderVisible, headerRef] = useIntersectionObserver({
     threshold: 0.2,
     rootMargin: "-50px 0px",
   })
-  const [isProjectSectionVisible, projectSectionRef] = useIntersectionObserver({
-    threshold: 0.2,
-    rootMargin: "-50px 0px",
-  })
+  // const [isProjectSectionVisible, projectSectionRef] = useIntersectionObserver({
+  //   threshold: 0.2,
+  //   rootMargin: "-50px 0px",
+  // })
 
   const {
     register,

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import RouterLink from "next/link"
 import { Button } from "components/Button"
@@ -10,7 +10,7 @@ import { Image } from "components/Image"
 import { Meta } from "components/Meta"
 import { Section } from "components/Section"
 import { Text } from "components/Text"
-import { useWindowSize } from "hooks"
+// import { useWindowSize } from "hooks"
 import { formatDate } from "utils/date"
 import { useIntersectionObserver } from "hooks/use-intersection-observer"
 import { Calendar, Clock, ArrowRight, TrendingUp } from "lucide-react"
@@ -193,8 +193,8 @@ const SkeletonPost = ({ index }) => {
 }
 
 export const Articles = ({ posts, featured }) => {
-  const { width } = useWindowSize()
-  const headerRef = useRef(null)
+  // const { width } = useWindowSize()
+  // const headerRef = useRef(null)
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.97])

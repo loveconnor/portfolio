@@ -1,7 +1,7 @@
 "use client"
 
 import { useAppContext } from "hooks"
-import { useId } from "react"
+// import { useId } from "react"
 import { Sun, Moon } from "lucide-react"
 import { useTheme } from "components/ThemeProvider"
 import styles from "./ThemeToggle.module.css"
@@ -9,7 +9,7 @@ import styles from "./ThemeToggle.module.css"
 export const ThemeToggle = ({ isMobile, ...rest }) => {
   const { dispatch } = useAppContext()
   const { themeId } = useTheme()
-  const id = useId()
+  // const id = useId()
   const isDark = themeId === "dark"
 
   const handleClick = () => {

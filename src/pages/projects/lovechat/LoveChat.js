@@ -285,9 +285,9 @@ export const Slice = () => {
             <div className={styles.reflectionSection}>
               <h3 className={styles.reflectionHeading}>Reflection</h3>
               <blockquote className={styles.reflectionQuote}>
-                "LoveChat pushed me to combine advanced AI integrations with a
+                &quot;LoveChat pushed me to combine advanced AI integrations with a
                 polished UX, showing the power of building end‑to‑end as a solo
-                developer."
+                developer.&quot;
               </blockquote>
               <p className={styles.reflectionText}>
                 Building LoveChat gave me a playground to connect modern AI APIs

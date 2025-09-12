@@ -15,7 +15,7 @@ import profileImgPlaceholder from "assets/profile-placeholder.jpg"
 import profileImg from "assets/connor.jpg"
 import styles from "./Profile.module.css"
 
-const ProfileText = ({ visible, titleId }) => {
+const ProfileText = ({ visible }) => {
   const skills = [
     { name: "Frontend Development", level: 90, icon: <Code size={18} /> },
     { name: "Backend Development", level: 85, icon: <Server size={18} /> },

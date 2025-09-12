@@ -5,7 +5,6 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { Instagram, Linkedin, Github, Menu, X } from 'lucide-react'
 import { Monogram } from "components/Monogram"
-import { useTheme } from "components/ThemeProvider"
 import { useAppContext, useScrollToHash, useWindowSize } from "hooks"
 import { ThemeToggle } from "./ThemeToggle"
 import { navLinks, socialLinks } from "./navData"
@@ -18,7 +17,7 @@ export const Navbar = () => {
   const [current, setCurrent] = useState()
   const [target, setTarget] = useState()
   const [scrolled, setScrolled] = useState(false)
-  const { themeId } = useTheme()
+  // const { themeId } = useTheme()
   const { menuOpen, dispatch } = useAppContext()
   const { route, asPath } = useRouter()
   const windowSize = useWindowSize()
