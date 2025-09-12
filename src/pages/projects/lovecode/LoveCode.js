@@ -326,8 +326,8 @@ export const Slice = () => {
             <div className={styles.reflectionSection}>
               <h3 className={styles.reflectionHeading}>Reflection</h3>
               <blockquote className={styles.reflectionQuote}>
-                "Building LoveCode showed me that coding can feel like jamming
-                — fast, fun, and creative."
+                &quot;Building LoveCode showed me that coding can feel like jamming
+                — fast, fun, and creative.&quot;
               </blockquote>
               <p className={styles.reflectionText}>
                 As a side project, LoveCode was a chance to prototype fast and
