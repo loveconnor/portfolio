@@ -1,6 +1,7 @@
-import sgMail from '@sendgrid/mail';
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// Switch to Brevo transactional API
+const BREVO_API_KEY = process.env.BREVO_API_KEY;
+const RECIPIENT_EMAIL = process.env.RECIPIENT_EMAIL;
+const SENDER_EMAIL = process.env.SENDER_EMAIL;
 
 /**
  * POST /api/project-inquiry
@@ -9,42 +10,50 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
  * GET /api/project-inquiry
  * Returns a simple status check
  */
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '20mb',
+    },
+  },
+};
+
 export default async function handler(req, res) {
-    if (req.method === 'GET') {
-        return res.status(200).json({ message: 'Project Inquiry API is up', success: true });
-    }
+  if (req.method === 'GET') {
+    return res.status(200).json({ message: 'Project Inquiry API is up', success: true });
+  }
 
-    if (req.method !== 'POST') {
-        return res.status(405).json({ message: 'Method Not Allowed' });
-    }
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
 
-    const {
-        name,
-        email,
-        projectName,
-        projectType,
-        projectDescription,
-        budget,
-        timeline,
-        company,
-        phone,
-        files = [],
-    } = req.body || {};
+  const {
+    name,
+    email,
+    projectName,
+    projectType,
+    projectDescription,
+    budget,
+    timeline,
+    company,
+    phone,
+    files = [],
+  } = req.body || {};
 
-    if (
-        !name ||
-        !email ||
-        !projectName ||
-        !projectType ||
-        !projectDescription ||
-        !budget ||
-        !timeline
-    ) {
-        return res.status(400).json({ message: 'Missing required fields', success: false });
-    }
+  if (
+    !name ||
+    !email ||
+    !projectName ||
+    !projectType ||
+    !projectDescription ||
+    !budget ||
+    !timeline
+  ) {
+    return res.status(400).json({ message: 'Missing required fields', success: false });
+  }
 
-    const subject = `New Project Inquiry from ${name}: ${projectName}`;
-    const html = `
+  const subject = `New Project Inquiry from ${name}: ${projectName}`;
+  const html = `
       <!DOCTYPE html>
     <html>
       <head>
@@ -161,14 +170,14 @@ export default async function handler(req, res) {
               </div>
               
               ${projectType
-            ? `
+      ? `
               <div class="field">
                 <span class="field-label">Project Type</span>
-                <p class="field-value">${projectType}</p>
+                <p class="field-value">${({ website: 'Website', webapp: 'Web Application', ecommerce: 'E-Commerce', branding: 'Branding', other: 'Other' })[projectType] || projectType}</p>
               </div>
               `
-            : ""
-        }
+      : ""
+    }
               
               <div class="field">
                 <span class="field-label">Description</span>
@@ -178,24 +187,24 @@ export default async function handler(req, res) {
               </div>
               
               ${budget
-            ? `
+      ? `
               <div class="field">
                 <span class="field-label">Budget Range</span>
-                <p class="field-value"><span class="badge">${budget}</span></p>
+                <p class="field-value"><span class="badge">${({ small: '$1,000 - $5,000', medium: '$5,000 - $10,000', large: '$10,000 - $25,000', enterprise: '$25,000+' })[budget] || budget}</span></p>
               </div>
               `
-            : ""
-        }
+      : ""
+    }
               
               ${timeline
-            ? `
+      ? `
               <div class="field">
                 <span class="field-label">Timeline</span>
-                <p class="field-value">${timeline}</p>
+                <p class="field-value">${({ urgent: 'Less than 1 month', standard: '1-3 months', relaxed: '3-6 months', longterm: '6+ months' })[timeline] || timeline}</p>
               </div>
               `
-            : ""
-        }
+      : ""
+    }
             </div>
             
             <div class="section">
@@ -212,34 +221,34 @@ export default async function handler(req, res) {
               </div>
               
               ${company
-            ? `
+      ? `
               <div class="field">
                 <span class="field-label">Company</span>
                 <p class="field-value">${company}</p>
               </div>
               `
-            : ""
-        }
+      : ""
+    }
               
               ${phone
-            ? `
+      ? `
               <div class="field">
                 <span class="field-label">Phone</span>
                 <p class="field-value"><a href="tel:${phone}" style="color: #4f46e5;">${phone}</a></p>
               </div>
               `
-            : ""
-        }
+      : ""
+    }
               
               ${files.length
-            ? `
+      ? `
               <div class="field">
                 <span class="field-label">Files Attached</span>
-                <p class="field-value">${files.length} file(s)</p>
+                <p class="field-value">${files.map(f => (f.name || f.filename || 'File')).join(', ')}</p>
               </div>
               `
-            : ""
-        }
+      : ""
+    }
             </div>
           </div>
           
@@ -250,28 +259,63 @@ export default async function handler(req, res) {
       </body>
     </html>
     `;
-    console.log(files);
-    const msg = {
-        to: process.env.RECIPIENT_EMAIL,
-        from: process.env.SENDER_EMAIL,
-        subject,
-        html,
-        attachments: files.map(file => ({
-            content: file.content, // base64 string
-            filename: file.name || 'File',
-            type: file.type,
-            disposition: 'attachment',
-        })),
-    };
+  console.log(files);
+  // Validate envs for Brevo
+  const missing = [];
+  if (!BREVO_API_KEY) missing.push('BREVO_API_KEY');
+  if (!RECIPIENT_EMAIL) missing.push('RECIPIENT_EMAIL');
+  if (!SENDER_EMAIL) missing.push('SENDER_EMAIL');
+  if (missing.length) {
+    return res.status(500).json({ success: false, message: `Missing env: ${missing.join(', ')}` });
+  }
 
-    try {
-        await sgMail.send(msg);
-        return res.status(200).json({ success: true });
-    } catch (error) {
-        console.error('Error sending contact email:', error);
-        if (error.response) {
-            console.error('SendGrid error body:', error.response.body);
-        }
-        return res.status(500).json({ message: 'Failed to send email', success: false });
+  // Filter/rename unsupported attachments for Brevo (e.g., .md)
+  const allowedExt = new Set(['pdf', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'txt', 'json', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'ppt', 'pptx', 'zip', 'rar', '7z', 'mp4', 'mov', 'avi', 'heic', 'heif']);
+  const attachments = (files || []).reduce((acc, f) => {
+    if (!f?.content) return acc;
+    const original = f.name || 'File';
+    const parts = original.split('.');
+    const ext = parts.length > 1 ? parts.pop().toLowerCase() : '';
+    let safeName = original;
+    if (!allowedExt.has(ext)) {
+      if (ext === 'md' || ext === 'markdown') {
+        safeName = `${parts.join('.') || 'File'}.txt`;
+      } else {
+        return acc; // skip unsupported
+      }
     }
+    acc.push({ name: safeName, content: f.content });
+    return acc;
+  }, []);
+
+  const brevoPayload = {
+    sender: { email: SENDER_EMAIL, name: 'Project Inquiry' },
+    to: [{ email: RECIPIENT_EMAIL }],
+    replyTo: { email },
+    subject,
+    htmlContent: html,
+    attachment: attachments,
+  };
+
+  try {
+    const resp = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json',
+        'api-key': BREVO_API_KEY,
+      },
+      body: JSON.stringify(brevoPayload),
+    });
+
+    if (!resp.ok) {
+      const body = await resp.json().catch(() => undefined);
+      return res.status(500).json({ success: false, message: 'Failed to send email', details: body });
+    }
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error sending project inquiry (Brevo):', error);
+    return res.status(500).json({ success: false, message: 'Failed to send email', details: error?.message });
+  }
 }

@@ -34,7 +34,7 @@ export const socialLinks = [
   },
   {
     label: 'Github',
-    url: 'https://github.com/Coding-with-love',
+    url: 'https://github.com/loveconnor',
     icon: 'github',
   },
 ];

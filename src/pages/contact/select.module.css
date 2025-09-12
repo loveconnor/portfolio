@@ -23,8 +23,8 @@
     padding: 10px;
     font-size: 16px;
     line-height: 1.5;
-    color: #333;
-    background-color: #111;
+    color: rgb(var(--rgbText));
+    background-color: rgb(var(--rgbBackgroundLight));
     background-clip: padding-box;
     
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
@@ -33,13 +33,13 @@
   }
   
   .input:focus {
-    border-color: #80bdff;
+    border-color: rgb(var(--rgbAccent));
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    box-shadow: 0 0 0 0.2rem rgb(var(--rgbAccent) / 0.25);
   }
   
   .input:hover {
-    border-color: #80bdff;
+    border-color: rgb(var(--rgbAccent));
   }
 
   .underline {

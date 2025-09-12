@@ -28,6 +28,7 @@ import { Section } from 'components/Section';
 import { Heading } from 'components/Heading';
 import { Text } from 'components/Text';
 import { Button } from 'components/Button';
+import { useTheme } from 'components/ThemeProvider';
 import { Footer } from 'components/Footer';
 import { useRouter } from 'next/router';
 import styles from './ProjectInquiry.module.css';
@@ -99,6 +100,7 @@ const timelineOptions = [
 ];
 
 export const Inquiry = () => {
+  const { themeId } = useTheme();
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -301,9 +303,8 @@ export const Inquiry = () => {
               {projectTypes.map(type => (
                 <motion.div
                   key={type.id}
-                  className={`${styles.projectTypeCard} ${
-                    formData.projectType === type.id ? styles.selected : ''
-                  }`}
+                  className={`${styles.projectTypeCard} ${formData.projectType === type.id ? styles.selected : ''
+                    }`}
                   onClick={() => handleProjectTypeSelect(type.id)}
                   whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(0, 210, 255, 0.2)' }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -401,9 +402,8 @@ export const Inquiry = () => {
                 {budgetRanges.map(budget => (
                   <motion.div
                     key={budget.id}
-                    className={`${styles.optionCard} ${
-                      formData.budget === budget.id ? styles.selected : ''
-                    }`}
+                    className={`${styles.optionCard} ${formData.budget === budget.id ? styles.selected : ''
+                      }`}
                     onClick={() => handleBudgetSelect(budget.id)}
                     whileHover={{
                       y: -5,
@@ -440,9 +440,8 @@ export const Inquiry = () => {
                 {timelineOptions.map(timeline => (
                   <motion.div
                     key={timeline.id}
-                    className={`${styles.optionCard} ${
-                      formData.timeline === timeline.id ? styles.selected : ''
-                    }`}
+                    className={`${styles.optionCard} ${formData.timeline === timeline.id ? styles.selected : ''
+                      }`}
                     onClick={() => handleTimelineSelect(timeline.id)}
                     whileHover={{
                       y: -5,
@@ -571,144 +570,145 @@ export const Inquiry = () => {
   };
 
   return (
-    <Section className={styles.projectInquirySection}>
-      <Meta
-        title="Start a Project | Connor Love"
-        description="Share your project details and let's create something amazing together."
-      />
+    <div data-theme={themeId}>
+      <Section className={styles.projectInquirySection}>
+        <Meta
+          title="Start a Project | Connor Love"
+          description="Share your project details and let's create something amazing together."
+        />
 
-      <div className={styles.projectInquiryContainer}>
-        <AnimatePresence mode="wait">
-          {isSubmitted ? (
-            <motion.div
-              className={styles.successContainer}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className={styles.successIcon}>
-                <Check size={64} />
-              </div>
-              <Heading level={2} as="h2" className={styles.successTitle}>
-                Project Inquiry Submitted!
-              </Heading>
-              <Text size="m" as="p" className={styles.successText}>
-                Thank you for sharing your project details. I&apos;ll review your inquiry
-                and get back to you within 1-2 business days to discuss next steps.
-              </Text>
-              <Button className={styles.backButton} onClick={handleBackToHome}>
-                <ChevronLeft size={18} />
-                Back to Contact
-              </Button>
-            </motion.div>
-          ) : (
-            <>
-              <div className={styles.formHeader}>
-                <Button className={styles.backLink} onClick={handleBackToHome}>
-                  <ChevronLeft size={16} />
+        <div className={styles.projectInquiryContainer}>
+          <AnimatePresence mode="wait">
+            {isSubmitted ? (
+              <motion.div
+                className={styles.successContainer}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className={styles.successIcon}>
+                  <Check size={64} />
+                </div>
+                <Heading level={2} as="h2" className={styles.successTitle}>
+                  Project Inquiry Submitted!
+                </Heading>
+                <Text size="m" as="p" className={styles.successText}>
+                  Thank you for sharing your project details. I&apos;ll review your inquiry
+                  and get back to you within 1-2 business days to discuss next steps.
+                </Text>
+                <Button className={styles.backButton} onClick={handleBackToHome}>
+                  <ChevronLeft size={18} />
                   Back to Contact
                 </Button>
-                <Heading level={1} as="h1" className={styles.title}>
-                  Start a Project
-                </Heading>
-                <Text size="m" as="p" className={styles.subtitle}>
-                  Tell me about your project and I&apos;ll help bring your vision to life.
-                </Text>
-              </div>
-
-              <div className={styles.progressContainer}>
-                <div className={styles.progressSteps}>
-                  {Array.from({ length: totalSteps }).map((_, index) => (
-                    <div
-                      key={index}
-                      className={`${styles.progressStep} ${
-                        step > index ? styles.completed : ''
-                      } ${step === index + 1 ? styles.active : ''}`}
-                    >
-                      <div className={styles.progressStepCircle}>
-                        {step > index ? <Check size={16} /> : index + 1}
-                      </div>
-                      <div className={styles.progressStepLabel}>
-                        {index === 0 && 'Project Type'}
-                        {index === 1 && 'Description'}
-                        {index === 2 && 'Budget & Timeline'}
-                        {index === 3 && 'Contact Info'}
-                      </div>
-                    </div>
-                  ))}
+              </motion.div>
+            ) : (
+              <>
+                <div className={styles.formHeader}>
+                  <Button secondary className={styles.backLink} onClick={handleBackToHome}>
+                    <ChevronLeft size={16} />
+                    Back to Contact
+                  </Button>
+                  <Heading level={1} as="h1" className={styles.title}>
+                    Start a Project
+                  </Heading>
+                  <Text size="m" as="p" className={styles.subtitle}>
+                    Tell me about your project and I&apos;ll help bring your vision to life.
+                  </Text>
                 </div>
-                <div className={styles.progressBar}>
-                  <div
-                    className={styles.progressFill}
-                    style={{ width: `${(step / totalSteps) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
 
-              <div className={styles.formCard}>
-                <form className={styles.projectForm} onSubmit={handleSubmit(onSubmit)}>
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={`step-${step}`}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {renderStepContent()}
-                    </motion.div>
-                  </AnimatePresence>
-
-                  <div className={styles.formNavigation}>
-                    {step > 1 && (
-                      <Button
-                        type="button"
-                        className={styles.prevButton}
-                        onClick={prevStep}
+                <div className={styles.progressContainer}>
+                  <div className={styles.progressSteps}>
+                    {Array.from({ length: totalSteps }).map((_, index) => (
+                      <div
+                        key={index}
+                        className={`${styles.progressStep} ${step > index ? styles.completed : ''
+                          } ${step === index + 1 ? styles.active : ''}`}
                       >
-                        <ChevronLeft size={18} />
-                        Previous Step
-                      </Button>
-                    )}
-
-                    {step < totalSteps ? (
-                      <Button
-                        type="button"
-                        className={styles.nextButton}
-                        onClick={nextStep}
-                      >
-                        Next Step
-                        <ChevronRight size={18} />
-                      </Button>
-                    ) : (
-                      <Button
-                        type="submit"
-                        className={styles.submitButton}
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Loader2 className={styles.spinnerIcon} size={18} />
-                            Submitting...
-                          </>
-                        ) : (
-                          <>
-                            Submit Project Inquiry
-                            <Check size={18} />
-                          </>
-                        )}
-                      </Button>
-                    )}
+                        <div className={styles.progressStepCircle}>
+                          {step > index ? <Check size={16} /> : index + 1}
+                        </div>
+                        <div className={styles.progressStepLabel}>
+                          {index === 0 && 'Project Type'}
+                          {index === 1 && 'Description'}
+                          {index === 2 && 'Budget & Timeline'}
+                          {index === 3 && 'Contact Info'}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </form>
-              </div>
-            </>
-          )}
-        </AnimatePresence>
-      </div>
+                  <div className={styles.progressBar}>
+                    <div
+                      className={styles.progressFill}
+                      style={{ width: `${(step / totalSteps) * 100}%` }}
+                    ></div>
+                  </div>
+                </div>
 
-      <Footer />
-    </Section>
+                <div className={styles.formCard}>
+                  <form className={styles.projectForm} onSubmit={handleSubmit(onSubmit)}>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={`step-${step}`}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {renderStepContent()}
+                      </motion.div>
+                    </AnimatePresence>
+
+                    <div className={styles.formNavigation}>
+                      {step > 1 && (
+                        <Button
+                          type="button"
+                          className={styles.prevButton}
+                          onClick={prevStep}
+                        >
+                          <ChevronLeft size={18} />
+                          Previous Step
+                        </Button>
+                      )}
+
+                      {step < totalSteps ? (
+                        <Button
+                          type="button"
+                          className={styles.nextButton}
+                          onClick={nextStep}
+                        >
+                          Next Step
+                          <ChevronRight size={18} />
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          className={styles.submitButton}
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 className={styles.spinnerIcon} size={18} />
+                              Submitting...
+                            </>
+                          ) : (
+                            <>
+                              Submit Project Inquiry
+                              <Check size={18} />
+                            </>
+                          )}
+                        </Button>
+                      )}
+                    </div>
+                  </form>
+                </div>
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <Footer />
+      </Section>
+    </div>
   );
 };

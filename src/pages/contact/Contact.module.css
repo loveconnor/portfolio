@@ -2,21 +2,24 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: rgb(17, 17, 17);
-  color: rgb(255, 255, 255);
-  margin-left: 78px; /* Account for side nav */
-  width: calc(100% - 78px);
+  background-color: rgb(var(--rgbBackground));
+  color: var(--colorTextBody);
+  margin-left: 0;
+  width: 100%;
+  padding-left: var(--spaceOuter);
+  padding-right: var(--spaceOuter);
+  padding-top: var(--space4XL);
   position: relative;
 }
 
 .contactContainer {
-  max-width: 1200px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
-  padding: 120px 80px;
+  padding: 64px 48px;
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 32px;
 }
 
 .contactHeader {
@@ -24,20 +27,39 @@
   max-width: 800px;
 }
 
+/* Quick actions */
+.headerCta {
+  margin-top: 16px;
+}
+
 .title {
-  font-size: 4.5rem;
+  font-size: 3rem;
   line-height: 1.1;
   margin-bottom: 24px;
-  color: rgb(255, 255, 255);
-  background: linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0.8));
+  color: var(--colorTextTitle);
+  background: linear-gradient(
+    to right,
+    rgb(var(--rgbText)),
+    rgb(var(--rgbText) / 0.8)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  color: rgb(var(--rgbText) / 0.7);
   max-width: 600px;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.headerButton {
+  margin-top: 0;
 }
 
 /* Contact Form */
@@ -65,18 +87,18 @@
 .formLabel {
   font-size: 0.95rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgb(var(--rgbText) / 0.8);
 }
 
 .formInput,
 .formSelect,
 .formTextarea {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgb(var(--rgbText) / 0.05);
+  border: 1px solid rgb(var(--rgbText) / 0.1);
   border-radius: 4px;
   padding: 12px 16px;
   font-size: 1rem;
-  color: rgb(255, 255, 255);
+  color: rgb(var(--rgbText));
   transition: all 0.3s ease;
   width: 100%;
 }
@@ -85,13 +107,13 @@
 .formSelect:focus,
 .formTextarea:focus {
   outline: none;
-  border-color: rgb(0, 210, 255);
-  box-shadow: 0 0 0 2px rgba(0, 210, 255, 0.2);
+  border-color: rgb(var(--rgbAccent));
+  box-shadow: 0 0 0 2px rgb(var(--rgbAccent) / 0.2);
 }
 
 .formInput::placeholder,
 .formTextarea::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgb(var(--rgbText) / 0.4);
 }
 
 .formTextarea {
@@ -100,7 +122,7 @@
 }
 
 .formError {
-  color: rgb(255, 86, 86);
+  color: rgb(var(--rgbError));
   font-size: 0.85rem;
   margin: 4px 0 0;
 }
@@ -116,8 +138,8 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background-color: rgb(0, 210, 255);
-  color: rgb(17, 17, 17);
+  background-color: rgb(var(--rgbAccent));
+  color: rgb(var(--rgbBlack));
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -127,12 +149,12 @@
 }
 
 .submitButton:hover {
-  background-color: rgba(0, 210, 255, 0.9);
+  background-color: rgb(var(--rgbAccent) / 0.9);
   transform: translateY(-2px);
 }
 
 .submitButton:disabled {
-  background-color: rgba(0, 210, 255, 0.5);
+  background-color: rgb(var(--rgbAccent) / 0.5);
   cursor: not-allowed;
   transform: none;
 }
@@ -162,20 +184,20 @@
 }
 
 .successIcon {
-  color: rgb(0, 210, 255);
+  color: rgb(var(--rgbAccent));
   margin-bottom: 24px;
 }
 
 .successTitle {
   font-size: 2.5rem;
   font-weight: 600;
-  color: rgb(255, 255, 255);
+  color: var(--colorTextTitle);
   margin: 0 0 16px;
 }
 
 .successText {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(var(--rgbText) / 0.7);
   margin-bottom: 32px;
 }
 
@@ -184,8 +206,8 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgb(255, 255, 255);
+  background-color: rgb(var(--rgbText) / 0.1);
+  color: rgb(var(--rgbText));
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -195,18 +217,16 @@
 }
 
 .resetButton:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgb(var(--rgbText) / 0.15);
   transform: translateY(-2px);
 }
 
 /* Contact Info */
 .contactInfo {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 40px;
-  margin-top: 40px;
-  padding-top: 60px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 8px 0 8px;
 }
 
 .contactInfoItem {
@@ -218,25 +238,25 @@
 .contactInfoTitle {
   font-size: 1.2rem;
   font-weight: 600;
-  color: rgb(255, 255, 255);
+  color: var(--colorTextTitle);
   margin: 0;
 }
 
 .contactInfoText {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(var(--rgbText) / 0.7);
   margin: 0;
 }
 
 .contactInfoLink {
   font-size: 1rem;
-  color: rgb(0, 210, 255);
+  color: rgb(var(--rgbAccent));
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .contactInfoLink:hover {
-  color: rgba(0, 210, 255, 0.8);
+  color: rgb(var(--rgbAccent) / 0.8);
   text-decoration: underline;
 }
 
@@ -246,13 +266,13 @@
 }
 
 .socialLink {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(var(--rgbText) / 0.7);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .socialLink:hover {
-  color: rgb(0, 210, 255);
+  color: rgb(var(--rgbAccent));
 }
 
 /* Project Section */
@@ -260,8 +280,12 @@
   margin-top: 40px;
   padding: 60px;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(0, 210, 255, 0.1), rgba(0, 210, 255, 0.05));
-  border: 1px solid rgba(0, 210, 255, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgb(var(--rgbAccent) / 0.1),
+    rgb(var(--rgbAccent) / 0.05)
+  );
+  border: 1px solid rgb(var(--rgbAccent) / 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -273,7 +297,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 70% 30%, rgba(0, 210, 255, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle at 70% 30%, rgb(var(--rgbAccent) / 0.15) 0%, transparent 70%);
   z-index: 0;
 }
 
@@ -289,28 +313,28 @@
 }
 
 .projectSectionIcon {
-  color: rgb(0, 210, 255);
+  color: rgb(var(--rgbAccent));
   margin-bottom: 24px;
-  background: rgba(0, 210, 255, 0.1);
+  background: rgb(var(--rgbAccent) / 0.1);
   width: 80px;
   height: 80px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+  box-shadow: 0 0 30px rgb(var(--rgbAccent) / 0.2);
 }
 
 .projectSectionTitle {
   font-size: 2.5rem;
   font-weight: 600;
-  color: rgb(255, 255, 255);
+  color: var(--colorTextTitle);
   margin: 0 0 16px;
 }
 
 .projectSectionText {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgb(var(--rgbText) / 0.8);
   margin-bottom: 32px;
 }
 
@@ -319,21 +343,21 @@
   align-items: center;
   gap: 12px;
   padding: 16px 32px;
-  background-color: rgb(0, 210, 255);
-  color: rgb(17, 17, 17);
+  background-color: rgb(var(--rgbAccent));
+  color: rgb(var(--rgbBlack));
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 30px rgba(0, 210, 255, 0.3);
+  box-shadow: 0 8px 30px rgb(var(--rgbAccent) / 0.3);
 }
 
 .projectButton:hover {
-  background-color: rgba(0, 210, 255, 0.9);
+  background-color: rgb(var(--rgbAccent) / 0.9);
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0, 210, 255, 0.4);
+  box-shadow: 0 12px 40px rgb(var(--rgbAccent) / 0.4);
 }
 
 .projectButtonIcon {

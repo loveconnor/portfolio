@@ -2,6 +2,7 @@
 import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
 import sprTexture from 'assets/landing.png';
 import chatLanding from 'assets/chatLanding.png';
+import loveCodeDemo from 'assets/lovecode-preview.png'
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
 import { Intro } from 'layouts/Home/Intro';
@@ -29,6 +30,7 @@ export const Home = () => {
   const intro = useRef(null);
   const projectOne = useRef(null);
   const projectTwo = useRef(null);
+  const projectThree = useRef(null);
   const details = useRef(null);
 
   useEffect(() => {
@@ -109,21 +111,40 @@ export const Home = () => {
         {...(visibleSections.includes(projectTwo.current) ? { visible: true } : {})}
         index={2}
         title="LoveChat"
-        description="T3 Chat cloneathon submission"
+        description="Advanced AI chat application built as an official T3 Chat Cloneathon entry — featuring multi‑model support, workflows, artifacts, and a polished UX."
         buttonText="View Case Study"
         buttonLink="/projects/lovechat"
         model={{
           type: 'laptop',
-          alt: 'T3 Chat Cloneathon Submission',
+          alt: 'LoveChat — T3 Chat Cloneathon Entry',
           textures: [
             {
               srcSet: [chatLanding],
               placeholder: sprTexturePlaceholder,
             },
-          ]
+          ],
         }}
       />
-
+      <ProjectSummary
+        id="project-3"
+        sectionRef={projectThree}
+        {...(visibleSections.includes(projectThree.current) ? { visible: true } : {})}
+        index={2}
+        title="LoveCode"
+        description="AI-powered vibe coding platform that turns ideas into live, runnable apps."
+        buttonText="View Case Study"
+        buttonLink="/projects/lovecode"
+        model={{
+          type: 'laptop',
+          alt: 'LoveCode — Chat to App Vibe Coding Platform',
+          textures: [
+            {
+              srcSet: [loveCodeDemo],
+              placeholder: sprTexturePlaceholder,
+            },
+          ],
+        }}
+      />
       <Profile
         sectionRef={details}
         {...(visibleSections.includes(details.current) ? { visible: true } : {})}

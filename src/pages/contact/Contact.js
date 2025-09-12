@@ -57,7 +57,12 @@ export const Contact = () => {
 
       const result = await response.json()
       if (!response.ok || !result.success) {
-        throw new Error(result?.message || "Failed to send message")
+        const extra =
+          result?.details?.errors?.[0]?.message ||
+          result?.details?.message ||
+          (typeof result?.details === "string" ? result.details : "")
+        const message = result?.message || "Failed to send message"
+        throw new Error(extra ? `${message}: ${extra}` : message)
       }
 
       setIsSubmitted(true)
@@ -95,13 +100,20 @@ export const Contact = () => {
           animate={isHeaderVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8 }}
         >
-          <Heading level={1} as="h1" className={styles.title}>
-            <DecoderText text="Get in Touch" start={isHeaderVisible} delay={300} />
-          </Heading>
-          <Text size="l" as="p" className={styles.subtitle}>
+          <div className={styles.headerRow}>
+            <Heading level={1} as="h1" className={styles.title}>
+              <DecoderText text="Get in Touch" start={isHeaderVisible} delay={300} />
+            </Heading>
+            <Button className={styles.headerButton} onClick={handleStartProject} iconEnd="arrowRight">
+              Start a project
+            </Button>
+          </div>
+          <Text size="m" as="p" className={styles.subtitle}>
             Have a question or just want to say hello? I&apos;d love to hear from you.
           </Text>
         </motion.div>
+
+        {/* Info under form (moved below later) */}
 
         <AnimatePresence mode="wait">
           {isSubmitted ? (
@@ -208,12 +220,12 @@ export const Contact = () => {
             </motion.form>
           )}
         </AnimatePresence>
-
+        {/* Contact info under the form */}
         <div className={styles.contactInfo}>
           <div className={styles.contactInfoItem}>
             <h3 className={styles.contactInfoTitle}>Email</h3>
             <a href="mailto:loveconnor2005@gmail.com" className={styles.contactInfoLink}>
-              hello@connorlove.com
+              LoveConnor2005@gmail.com
             </a>
           </div>
           <div className={styles.contactInfoItem}>
@@ -223,61 +235,18 @@ export const Contact = () => {
           <div className={styles.contactInfoItem}>
             <h3 className={styles.contactInfoTitle}>Social</h3>
             <div className={styles.socialLinks}>
-              <a
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-              >
+              <a href="https://github.com/loveconnor" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
                 GitHub
               </a>
-              <a
-                href="https://linkedin.com/in/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-              >
+              <a href="https://linkedin.com/in/connorlove2005" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
                 LinkedIn
               </a>
-              <a
-                href="https://twitter.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-              >
+              <a href="https://x.com/cando145" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
                 Twitter
               </a>
             </div>
           </div>
         </div>
-
-        {/* Project Section */}
-        <motion.div
-          className={styles.projectSection}
-          ref={projectSectionRef}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isProjectSectionVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className={styles.projectSectionContent}>
-            <div className={styles.projectSectionIcon}>
-              <Briefcase size={40} />
-            </div>
-            <Heading level={2} as="h2" className={styles.projectSectionTitle}>
-              Have a project in mind?
-            </Heading>
-            <Text size="m" as="p" className={styles.projectSectionText}>
-              Let&apos;s work together to bring your vision to life. Start the conversation by sharing your project
-              details.
-            </Text>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-              <Button className={styles.projectButton} onClick={handleStartProject}>
-                Start a Project
-                <ArrowRight size={18} className={styles.projectButtonIcon} />
-              </Button>
-            </motion.div>
-          </div>
-        </motion.div>
       </div>
 
       <Footer />

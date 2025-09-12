@@ -6,7 +6,7 @@
 }
 
 .dropzone {
-  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border: 2px dashed rgb(var(--rgbText) / 0.2);
   border-radius: 12px;
   padding: 30px;
   display: flex;
@@ -15,13 +15,13 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgb(var(--rgbText) / 0.06);
   position: relative;
 }
 
 .dropzone:hover {
-  border-color: rgba(0, 210, 255, 0.4);
-  background-color: rgba(0, 210, 255, 0.05);
+  border-color: rgb(var(--rgbAccent) / 0.4);
+  background-color: rgb(var(--rgbAccent) / 0.05);
 }
 
 .dragging {
@@ -42,25 +42,25 @@
 }
 
 .uploadIcon {
-  color: rgb(0, 210, 255);
+  color: rgb(var(--rgbAccent));
   margin-bottom: 8px;
   opacity: 0.8;
 }
 
 .dropzoneText {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgb(var(--rgbText) / 0.85);
   margin: 0;
 }
 
 .highlight {
-  color: rgb(0, 210, 255);
+  color: rgb(var(--rgbAccent));
   font-weight: 500;
 }
 
 .dropzoneHint {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(var(--rgbText) / 0.6);
   margin: 0;
 }
 
@@ -77,13 +77,13 @@
   gap: 12px;
   padding: 12px;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgb(var(--rgbText) / 0.05);
+  border: 1px solid rgb(var(--rgbText) / 0.1);
   transition: all 0.2s ease;
 }
 
 .fileItem:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgb(var(--rgbText) / 0.08);
 }
 
 .filePreview {
@@ -94,8 +94,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgb(0, 210, 255);
+  background-color: rgb(var(--rgbText) / 0.1);
+  color: rgb(var(--rgbAccent));
   flex-shrink: 0;
 }
 
@@ -112,7 +112,7 @@
 
 .fileName {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--colorTextTitle);
   margin: 0 0 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -121,7 +121,7 @@
 
 .fileSize {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(var(--rgbText) / 0.6);
   margin: 0;
 }
 
@@ -129,8 +129,8 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
+  background-color: rgb(var(--rgbText) / 0.1);
+  color: rgb(var(--rgbText) / 0.7);
   border: none;
   display: flex;
   align-items: center;
@@ -141,8 +141,8 @@
 }
 
 .removeButton:hover {
-  background-color: rgba(255, 86, 86, 0.2);
-  color: rgb(255, 86, 86);
+  background-color: rgb(var(--rgbError) / 0.2);
+  color: rgb(var(--rgbError));
 }
 
 .addMoreButton {
@@ -151,7 +151,7 @@
   gap: 8px;
   background: none;
   border: none;
-  color: rgb(0, 210, 255);
+  color: rgb(var(--rgbAccent));
   font-size: 0.9rem;
   cursor: pointer;
   padding: 8px 0;
@@ -160,7 +160,7 @@
 }
 
 .addMoreButton:hover {
-  color: rgba(0, 210, 255, 0.8);
+  color: rgb(var(--rgbAccent) / 0.8);
   text-decoration: underline;
 }
 
