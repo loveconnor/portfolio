@@ -1,7 +1,7 @@
 .uses {
   width: 100%;
   min-height: 100vh;
-  padding: var(--spaceXL) var(--spaceXL) var(--space4XL);
+  padding: var(--space3XL) var(--spaceXL) var(--space4XL);
   background: var(--colorBackground);
   position: relative;
   max-width: calc(100% - 90px); /* Adjust max-width to account for sidebar */
@@ -67,15 +67,12 @@
 
 .category:hover {
   border-color: var(--colorTextLight);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.1);
 }
 
 .category[data-active="true"] {
   background: rgb(var(--rgbPrimary) / 0.1);
   border-color: rgb(var(--rgbPrimary) / 0.3);
   color: rgb(var(--rgbPrimary));
-  box-shadow: 0 4px 12px -4px rgb(var(--rgbPrimary) / 0.2);
 }
 
 .category[data-active="true"] .categoryIcon {
@@ -99,17 +96,15 @@
   border-radius: 12px;
   border: 1px solid var(--colorBorder);
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.05);
   width: 100%; /* Ensure cards take full width of their grid cell */
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px -12px rgb(var(--rgbText) / 0.08);
+  transform: translateY(-2px);
   border-color: var(--colorTextLight);
 }
 
@@ -139,7 +134,6 @@
   justify-content: center;
   color: rgb(var(--rgbPrimary));
   flex-shrink: 0;
-  box-shadow: 0 4px 8px -4px rgb(var(--rgbPrimary) / 0.2);
 }
 
 .cardTitle {
@@ -230,7 +224,6 @@
 .resetButton:hover {
   background: rgb(var(--rgbPrimary) / 0.15);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px -4px rgb(var(--rgbPrimary) / 0.3);
 }
 
 .searchInputWrapper {
@@ -292,12 +285,10 @@
 body[data-theme="dark"] .card {
   background: var(--colorBackgroundLight);
   border-color: var(--colorBorder);
-  box-shadow: 0 4px 20px -6px rgba(0, 0, 0, 0.2);
 }
 
 body[data-theme="dark"] .card:hover {
   border-color: rgb(var(--rgbText) / 0.3);
-  box-shadow: 0 12px 24px -12px rgb(0 0 0 / 0.3);
 }
 
 body[data-theme="dark"] .searchInput {
@@ -312,7 +303,7 @@ body[data-theme="dark"] .searchInput {
 
 @media (max-width: 768px) {
   .uses {
-    padding: var(--spaceXL) var(--spaceM);
+    padding: var(--space2XL) var(--spaceM);
     margin-left: 90px; /* Maintain the margin on mobile */
     max-width: calc(100% - 90px);
   }

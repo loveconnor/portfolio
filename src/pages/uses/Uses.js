@@ -14,76 +14,167 @@ import {
   BookOpen,
   Search,
   ExternalLink,
-  Figma,
-  Film,
+  Figma as FigmaIcon,
   Layers,
   X,
+  Database,
+  Server,
+  Cpu,
+  Cloud,
+  Terminal
 } from "lucide-react"
 
 const designTools = [
   {
     name: "Figma",
-    description: "My primary tool for UI design. Made the switch from Sketch in 2020 and haven't looked back.",
-    icon: Figma,
+    description: "Primary UI/UX tool for wireframes, prototypes, and design systems.",
+    icon: FigmaIcon,
     url: "https://www.figma.com",
   },
   {
-    name: "Adobe After Effects",
-    description: "For motion graphics creation. Haven't found a non-Adobe product that's as good yet.",
-    icon: Film,
+    name: "Adobe Photoshop",
+    description: "Asset editing, photo manipulation, and graphics prep for web.",
+    icon: Palette,
+    url: "https://www.adobe.com/products/photoshop.html",
   },
   {
-    name: "Blender",
-    description: "For 3D models. Since 2.8 it's become way simpler to use and often better than expensive paid tools.",
-    icon: Box,
-    url: "https://www.blender.org/",
+    name: "Adobe Illustrator",
+    description: "Vector logos, icons, and scalable illustrations for interfaces.",
+    icon: Palette,
+    url: "https://www.adobe.com/products/illustrator.html",
   },
 ]
 
 const devTools = [
   {
     name: "Visual Studio Code",
-    description: "My text editor with One Dark Pro theme and Operator Mono typeface.",
+    description: "Editor of choice—fast, extensible, and great TypeScript support.",
     icon: Code,
     url: "https://code.visualstudio.com/",
   },
   {
     name: "Arc Browser",
-    description: "My main browser for both development and general use.",
+    description: "Daily driver for browsing and web dev tasks.",
     icon: Globe,
   },
   {
     name: "React",
-    description:
-      "My front end Javascript library of choice. The component-centric mental model is the first thing that truly made sense to me as a designer.",
+    description: "Component-driven UI library I use across projects.",
     icon: Atom,
-    url: "https://reactjs.org/",
+    url: "https://react.dev/",
+  },
+  {
+    name: "Next.js",
+    description: "Full-stack React framework for routing, data fetching, and deployment.",
+    icon: Code,
+    url: "https://nextjs.org/",
   },
   {
     name: "Three.js",
-    description:
-      "For 3D effects and image shaders. It has a bit of a learning curve but you can do some really powerful stuff with it.",
+    description: "3D scenes and visual effects in the browser.",
     icon: Box,
     url: "https://threejs.org/",
   },
   {
-    name: "PostCSS",
-    description:
-      "For CSS, I've used many pre-processors and css-in-js solutions, but these days I'm using vanilla CSS with PostCSS to get upcoming CSS features today.",
-    icon: Palette,
-    url: "https://postcss.org/",
+    name: "GSAP",
+    description: "High-performance animation for polished motion and transitions.",
+    icon: Sparkles,
+    url: "https://gsap.com/",
   },
   {
     name: "Framer Motion",
-    description: "For Javascript animations. It's a great way to add spring animations to React and three.js.",
+    description: "Declarative animations and gestures for React UIs.",
     icon: Sparkles,
     url: "https://www.framer.com/motion/",
   },
   {
+    name: "Tailwind CSS",
+    description: "Utility-first styling for fast, consistent interfaces.",
+    icon: Palette,
+    url: "https://tailwindcss.com/",
+  },
+  {
+    name: "Material-UI",
+    description: "Production-ready React components when I need speed and consistency.",
+    icon: BookOpen,
+    url: "https://mui.com/",
+  },
+  {
     name: "Storybook",
-    description: "For building and testing UI components in isolation.",
+    description: "Build and test UI components in isolation.",
     icon: BookOpen,
     url: "https://storybook.js.org/",
+  },
+  {
+    name: "Node.js",
+    description: "Backend runtime powering APIs and server logic.",
+    icon: Server,
+    url: "https://nodejs.org/",
+  },
+  {
+    name: "REST APIs",
+    description: "Standard interface for services and integrations.",
+    icon: Server,
+  },
+  {
+    name: "Supabase",
+    description: "Auth, storage, and Postgres backend for rapid builds.",
+    icon: Database,
+    url: "https://supabase.com/",
+  },
+  {
+    name: "PostgreSQL",
+    description: "Relational database for reliability and strong SQL features.",
+    icon: Database,
+    url: "https://www.postgresql.org/",
+  },
+]
+
+const aiTools = [
+  {
+    name: "OpenAI API",
+    description: "LLM features for chat, generation, and tooling.",
+    icon: Cpu,
+    url: "https://platform.openai.com/",
+  },
+  {
+    name: "Google Gemini",
+    description: "Multimodal models for text, image, and code tasks.",
+    icon: Cpu,
+    url: "https://ai.google/",
+  },
+  {
+    name: "Anthropic Claude",
+    description: "Reasoning-focused model for safer, reliable outputs.",
+    icon: Cpu,
+    url: "https://www.anthropic.com/",
+  },
+  {
+    name: "ElevenLabs",
+    description: "High-quality text-to-speech for product voice features.",
+    icon: Cpu,
+    url: "https://elevenlabs.io/",
+  },
+  {
+    name: "Serper API",
+    description: "Search integration for retrieval-augmented features.",
+    icon: Search,
+    url: "https://serper.dev/",
+  },
+]
+
+const platformTools = [
+  {
+    name: "Docker",
+    description: "Containerization for consistent dev and deploy workflows.",
+    icon: Terminal,
+    url: "https://www.docker.com/",
+  },
+  {
+    name: "Vercel",
+    description: "Zero-config deploys for Next.js and edge-ready apps.",
+    icon: Cloud,
+    url: "https://vercel.com/",
   },
 ]
 
@@ -91,22 +182,25 @@ export const Uses = () => {
   const [activeCategory, setActiveCategory] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
 
+  const collectByCategory = () => {
+    if (activeCategory === "all")
+      return [...designTools, ...devTools, ...aiTools, ...platformTools]
+    if (activeCategory === "design") return designTools
+    if (activeCategory === "development") return devTools
+    if (activeCategory === "ai") return aiTools
+    if (activeCategory === "platforms") return platformTools
+    return []
+  }
+
   const filteredTools = () => {
-    let tools = []
-
-    if (activeCategory === "all") tools = [...designTools, ...devTools]
-    else if (activeCategory === "design") tools = designTools
-    else if (activeCategory === "development") tools = devTools
-
-    if (searchQuery) {
-      return tools.filter(
-        (tool) =>
-          tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          tool.description.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-    }
-
-    return tools
+    const tools = collectByCategory()
+    if (!searchQuery) return tools
+    const q = searchQuery.toLowerCase()
+    return tools.filter(
+      (tool) =>
+        tool.name.toLowerCase().includes(q) ||
+        tool.description.toLowerCase().includes(q)
+    )
   }
 
   const handleCategoryClick = (category) => {
@@ -116,13 +210,12 @@ export const Uses = () => {
   return (
     <>
       <Fragment>
-        <Meta title="Uses" description="A list of hardware and software I use to do my thing" />
+        <Meta title="Uses" description="The tools, platforms, and technologies I use to design and build software." />
         <div className={styles.uses}>
           <header className={styles.header}>
             <h1 className={styles.title}>Tools & Technologies</h1>
             <p className={styles.description}>
-              A curated collection of the tools, applications, and technologies I use daily to design and develop
-              exceptional digital experiences.
+              A curated list of what I use day-to-day across design, development, AI, and deployment.
             </p>
 
             <div className={styles.searchAndCategories}>
@@ -151,7 +244,7 @@ export const Uses = () => {
                   onClick={() => handleCategoryClick("all")}
                 >
                   <Layers className={styles.categoryIcon} size={16} />
-                  <span>All Tools</span>
+                  <span>All</span>
                 </button>
                 <button
                   className={styles.category}
@@ -169,6 +262,22 @@ export const Uses = () => {
                   <Code className={styles.categoryIcon} size={16} />
                   <span>Development</span>
                 </button>
+                <button
+                  className={styles.category}
+                  data-active={activeCategory === "ai"}
+                  onClick={() => handleCategoryClick("ai")}
+                >
+                  <Cpu className={styles.categoryIcon} size={16} />
+                  <span>AI & Integrations</span>
+                </button>
+                <button
+                  className={styles.category}
+                  data-active={activeCategory === "platforms"}
+                  onClick={() => handleCategoryClick("platforms")}
+                >
+                  <Cloud className={styles.categoryIcon} size={16} />
+                  <span>Platforms</span>
+                </button>
               </div>
             </div>
           </header>
@@ -176,11 +285,17 @@ export const Uses = () => {
           <main>
             {filteredTools().length > 0 ? (
               <>
-                {activeCategory === "design" && <h2 className={styles.sectionTitle}>Design Tools</h2>}
-                {activeCategory === "development" && <h2 className={styles.sectionTitle}>Development Tools</h2>}
+                {activeCategory !== "all" && (
+                  <h2 className={styles.sectionTitle}>
+                    {activeCategory === "design" && "Design Tools"}
+                    {activeCategory === "development" && "Development Tools"}
+                    {activeCategory === "ai" && "AI & Integrations"}
+                    {activeCategory === "platforms" && "Platforms"}
+                  </h2>
+                )}
                 <div className={styles.grid}>
                   {filteredTools().map((tool, index) => (
-                    <article className={styles.card} key={index}>
+                    <article className={styles.card} key={`${tool.name}-${index}`}>
                       <div className={styles.cardContent}>
                         <div className={styles.cardHeader}>
                           <div className={styles.cardIconWrap}>
@@ -217,8 +332,6 @@ export const Uses = () => {
               </div>
             )}
           </main>
-
-
         </div>
       </Fragment>
       <Footer />

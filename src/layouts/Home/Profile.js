@@ -2,7 +2,7 @@
 
 import { useState, useRef, Fragment } from "react"
 import { motion } from "framer-motion"
-import { Send, ChevronRight, Code, Server, Database, Globe, Layers, Terminal } from "lucide-react"
+import { Send, ChevronRight, Code, Server, Database, Globe, Layers, Terminal, Cpu } from "lucide-react"
 import { Button } from "components/Button"
 import { Image } from "components/Image"
 import { Section } from "components/Section"
@@ -12,18 +12,62 @@ import { useIntersectionObserver } from "hooks/use-intersection-observer"
 import { media } from "utils/style"
 import profileImgLarge from "assets/connor.jpg"
 import profileImgPlaceholder from "assets/profile-placeholder.jpg"
-import profileImg from "assets/connor.jpg"
+import profileImg from "assets/connor.png"
 import styles from "./Profile.module.css"
 
 const ProfileText = ({ visible }) => {
+  const MAX_TAGS_PER_CARD = 3
+  const [expanded, setExpanded] = useState({})
+
   const skills = [
-    { name: "Frontend Development", level: 90, icon: <Code size={18} /> },
-    { name: "Backend Development", level: 85, icon: <Server size={18} /> },
-    { name: "Database Management", level: 80, icon: <Database size={18} /> },
-    { name: "Web Design", level: 85, icon: <Globe size={18} /> },
-    { name: "UI/UX Design", level: 75, icon: <Layers size={18} /> },
-    { name: "DevOps", level: 70, icon: <Terminal size={18} /> },
-  ]
+    {
+      name: "Frontend Development",
+      icon: <Code size={18} />,
+      tags: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Three.js",
+        "GSAP",
+        "Framer Motion",
+        "Tailwind CSS",
+        "Material-UI",
+        "HTML/CSS",
+      ],
+    },
+    {
+      name: "Backend Development",
+      icon: <Server size={18} />,
+      tags: ["Node.js", "Supabase", "REST APIs", "Python", "Java", "C++"],
+    },
+    {
+      name: "Database Management",
+      icon: <Database size={18} />,
+      tags: ["PostgreSQL", "SQL"],
+    },
+    {
+      name: "Web & UI Design",
+      icon: <Globe size={18} />,
+      tags: ["Responsive Design", "Accessibility", "Figma", "Prototyping"],
+    },
+    {
+      name: "Creative Tools",
+      icon: <Layers size={18} />,
+      tags: ["Photoshop", "Illustrator", "Design Systems", "Wireframing"],
+    },
+    {
+      name: "DevOps & Deployment",
+      icon: <Terminal size={18} />,
+      tags: ["Git", "GitHub", "Docker", "Vercel", "CI/CD"],
+    },
+    {
+      name: "AI & Integrations",
+      icon: <Cpu size={18} />, // you can swap this for an icon you prefer
+      tags: ["OpenAI API", "Google Gemini", "Claude", "ElevenLabs", "Serper API"],
+    },
+  ];
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -98,17 +142,21 @@ const ProfileText = ({ visible }) => {
       >
         <motion.div variants={itemVariants}>
           <Text className={styles.description} as="p">
-            Hi! I&apos;m a first-year Computer Science student at Kent State University with a 4.0 GPA, passionate about
-            technology and creativity. I&apos;m from Medina, Ohio, and have been honing my skills in web development.
+            Hi! I&apos;m Connor Love, a Computer Science and Engineering student at The Ohio State University with prior
+            coursework and research experience at Kent State University. With a 4.0 GPA and a strong foundation in both design
+            and development, I enjoy exploring new ideas and turning them into real projects from the ground up.
           </Text>
         </motion.div>
 
         <motion.div variants={itemVariants}>
           <Text className={styles.description} as="p">
-            The best part about what I do is the mix of problem-solving and creative expression. I love bringing ideas
-            to life, whether it&apos;s through building websites, coding apps, or creating impactful designs.
+            What excites me most about technology is the blend of problem-solving and creativity. Whether I&apos;m building an
+            AI-powered platform, designing intuitive interfaces, or coding applications, I love the process of bringing
+            something from an initial idea into a working, impactful solution. For me, design and development are more than
+            skills, they&apos;re ways to innovate, express creativity, and create meaningful experiences.
           </Text>
         </motion.div>
+
       </motion.div>
 
       <div className={styles.skillsContainer}>
@@ -133,23 +181,36 @@ const ProfileText = ({ visible }) => {
                 <div className={styles.skillIcon}>{skill.icon}</div>
                 <div className={styles.skillNameContainer}>
                   <div className={styles.skillName}>{skill.name}</div>
-                  <div className={styles.skillPercentage}>{skill.level}%</div>
                 </div>
               </div>
-              <div className={styles.skillLevel}>
-                <div className={styles.skillLevelBar}>
-                  <motion.div
-                    className={styles.skillLevelFill}
-                    initial={{ width: 0 }}
-                    animate={visible ? { width: `${skill.level}%` } : { width: 0 }}
-                    transition={{
-                      duration: 0.8,
-                      delay: 0.6 + index * 0.1,
-                      ease: [0.25, 0.1, 0.25, 1],
-                    }}
-                  />
+              {skill.tags && skill.tags.length > 0 && (
+                <div className={styles.skillTags}>
+                  {(expanded[skill.name] ? skill.tags : skill.tags.slice(0, MAX_TAGS_PER_CARD)).map((tag) => (
+                    <span key={tag} className={styles.skillTag}>{tag}</span>
+                  ))}
+                  {skill.tags.length > MAX_TAGS_PER_CARD && !expanded[skill.name] && (
+                    <button
+                      type="button"
+                      className={styles.skillTagMore}
+                      title={skill.tags.join(", ")}
+                      aria-expanded={!!expanded[skill.name]}
+                      onClick={() => setExpanded((prev) => ({ ...prev, [skill.name]: true }))}
+                    >
+                      +{skill.tags.length - MAX_TAGS_PER_CARD}
+                    </button>
+                  )}
+                  {expanded[skill.name] && (
+                    <button
+                      type="button"
+                      className={styles.skillTagToggle}
+                      aria-label={`Show fewer ${skill.name} tags`}
+                      onClick={() => setExpanded((prev) => ({ ...prev, [skill.name]: false }))}
+                    >
+                      Show less
+                    </button>
+                  )}
                 </div>
-              </div>
+              )}
             </motion.div>
           ))}
         </div>
