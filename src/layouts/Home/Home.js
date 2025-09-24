@@ -129,7 +129,7 @@ export const Home = () => {
         id="project-3"
         sectionRef={projectThree}
         {...(visibleSections.includes(projectThree.current) ? { visible: true } : {})}
-        index={2}
+        index={3}
         title="LoveCode"
         description="AI-powered vibe coding platform that turns ideas into live, runnable apps."
         buttonText="View Case Study"
