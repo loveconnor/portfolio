@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://connorlove.com/
+
+# Sitemaps
+Sitemap: https://connorlove.com/sitemap.xml

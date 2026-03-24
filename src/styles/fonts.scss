@@ -1,0 +1,82 @@
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-Light.woff') format('woff');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-RegularItalic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-SemiboldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-Bold.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Sans';
+  src: url('/fonts/LoveSans-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --font-primary: 'Love Sans';
+}
+
+body {
+  font-family: var(--font-primary), sans-serif;
+}
