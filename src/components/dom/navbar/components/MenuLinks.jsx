@@ -25,21 +25,44 @@ function MenuLinks() {
     const scrollbar = document?.getElementById('scrollbar');
     const header = document?.querySelector('header');
 
-    gsap.set(refs.menuRef.current, { pointerEvents: 'none', autoAlpha: 0 });
+    gsap.set(refs.menuRef.current, { autoAlpha: 0 });
     gsap.set(refs.menuLinksItemsRef.current, { x: '-100%' });
 
     gsapTimeline
-      .to(refs.menuRef.current, { autoAlpha: 1, stagger: 0.01, pointerEvents: 'auto' }, 0)
+      .to(refs.menuRef.current, { autoAlpha: 1, stagger: 0.01 }, 0)
       .to(fluidCanvas, { duration: 0, opacity: 0 }, 0)
       .to(refs.menuLinksItemsRef.current, { x: 0, stagger: 0.016, pointerEvents: 'auto' }, 0)
-      .to('main', { borderRadius: '1.3888888889vw', border: '2px solid #f0f4f1', scale: 0.9, pointerEvents: 'none', left: '-40vw' }, 0)
+      .to(
+        'main',
+        {
+          borderRadius: '1.3888888889vw',
+          border: '2px solid #f0f4f1',
+          scale: 0.9,
+          pointerEvents: 'none',
+          left: '-40vw',
+        },
+        0,
+      )
       .to(layout, { opacity: isMobile ? 0.05 : 0.3, height: '90svh' }, 0)
       .to(scrollbar, { opacity: 0, right: '46vw', scale: 0.9 }, 0)
-      .to(header, { autoAlpha: 0, left: '-40vw', top: isMobile ? '6vw' : '3vw', scale: 0.9, overwrite: true }, 0);
+      .to(
+        header,
+        {
+          autoAlpha: 0,
+          left: '-40vw',
+          top: isMobile ? '6vw' : '3vw',
+          scale: 0.9,
+          overwrite: true,
+        },
+        0,
+      );
   };
 
   useEffect(() => {
-    const tl = gsap.timeline({ paused: true, defaults: { duration: 0.92, ease: 'expo.inOut' } });
+    const tl = gsap.timeline({
+      paused: true,
+      defaults: { duration: 0.92, ease: 'expo.inOut' },
+    });
     timeline.current = tl;
     const refs = { menuRef, menuLinksItemsRef };
     const ctx = gsap.context(() => {
@@ -57,7 +80,7 @@ function MenuLinks() {
   useEffect(() => {
     const tl = timeline.current;
     if (!tl || tl.getChildren().length === 0) {
-      gsap.set(menuRef.current, { autoAlpha: isMenuOpen ? 1 : 0, pointerEvents: isMenuOpen ? 'auto' : 'none' });
+      gsap.set(menuRef.current, { autoAlpha: isMenuOpen ? 1 : 0 });
       gsap.set(menuLinksItemsRef.current, { x: isMenuOpen ? 0 : '-100%' });
       return;
     }
@@ -83,13 +106,13 @@ function MenuLinks() {
           duration: 1.5,
           force: true,
           easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
-          onComplete: () => {
-            lenis.start();
-          },
         });
       }
     }, 850);
   };
+
+  const l1 = menuLinks.length;
+  const l2 = projectsLinks.length;
 
   const renderMenuLinks = (links, refs, pathname) =>
     links.map((link, index) => (
@@ -123,8 +146,8 @@ function MenuLinks() {
     ));
 
   return (
-    <nav id="menu" ref={menuRef} className={styles.menu}>
-      <div className={clsx(styles.menuWrapper, 'layout-block-inner')}>
+    <nav id="menu" ref={menuRef} className={clsx(styles.menu, isMenuOpen && styles.menuOpen)}>
+      <div data-lenis-prevent="true" data-lenis-prevent-touch="true" className={clsx(styles.menuWrapper, 'layout-block-inner')}>
         <div
           ref={(el) => {
             menuLinksItemsRef.current[0] = el;
@@ -135,14 +158,14 @@ function MenuLinks() {
         </div>
         <div
           ref={(el) => {
-            menuLinksItemsRef.current[menuLinks.length + 2] = el;
+            menuLinksItemsRef.current[l1 + 1] = el;
           }}
           className={styles.menuList}
         >
           {projectsLinks.map((link, index) => (
             <div
               ref={(el) => {
-                menuLinksItemsRef.current[menuLinks.length + index + 2] = el;
+                menuLinksItemsRef.current[l1 + index + 2] = el;
               }}
               key={link.title}
               className={styles.menuListItem}
@@ -155,14 +178,14 @@ function MenuLinks() {
         </div>
         <div
           ref={(el) => {
-            menuLinksItemsRef.current[menuLinks.length + projectsLinks.length + 3] = el;
+            menuLinksItemsRef.current[l1 + l2 + 2] = el;
           }}
           className={styles.menuList}
         >
           <div
             role="presentation"
             ref={(el) => {
-              menuLinksItemsRef.current[menuLinks.length + projectsLinks.length + 3] = el;
+              menuLinksItemsRef.current[l1 + l2 + 3] = el;
             }}
             className={styles.menuListItem}
           >
@@ -173,14 +196,14 @@ function MenuLinks() {
         </div>
         <div
           ref={(el) => {
-            menuLinksItemsRef.current[menuLinks.length + projectsLinks.length + 4] = el;
+            menuLinksItemsRef.current[l1 + l2 + 4] = el;
           }}
           className={styles.menuList}
         >
           {footerLinks.map((link, index) => (
             <div
               ref={(el) => {
-                menuLinksItemsRef.current[menuLinks.length + projectsLinks.length + index + 4] = el;
+                menuLinksItemsRef.current[l1 + l2 + index + 5] = el;
               }}
               key={link.title}
               className={styles.menuListItem}

@@ -51,11 +51,11 @@ class x {
 
   render = this.#i;
 
-  onBeforeRender = () => {};
+  onBeforeRender = () => { };
 
-  onAfterRender = () => {};
+  onAfterRender = () => { };
 
-  onAfterResize = () => {};
+  onAfterResize = () => { };
 
   #s = false;
 
@@ -300,10 +300,10 @@ function S(e1) {
     nPosition: new r(),
     hover: false,
     touching: false,
-    onEnter() {},
-    onMove() {},
-    onClick() {},
-    onLeave() {},
+    onEnter() { },
+    onMove() { },
+    onClick() { },
+    onLeave() { },
     ...e1,
   };
   (function addInteractionListener(e2, t2) {
@@ -386,7 +386,9 @@ function L() {
 
 function TouchStart(e1) {
   if (e1.touches.length > 0) {
-    e1.preventDefault();
+    if (!e1.target.closest?.('#menu')) {
+      e1.preventDefault();
+    }
     A.x = e1.touches[0].clientX;
     A.y = e1.touches[0].clientY;
 
@@ -407,7 +409,9 @@ function TouchStart(e1) {
 
 function TouchMove(e1) {
   if (e1.touches.length > 0) {
-    e1.preventDefault();
+    if (!e1.target.closest?.('#menu')) {
+      e1.preventDefault();
+    }
     A.x = e1.touches[0].clientX;
     A.y = e1.touches[0].clientY;
 
