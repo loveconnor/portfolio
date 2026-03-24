@@ -29,8 +29,7 @@ function useRenderTargetTexture() {
     return [null, null];
   }, []);
 
-
-   useFrame(({ clock, gl }) => {
+  useFrame(({ clock, gl }) => {
     const time = clock.getElapsedTime();
     if (camera.current && mesh.current) {
       mesh.current.rotation.y = time;
@@ -43,8 +42,6 @@ function useRenderTargetTexture() {
 
   return { camera, mesh, scene, texture: target?.texture };
 }
-
-
 
 export default function MagicBall({ roughness, color, isSphere, text }) {
   return (
@@ -74,10 +71,10 @@ function Marble({ roughness, color, isSphere, text }) {
       )}
       {scene &&
         createPortal(
-        <Text scale={[0.7, 1.5, 1]} fontSize={isSphere ? 1 : 0.8}>
-          {text}
-        </Text>,
-        scene,
+          <Text scale={[0.7, 1.5, 1]} fontSize={isSphere ? 1 : 0.8}>
+            {text}
+          </Text>,
+          scene,
         )}
     </>
   );
@@ -136,7 +133,7 @@ float snoise(vec2 v) {
 }`;
 
 function MagicMarbleMaterial({ roughness, color, texture, isSphere }) {
-   const volumeColor = {
+  const volumeColor = {
     r: 0,
     g: 0,
     b: 255,
@@ -146,11 +143,7 @@ function MagicMarbleMaterial({ roughness, color, texture, isSphere }) {
   const rayDirPos = DEFAULT_RAY_DIR_POS;
   const rayOrigPos = DEFAULT_RAY_ORIG_POS;
   THREE.Cache.enabled = true;
-  const [baseTexture1, baseTexture2, heightVolumeTexture1] = useTexture([
-    '/other/noise1.png',
-    '/other/peakpx.jpg',
-    '/other/noise2.png',
-  ]);
+  const [baseTexture1, baseTexture2, heightVolumeTexture1] = useTexture(['/other/noise1.png', '/other/peakpx.jpg', '/other/noise2.png']);
 
   const configureTexture = (texture) => {
     texture.minFilter = THREE.NearestFilter;
@@ -161,13 +154,12 @@ function MagicMarbleMaterial({ roughness, color, texture, isSphere }) {
   configureTexture(baseTexture2);
   configureTexture(heightVolumeTexture1);
 
-   const getTextures = (isSphere) => ({
+  const getTextures = (isSphere) => ({
     baseMap: isSphere ? baseTexture2 : baseTexture2,
     heightVolumeMap: isSphere ? baseTexture1 : heightVolumeTexture1,
   });
 
   const { baseMap, heightVolumeMap } = getTextures(isSphere);
-
 
   const [uniforms] = useState(() => ({
     time: { value: 0 },
@@ -189,17 +181,17 @@ function MagicMarbleMaterial({ roughness, color, texture, isSphere }) {
     uniforms.time.value = 1 + clock.elapsedTime * 0.05;
   });
 
-   const onBeforeCompile = (shader) => {
-     shader.uniforms = { ...shader.uniforms, ...uniforms };
+  const onBeforeCompile = (shader) => {
+    shader.uniforms = { ...shader.uniforms, ...uniforms };
 
-     shader.vertexShader = /* glsl */ `
+    shader.vertexShader = /* glsl */ `
       varying vec3 v_pos;
       varying vec3 v_dir;
       varying vec2 vUv;
 
     ${shader.vertexShader}`;
 
-     shader.vertexShader = shader.vertexShader.replace(
+    shader.vertexShader = shader.vertexShader.replace(
       /void main\(\) {/,
       (match) =>
         `${
@@ -214,7 +206,7 @@ function MagicMarbleMaterial({ roughness, color, texture, isSphere }) {
         `,
     );
 
-     shader.fragmentShader = /* glsl */ `
+    shader.fragmentShader = /* glsl */ `
       #define FLIP vec2(1., -1.)
 
       uniform vec3 volumeColor;
@@ -239,7 +231,7 @@ function MagicMarbleMaterial({ roughness, color, texture, isSphere }) {
 
     ${shader.fragmentShader}`;
 
-     shader.fragmentShader = shader.fragmentShader.replace(
+    shader.fragmentShader = shader.fragmentShader.replace(
       /void main\(\) {/,
       (match) =>
         `${

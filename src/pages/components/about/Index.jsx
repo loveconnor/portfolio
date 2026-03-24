@@ -42,14 +42,7 @@ function About() {
 
   const renderImageContainer = () => (
     <div className={styles.imageContainer}>
-      <Image
-        priority
-        src="/connor/front.webp"
-        width={1024}
-        height={1536}
-        sizes="(max-width: 768px) 100vw, 50vw"
-        alt="Connor Love"
-      />
+      <Image priority src="/connor/front.webp" width={1024} height={1536} sizes="(max-width: 768px) 100vw, 50vw" alt="Connor Love" />
     </div>
   );
 
@@ -66,7 +59,9 @@ function About() {
         {isMobile ? renderImageContainer() : null}
         <div className={clsx(styles.descWrapper)} ref={animatedImageRef}>
           <AppearTitle>
-            <div className="p-l">“My experience as a self-taught developer has pushed me to think creatively and build with intention, focusing on how things look, feel, and perform in real use.”</div>
+            <div className="p-l">
+              “My experience as a self-taught developer has pushed me to think creatively and build with intention, focusing on how things look, feel, and perform in real use.”
+            </div>
           </AppearTitle>
         </div>
         {!isMobile ? renderImageContainer() : null}

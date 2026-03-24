@@ -11,12 +11,12 @@ function Stats() {
     return undefined;
   }, []);
 
-  useIsomorphicLayoutEffect(() => {
-
-    return () => {
+  useIsomorphicLayoutEffect(
+    () => () => {
       stats.dom.remove();
-    };
-  }, [stats]);
+    },
+    [stats],
+  );
 
   useFrame(() => {
     stats.begin();

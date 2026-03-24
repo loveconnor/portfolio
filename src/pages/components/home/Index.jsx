@@ -53,10 +53,17 @@ const performMoves = (rectangles, gridWidth, gridHeight) => {
         moveRect(rect, direction, gridWidth, gridHeight);
         const newPosition = { ...rect };
 
-        const { x, y } = { x: parseFloat(newPosition.x), y: parseFloat(newPosition.y) };
+        const { x, y } = {
+          x: parseFloat(newPosition.x),
+          y: parseFloat(newPosition.y),
+        };
         if (x > -0.5 && x < 90 && y > -0.5 && y < 90 && !isPositionOccupied(rectangles, newPosition)) {
           validMove = true;
-          validMoves.push({ index: newPosition.index, x: newPosition.x, y: newPosition.y });
+          validMoves.push({
+            index: newPosition.index,
+            x: newPosition.x,
+            y: newPosition.y,
+          });
           Object.assign(rectangles[newPosition.index], newPosition);
         } else {
           Object.assign(rect, originalPosition);
@@ -85,27 +92,27 @@ function Home() {
     () =>
       !isMobile
         ? [
-          { index: 0, x: '0.00%', y: '50.00%' },
-          { index: 1, x: '16.67%', y: '0.00%' },
-          { index: 2, x: '33.34%', y: '0.00%' },
-          { index: 3, x: '50.01%', y: '0.00%' },
-          { index: 4, x: '66.68%', y: '50.00%' },
-          { index: 5, x: '83.35%', y: '50.00%' },
-          { index: 6, x: '33.34%', y: '50.00%' },
-        ]
+            { index: 0, x: '0.00%', y: '50.00%' },
+            { index: 1, x: '16.67%', y: '0.00%' },
+            { index: 2, x: '33.34%', y: '0.00%' },
+            { index: 3, x: '50.01%', y: '0.00%' },
+            { index: 4, x: '66.68%', y: '50.00%' },
+            { index: 5, x: '83.35%', y: '50.00%' },
+            { index: 6, x: '33.34%', y: '50.00%' },
+          ]
         : [
-          { index: 0, x: '0.00%', y: '0.00%' },
-          { index: 1, x: '20.00%', y: '0.00%' },
-          { index: 2, x: '60.00%', y: '0.00%' },
-          { index: 3, x: '20.00%', y: '20.00%' },
-          { index: 4, x: '80.00%', y: '20.00%' },
-          { index: 5, x: '20.00%', y: '40.00%' },
-          { index: 6, x: '60.00%', y: '40.00%' },
-          { index: 7, x: '40.00%', y: '60.00%' },
-          { index: 8, x: '80.00%', y: '60.00%' },
-          { index: 9, x: '20.00%', y: '80.00%' },
-          { index: 10, x: '60.00%', y: '80.00%' },
-        ],
+            { index: 0, x: '0.00%', y: '0.00%' },
+            { index: 1, x: '20.00%', y: '0.00%' },
+            { index: 2, x: '60.00%', y: '0.00%' },
+            { index: 3, x: '20.00%', y: '20.00%' },
+            { index: 4, x: '80.00%', y: '20.00%' },
+            { index: 5, x: '20.00%', y: '40.00%' },
+            { index: 6, x: '60.00%', y: '40.00%' },
+            { index: 7, x: '40.00%', y: '60.00%' },
+            { index: 8, x: '80.00%', y: '60.00%' },
+            { index: 9, x: '20.00%', y: '80.00%' },
+            { index: 10, x: '60.00%', y: '80.00%' },
+          ],
     [isMobile],
   );
 

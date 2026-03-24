@@ -49,7 +49,6 @@ const projects = [
         tag: 'big',
         isRight: true,
       },
-
     ],
     desc: [
       'LoveUI is a full-scale component system built to accelerate modern product development with reusable, production-ready UI.',

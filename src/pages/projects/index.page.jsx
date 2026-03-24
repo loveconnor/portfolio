@@ -91,13 +91,13 @@ function Page() {
                 style={
                   !isMobile
                     ? {
-                      height: index === projects.length - 1 ? '200svh' : `${200 + 100 * index}svh`,
-                      top: index === 0 ? '0px' : '-100svh',
-                    }
+                        height: index === projects.length - 1 ? '200svh' : `${200 + 100 * index}svh`,
+                        top: index === 0 ? '0px' : '-100svh',
+                      }
                     : {
-                      height: index === projects.length - 1 ? '100svh' : `${200 + 100 * index}svh`,
-                      top: index === 0 ? '0px' : '-50svh',
-                    }
+                        height: index === projects.length - 1 ? '100svh' : `${200 + 100 * index}svh`,
+                        top: index === 0 ? '0px' : '-50svh',
+                      }
                 }
                 className={styles.projectsWrap}
               >

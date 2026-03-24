@@ -33,7 +33,6 @@ export default function Badge({ name }) {
       </Physics>
       <ambientLight intensity={1.3} />
 
-
       <directionalLight
         position={[5, 5, 5]}
         intensity={1.5}
@@ -47,9 +46,7 @@ export default function Badge({ name }) {
         shadow-camera-bottom={-10}
       />
 
-
       <directionalLight position={[-5, 5, 5]} intensity={1} />
-
 
       <directionalLight position={[0, 5, -5]} intensity={2} />
     </View>
@@ -80,7 +77,10 @@ function Band({ maxSpeed = 50, minSpeed = 10, name, intersected }) {
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
-  useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.45, 0]]);
+  useSphericalJoint(j3, card, [
+    [0, 0, 0],
+    [0, 1.45, 0],
+  ]);
 
   useScroll(({ direction, isScrolling: useScrolling, velocity }) => {
     scrollDirection.current = direction;

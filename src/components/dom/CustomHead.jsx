@@ -14,7 +14,6 @@ const getSchema = () => ({
   image: OG_IMAGE,
   email: 'mailto:loveconnor2005@gmail.com',
   sameAs: ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'],
-
 });
 
 function CustomHead({ title = '', description, keywords }) {

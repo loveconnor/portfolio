@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useRef } from 'react';
 import {
   Vector3 as a,
@@ -50,11 +51,11 @@ class x {
 
   render = this.#i;
 
-  onBeforeRender = () => { };
+  onBeforeRender = () => {};
 
-  onAfterRender = () => { };
+  onAfterRender = () => {};
 
-  onAfterResize = () => { };
+  onAfterResize = () => {};
 
   #s = false;
 
@@ -299,10 +300,10 @@ function S(e1) {
     nPosition: new r(),
     hover: false,
     touching: false,
-    onEnter() { },
-    onMove() { },
-    onClick() { },
-    onLeave() { },
+    onEnter() {},
+    onMove() {},
+    onClick() {},
+    onLeave() {},
     ...e1,
   };
   (function addInteractionListener(e2, t2) {
@@ -450,12 +451,7 @@ function P(e1, t1) {
 
 function D(e1) {
   const { x: t1, y: i1 } = A;
-  const {
-    left: s1,
-    top: n1,
-    width: o1,
-    height: r1,
-  } = e1;
+  const { left: s1, top: n1, width: o1, height: r1 } = e1;
   return t1 >= s1 && t1 <= s1 + o1 && i1 >= n1 && i1 <= n1 + r1;
 }
 
@@ -483,11 +479,7 @@ class W {
   }
 
   #R() {
-    const {
-      config: e1,
-      positionData: t1,
-      velocityData: i2,
-    } = this;
+    const { config: e1, positionData: t1, velocityData: i2 } = this;
     this.center.toArray(t1, 0);
     for (let i1 = 1; i1 < e1.count; i1 += 1) {
       const s1 = 3 * i1;
@@ -501,10 +493,7 @@ class W {
   }
 
   setSizes() {
-    const {
-      config: e1,
-      sizeData: t1,
-    } = this;
+    const { config: e1, sizeData: t1 } = this;
     t1[0] = e1.size0;
     for (let i1 = 1; i1 < e1.count; i1 += 1) {
       t1[i1] = k(e1.minSize, e1.maxSize);
@@ -512,13 +501,7 @@ class W {
   }
 
   update(e1) {
-    const {
-      config: t1,
-      center: i1,
-      positionData: s1,
-      sizeData: n1,
-      velocityData: o1,
-    } = this;
+    const { config: t1, center: i1, positionData: s1, sizeData: n1, velocityData: o1 } = this;
     let r1 = 0;
     if (t1.controlSphere0) {
       r1 = 1;
