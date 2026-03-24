@@ -21,36 +21,51 @@ const GoTop = dynamic(() => import('@src/components/dom/GoTop'), { ssr: false })
 function Footer() {
   const isMobile = useIsMobile();
   const footerRef = useRef();
+  const rafIdRef = useRef(null);
   const [isLoading] = useStore(useShallow((state) => [state.isLoading]));
   const windowSize = useWindowSize();
 
   useIsomorphicLayoutEffect(() => {
     if (!isLoading) {
       const setupFooterAnimation = () => {
-        gsap.set(footerRef.current, { height: 'auto' });
+        const footerEl = footerRef.current;
+        if (!footerEl) return;
+
         const allSections = document.querySelectorAll('#mainContainer section');
         if (allSections.length > 1) {
           const lastSection = allSections[allSections.length - 2];
-          if (footerRef.current.offsetHeight <= windowSize.height) {
-            gsap.set(footerRef.current, { yPercent: -50 });
-            const uncover = gsap.timeline({ paused: true });
-            gsap.set(footerRef.current, { height: '100.5svh' });
-            uncover.to(footerRef.current, {
-              yPercent: 0,
-              ease: 'none',
-            });
-            ScrollTrigger.create({
-              id: 'footerTrigger',
-              trigger: lastSection,
-              start: 'bottom bottom',
-              end: '+=100%',
-              animation: uncover,
-              scrub: true,
-              scroller: document?.querySelector('main'),
-            });
-          } else {
-            gsap.set(footerRef.current, { transform: 'translate(0%, 0%)', height: 'auto' });
+
+          if (rafIdRef.current) {
+            cancelAnimationFrame(rafIdRef.current);
           }
+
+          rafIdRef.current = requestAnimationFrame(() => {
+            const footerTrigger = ScrollTrigger.getById('footerTrigger');
+            if (footerTrigger) {
+              footerTrigger.kill();
+            }
+
+            const footerHeight = footerEl.offsetHeight;
+            if (footerHeight <= windowSize.height) {
+              gsap.set(footerEl, { yPercent: -50, height: '100.5svh' });
+              const uncover = gsap.timeline({ paused: true });
+              uncover.to(footerEl, {
+                yPercent: 0,
+                ease: 'none',
+              });
+              ScrollTrigger.create({
+                id: 'footerTrigger',
+                trigger: lastSection,
+                start: 'bottom bottom',
+                end: '+=100%',
+                animation: uncover,
+                scrub: true,
+                scroller: document?.querySelector('main'),
+              });
+            } else {
+              gsap.set(footerEl, { transform: 'translate(0%, 0%)', yPercent: 0, height: 'auto' });
+            }
+          });
         }
       };
 
@@ -58,6 +73,10 @@ function Footer() {
     }
 
     return () => {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+
       const footerTrigger = ScrollTrigger.getById('footerTrigger');
       if (footerTrigger) {
         footerTrigger.kill();

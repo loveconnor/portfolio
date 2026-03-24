@@ -66,10 +66,9 @@ function MenuLinks() {
     setIsMenuOpen(false);
 
     setTimeout(() => {
-      const mainElement = document.querySelector('main');
-      if (mainElement) {
-        const mainHeight = mainElement.scrollHeight;
-        lenis.scrollTo(mainHeight, {
+      const maxScroll = typeof lenis?.limit === 'number' ? lenis.limit : (document.querySelector('main')?.scrollHeight ?? 0);
+      if (maxScroll > 0) {
+        lenis.scrollTo(maxScroll, {
           duration: 1.5,
           force: true,
           easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),

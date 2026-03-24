@@ -9,13 +9,20 @@ function InfiniteText({ text, length, className, hasStroke = true }) {
 
   useIsomorphicLayoutEffect(() => {
     const container = containerRef.current;
-    const containerWidth = container.getBoundingClientRect().width;
-    const itemWidth = container.children[0].getBoundingClientRect().width;
-    const initialOffset = ((2 * itemWidth) / containerWidth) * 100 * -1;
+    if (!container || !container.children?.[0]) return undefined;
 
-    gsap.set(container, {
-      xPercent: `${initialOffset}`,
-    });
+    const applyOffset = () => {
+      const containerWidth = container.getBoundingClientRect().width;
+      const itemWidth = container.children[0].getBoundingClientRect().width;
+
+      if (containerWidth <= 0 || itemWidth <= 0) return;
+
+      const initialOffset = ((2 * itemWidth) / containerWidth) * 100 * -1;
+
+      gsap.set(container, {
+        xPercent: `${initialOffset}`,
+      });
+    };
 
     const duration = 5;
 
@@ -30,7 +37,20 @@ function InfiniteText({ text, length, className, hasStroke = true }) {
       });
     }, containerRef);
 
-    return () => ctx.kill();
+    const rafId = requestAnimationFrame(applyOffset);
+
+    const resizeObserver = new ResizeObserver(() => {
+      applyOffset();
+    });
+
+    resizeObserver.observe(container);
+    resizeObserver.observe(container.children[0]);
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (resizeObserver) resizeObserver.disconnect();
+      ctx.kill();
+    };
   }, []);
 
   return (
