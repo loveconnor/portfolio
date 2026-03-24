@@ -66,6 +66,10 @@ function MenuLinks() {
     setIsMenuOpen(false);
 
     setTimeout(() => {
+      if (!lenis) {
+        return;
+      }
+
       const maxScroll = typeof lenis?.limit === 'number' ? lenis.limit : (document.querySelector('main')?.scrollHeight ?? 0);
       if (maxScroll > 0) {
         lenis.scrollTo(maxScroll, {
@@ -184,7 +188,7 @@ function MenuLinks() {
           type="button"
           onClick={() => {
             setIsMenuOpen(false);
-            lenis.start();
+            lenis?.start?.();
           }}
           className={styles.menuClose}
         >
