@@ -12,9 +12,9 @@ import { useRouter } from 'next/router';
 import { useStore } from '@src/store';
 
 function MenuLinks() {
-  const timeline = useRef(gsap.timeline({ paused: true, defaults: { duration: 0.92, ease: 'expo.inOut' } }));
+  const timeline = useRef(null);
   const isMobile = useIsMobile();
-  const [isMenuOpen, setIsMenuOpen, lenis, isLoading] = useStore((state) => [state.isMenuOpen, state.setIsMenuOpen, state.lenis, state.isLoading]);
+  const [isMenuOpen, setIsMenuOpen, lenis] = useStore((state) => [state.isMenuOpen, state.setIsMenuOpen, state.lenis]);
   const menuRef = useRef();
   const menuLinksItemsRef = useRef([]);
   const router = useRouter();
@@ -39,22 +39,29 @@ function MenuLinks() {
   };
 
   useEffect(() => {
-    const tl = timeline.current;
+    const tl = gsap.timeline({ paused: true, defaults: { duration: 0.92, ease: 'expo.inOut' } });
+    timeline.current = tl;
     const refs = { menuRef, menuLinksItemsRef };
     const ctx = gsap.context(() => {
       setupMenuAnimation(tl, refs, isMobile);
     });
 
     return () => {
+      ctx.kill();
       if (tl) {
         tl.kill();
       }
-      ctx.kill();
     };
-  }, [isLoading, isMobile]);
+  }, [isMobile]);
 
   useEffect(() => {
     const tl = timeline.current;
+    if (!tl || tl.getChildren().length === 0) {
+      gsap.set(menuRef.current, { autoAlpha: isMenuOpen ? 1 : 0, pointerEvents: isMenuOpen ? 'auto' : 'none' });
+      gsap.set(menuLinksItemsRef.current, { x: isMenuOpen ? 0 : '-100%' });
+      return;
+    }
+
     if (isMenuOpen) {
       tl.play();
     } else {
@@ -186,7 +193,12 @@ function MenuLinks() {
         </div>
         <button
           type="button"
+          aria-label="Close menu"
           onClick={() => {
+            setIsMenuOpen(false);
+            lenis?.start?.();
+          }}
+          onTouchStart={() => {
             setIsMenuOpen(false);
             lenis?.start?.();
           }}

@@ -14,7 +14,7 @@ function MenuButton() {
   }, [setIsMenuOpen, lenis]);
 
   return (
-    <button type="button" onClick={handleClick} aria-label="Open Menu" aria-expanded={isMenuOpen} aria-controls="menu" className={clsx('p-xs', styles.button)}>
+    <button type="button" onClick={handleClick} onTouchStart={handleClick} aria-label="Open Menu" aria-expanded={isMenuOpen} aria-controls="menu" className={clsx('p-xs', styles.button)}>
       <PerspectiveText label="Menu" className={clsx('p-x', styles.label)} />
     </button>
   );
