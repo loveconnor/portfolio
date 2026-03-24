@@ -27,7 +27,7 @@ const seo = {
     'Freelance Developer',
     'Modern Web Development',
     'cross-platform development',
-    'Greek',
+    'Ohio',
     'JavaScript',
     'Typescript',
     'Next.js',
