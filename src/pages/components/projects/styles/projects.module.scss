@@ -5,10 +5,10 @@
   padding-bottom: 0px;
   align-items: center;
   .title {
-    grid-column: 1 / 10;
+    grid-column: 1 / 12;
     padding-bottom: calc(var(--layout-columns-gap) * 1);
     @include mobile {
-      grid-column: 1 / 7;
+      grid-column: 1 / -1;
     }
   }
 }
