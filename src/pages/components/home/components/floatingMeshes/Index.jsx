@@ -506,6 +506,7 @@ class W {
 
   update(e1) {
     const { config: t1, center: i1, positionData: s1, sizeData: n1, velocityData: o1 } = this;
+    const frameScale = Math.min(e1.delta * 60, 2);
     let r1 = 0;
     if (t1.controlSphere0) {
       r1 = 1;
@@ -518,11 +519,11 @@ class W {
       I.fromArray(s1, base);
       B.fromArray(o1, base);
       const wobble = 0.00035;
-      B.x += Math.sin(e1.elapsed * 0.9 + idx * 1.37) * wobble;
-      B.z += Math.cos(e1.elapsed * 0.7 + idx * 1.91) * wobble;
-      B.y += Math.sin(e1.elapsed * 0.5 + idx * 0.73) * (wobble * 0.5);
+      B.x += Math.sin(e1.elapsed * 0.9 + idx * 1.37) * wobble * frameScale;
+      B.z += Math.cos(e1.elapsed * 0.7 + idx * 1.91) * wobble * frameScale;
+      B.y += Math.sin(e1.elapsed * 0.5 + idx * 0.73) * (wobble * 0.5) * frameScale;
       B.y -= e1.delta * t1.gravity * n1[idx];
-      B.multiplyScalar(t1.friction);
+      B.multiplyScalar(Math.pow(t1.friction, frameScale));
       B.clampLength(0, t1.maxVelocity);
       I.add(B);
       I.toArray(s1, base);
@@ -625,7 +626,7 @@ class Y extends c {
 }
 
 const X = {
-  count: 60,
+  count: 75,
   colors: [0x0a0a0a, 0x111111, 0xdb1021],
   ambientColor: 16777215,
   ambientIntensity: 1,
