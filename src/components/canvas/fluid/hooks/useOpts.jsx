@@ -14,8 +14,8 @@ const useOpts = () => {
       densityDissipation: isMobile ? 0.96 : 0.965,
       velocityDissipation: 0.93,
 
-      fluidColor: '#f0f4f1',
-      backgroundColor: '#070410',
+      fluidColor: '#f8e9cc',
+      backgroundColor: '#0b1f2a',
 
       showBackground: false,
 

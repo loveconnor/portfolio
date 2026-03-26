@@ -32,10 +32,10 @@ function Background() {
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uColor1: { value: [63 / 255, 63 / 255, 63 / 255] },
-      uColor2: { value: [38 / 255, 38 / 255, 38 / 255] },
-      uColor3: { value: [9 / 255, 5 / 255, 12 / 255] },
-      uColorAccent: { value: new THREE.Color(20.0, 20.0, 20.0) },
+      uColor1: { value: [20 / 255, 41 / 255, 56 / 255] },
+      uColor2: { value: [11 / 255, 31 / 255, 42 / 255] },
+      uColor3: { value: [7 / 255, 20 / 255, 29 / 255] },
+      uColorAccent: { value: new THREE.Color(0.4, 0.607, 0.737) },
       uLinesBlur: { value: 0.49 },
       uNoise: { value: 0.02 },
       uOffsetX: { value: 0.34 },

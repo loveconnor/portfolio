@@ -18,8 +18,8 @@ const FluidEffectWrapper = forwardRef((props, ref) => {
 
 FluidEffectWrapper.defaultProps = {
   intensity: 1.0,
-  fluidColor: '#ffffff',
-  backgroundColor: '#000000',
+  fluidColor: '#f8e9cc',
+  backgroundColor: '#0b1f2a',
 };
 
 export default FluidEffectWrapper;
