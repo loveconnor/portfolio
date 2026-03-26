@@ -5,10 +5,22 @@
     height: 6vw;
   }
   border-radius: 9vw;
-  background-color: var(--menuColor);
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  color: var(--black);
+  transition:
+    background-color 0.35s cubic-bezier(0.4, 0, 0.1, 1),
+    color 0.35s cubic-bezier(0.4, 0, 0.1, 1),
+    border-color 0.35s cubic-bezier(0.4, 0, 0.1, 1);
   box-shadow:
-    0 0.32vw 0.52vw #0000000a,
-    0 0.12vw 0.22vw #0000000a;
+    0 0.32vw 0.52vw #00000014,
+    0 0.12vw 0.22vw #0000001a;
+
+  &:hover {
+    background-color: var(--accentColor);
+    border-color: var(--accentColor);
+  }
+
   .label {
     @include mobile {
       padding: 0 3vw 0 3vw;

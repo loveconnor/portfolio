@@ -67,12 +67,12 @@ function Page({ id }) {
     }
     return () => {
       updateCSSVariables({
-        primary: '#28282b',
-        secondary: '#f0f4f1',
-        accentColor: '#f9f9f9',
-        fillColor: '#f2ffbd',
-        menuColor: '#28282b',
-        menuFontColor: '#f0f4f1',
+        primary: '#00263a',
+        secondary: '#f8e9cc',
+        accentColor: '#669bbc',
+        fillColor: '#c1121f',
+        menuColor: '#00263a',
+        menuFontColor: '#00263a',
       });
       setFluidColor('#d7d7d4');
     };

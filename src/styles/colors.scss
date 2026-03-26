@@ -1,12 +1,17 @@
 @use 'sass:color';
 
 $colors: (
-  'white': #f0f4f1,
-  'black': #28282b,
-  'menuColor': #28282b,
-  'accentColor': #f9f9f9,
-  'fillColor': #f2ffbd,
-  'menuFontColor': #f0f4f1,
+  'bg': #f8e9cc,
+  'primary': #00263a,
+  'secondary': #669bbc,
+  'accent': #c1121f,
+  'accent-dark': #780000,
+  'white': #f8e9cc,
+  'black': #00263a,
+  'menuColor': #00263a,
+  'accentColor': #669bbc,
+  'fillColor': #c1121f,
+  'menuFontColor': #00263a,
 );
 
 html {

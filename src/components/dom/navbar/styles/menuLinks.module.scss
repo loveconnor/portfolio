@@ -142,7 +142,7 @@
     left: 0;
     width: 100%;
     height: 0.375vw;
-    background: var(--white);
+    background: var(--accentColor);
     z-index: -1;
     transform: scale3d(0.001, 1, 1);
     opacity: 0;
@@ -170,10 +170,17 @@
     display: block;
     color: var(--white);
     text-decoration: none;
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.1, 1);
 
     @include mobile {
       font-size: 3.7vw;
       line-height: 140%;
+    }
+  }
+
+  &:hover {
+    span {
+      color: var(--accentColor);
     }
   }
 }

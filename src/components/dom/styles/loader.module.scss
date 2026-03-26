@@ -8,8 +8,8 @@
   height: 100vh;
   height: calc(100 * var(--svh, 1vh));
   height: 100svh;
-  color: #28282b;
-  background-color: #f0f4f1;
+  color: var(--black);
+  background-color: var(--white);
   .innerContainer {
     position: relative;
     width: 100%;
@@ -30,7 +30,7 @@
         text-align: center;
         display: inline-block;
         overflow: hidden;
-        color: #020002;
+        color: var(--black);
         > span {
           position: relative;
           top: 0px;
@@ -51,7 +51,7 @@
         display: inline-block;
         overflow: hidden;
         opacity: 0;
-        color: #020002;
+        color: var(--black);
         > span {
           position: relative;
           top: 12vw;
@@ -67,7 +67,7 @@
       text-align: center;
       display: inline-block;
       overflow: hidden;
-      color: #020002;
+      color: var(--black);
       > span {
         position: relative;
         top: 0px;

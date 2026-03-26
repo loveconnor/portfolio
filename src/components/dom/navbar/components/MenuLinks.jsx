@@ -36,7 +36,7 @@ function MenuLinks() {
         'main',
         {
           borderRadius: '1.3888888889vw',
-          border: '2px solid #f0f4f1',
+          border: '2px solid var(--white)',
           scale: 0.9,
           pointerEvents: 'none',
           left: '-40vw',

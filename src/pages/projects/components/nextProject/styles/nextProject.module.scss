@@ -68,8 +68,8 @@
             .projectsDetails {
               > h6,
               h3 {
-                color: #28282b;
-                text-shadow: 0.1vw 0.1vw 0.1vw #f0f4f1;
+                color: var(--black);
+                text-shadow: 0.1vw 0.1vw 0.1vw var(--white);
               }
             }
           }
@@ -115,7 +115,7 @@
             > h6,
             h3 {
               transition: all 0.6s cubic-bezier(0.4, 0, 0.1, 1);
-              color: #f0f4f1;
+              color: var(--white);
               text-shadow: unset;
             }
           }

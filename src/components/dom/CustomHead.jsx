@@ -54,8 +54,8 @@ function CustomHead({ title = '', description, keywords }) {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#333333" />
-        <meta name="msapplication-TileColor" content="#f0f4f1" />
-        <meta name="theme-color" content="#f0f4f1" />
+        <meta name="msapplication-TileColor" content="#f8e9cc" />
+        <meta name="theme-color" content="#f8e9cc" />
 
         {/* Schema */}
         {/* eslint-disable-next-line react/no-danger */}
