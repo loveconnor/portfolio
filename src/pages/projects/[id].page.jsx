@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
 import CustomHead from '@src/components/dom/CustomHead';
 import NextProject from '@src/pages/projects/components/nextProject/NextProject';
@@ -20,22 +20,11 @@ function Page({ id }) {
   const isMobile = useIsMobile();
   const rightContainerRef = useRef();
   const leftContainerRef = useRef();
-  const [isLoading, setFluidColor] = useStore(useShallow((state) => [state.isLoading, state.setFluidColor]));
+  const [isLoading] = useStore(useShallow((state) => [state.isLoading]));
   const windowSize = useWindowSize();
 
   const projectIndex = useMemo(() => projects.findIndex((project) => project.id === id), [id]);
   const currentProject = useMemo(() => projects[projectIndex], [projectIndex]);
-
-  const updateCSSVariables = (project) => {
-    gsap.set('html', {
-      '--black': project.primary,
-      '--white': project.secondary,
-      '--accentColor': project.accentColor,
-      '--fillColor': project.fillColor,
-      '--menuColor': project.menuColor,
-      '--menuFontColor': project.menuFontColor,
-    });
-  };
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -59,24 +48,6 @@ function Page({ id }) {
       ScrollTrigger.getById('project')?.kill();
     };
   }, [isMobile, isLoading, windowSize.width]);
-
-  useEffect(() => {
-    if (currentProject) {
-      updateCSSVariables(currentProject);
-      setFluidColor(currentProject.fluidColor);
-    }
-    return () => {
-      updateCSSVariables({
-        primary: '#00263a',
-        secondary: '#f8e9cc',
-        accentColor: '#669bbc',
-        fillColor: '#c1121f',
-        menuColor: '#00263a',
-        menuFontColor: '#00263a',
-      });
-      setFluidColor('#d7d7d4');
-    };
-  }, [currentProject]);
 
   const seo = useMemo(
     () => ({
