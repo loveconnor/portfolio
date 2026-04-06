@@ -53,7 +53,7 @@ const projects = [
     desc: [
       'LoveUI is a full-scale component system built to accelerate modern product development with reusable, production-ready UI.',
       'It includes atomic components, prebuilt sections, templates, and full example apps, allowing developers to move from idea to interface without friction.',
-      'Designed with scalability in mind, LoveUI removes dependency lock-in while giving full control over styling, structure, and behavior. :contentReference[oaicite:0]{index=0}',
+      'Designed with scalability in mind, LoveUI removes dependency lock-in while giving full control over styling, structure, and behavior.',
     ],
   },
   {
@@ -63,6 +63,7 @@ const projects = [
     link: '/projects/lovechat',
     date: '2026',
     liveLink: undefined,
+    githubLink: 'https://github.com/loveconnor/lovechat',
     primary: '#263745',
     accentColor: '#f0f4f1',
     secondary: '#F3F5F7',
@@ -110,7 +111,7 @@ const projects = [
     desc: [
       'LoveChat is a full-stack AI chat platform built with a modern monorepo architecture, combining real-time conversations with advanced AI workflows.',
       'It supports session-based chat, branching conversations, memory systems, file uploads, and rich content rendering including charts, math, and images.',
-      'The system integrates model routing, web search, and long-term memory to create a highly dynamic and extensible AI product experience. :contentReference[oaicite:1]{index=1}',
+      'The system integrates model routing, web search, and long-term memory to create a highly dynamic and extensible AI product experience.',
     ],
   },
   {
@@ -120,6 +121,7 @@ const projects = [
     link: '/projects/lyceum',
     date: '2026',
     liveLink: undefined,
+    githubLink: 'https://github.com/loveconnor/lyceum',
     primary: '#000000',
     accentColor: '#f0f4f1',
     secondary: '#FAFAFA',
@@ -167,11 +169,12 @@ const projects = [
     desc: [
       'Lyceum is an AI-powered learning platform designed to guide users from interest to mastery through personalized learning paths and interactive labs.',
       'The system combines structured modules, hands-on exercises, and an integrated AI assistant to support real-time learning and feedback.',
-      'With progress tracking, reflections, and adaptive recommendations, Lyceum creates a fully dynamic and personalized education experience. :contentReference[oaicite:2]{index=2}',
+      'With progress tracking, reflections, and adaptive recommendations, Lyceum creates a fully dynamic and personalized education experience.',
     ],
   },
   {
     id: 'lovesans',
+    githubLink: 'https://github.com/loveconnor/lovesans',
     title: 'LoveSans',
     img: '/lovesans/project1.webp',
     link: '/projects/lovesans',
@@ -213,11 +216,12 @@ const projects = [
     desc: [
       'LoveSans is a custom sans-serif typeface system designed for modern digital products, branding, and interface design.',
       'The project focuses on creating a consistent typographic foundation across web applications, balancing readability with strong visual identity.',
-      'Built as both a design and engineering exercise, it bridges typography with real-world UI implementation and product usage. :contentReference[oaicite:3]{index=3}',
+      'Built as both a design and engineering exercise, it bridges typography with real-world UI implementation and product usage.',
     ],
   },
   {
     id: 'connorvault',
+    githubLink: 'https://github.com/loveconnor/connorvault',
     title: 'ConnorVault',
     img: '/connorvault/project2.webp',
     link: '/projects/connorvault',
@@ -249,7 +253,7 @@ const projects = [
     desc: [
       'ConnorVault is a full-stack API key management and proxy platform that centralizes provider credentials behind secure internal keys.',
       'It enables developers to route API requests through a controlled proxy, monitor usage, and manage key lifecycles across environments.',
-      'With built-in telemetry, environment separation, and key-level control, it provides a secure infrastructure layer for modern applications. :contentReference[oaicite:4]{index=4}',
+      'With built-in telemetry, environment separation, and key-level control, it provides a secure infrastructure layer for modern applications.',
     ],
   },
   /*

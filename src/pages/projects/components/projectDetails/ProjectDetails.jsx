@@ -21,6 +21,11 @@ function ProjectDetails({ project }) {
             <ButtonLink target href={project.liveLink} label="VISIT LIVE SITE" />
           </div>
         ) : null}
+        {project.githubLink ? (
+          <div className={styles.buttonContainer}>
+            <ButtonLink target href={project.githubLink} label="VIEW GITHUB" />
+          </div>
+        ) : null}
       </div>
     </div>
   );
