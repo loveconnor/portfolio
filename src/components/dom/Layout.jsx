@@ -235,8 +235,19 @@ function Layout({ children, layoutRef, mainRef, router }) {
         </ReactTransition>
       </SwitchTransition>
 
-      {isMounted && createPortal(
-          <div id="awwwards" style={{ position: 'fixed', zIndex: 999, transform: 'translateY(-50%)', top: '50%', left: 0, right: 'auto' }}>
+      {isMounted &&
+        createPortal(
+          <div
+            id="awwwards"
+            style={{
+              position: 'fixed',
+              zIndex: 999,
+              transform: 'translateY(-50%)',
+              top: '50%',
+              left: 0,
+              right: 'auto',
+            }}
+          >
             <a href="https://www.awwwards.com/sites/connor-love" target="_blank" rel="noreferrer">
               <svg width="53.08" height="171.358">
                 <path className="js-color-bg" fill="#5ABDB2" d="M0 0h53.08v171.358H0z" />
