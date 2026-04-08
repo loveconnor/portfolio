@@ -353,7 +353,7 @@ via `CustomHead` + `NextSeo`.
 ### Sitemap + robots
 
 - `next-sitemap` runs in `postbuild`
-- Configured site URL: `https://connorlove.com/`
+- Configured site URL: `https://www.connorlove.com/`
 - `robots.txt` is generated
 
 ---

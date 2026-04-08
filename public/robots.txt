@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://connorlove.com/
+Host: https://www.connorlove.com/
 
 # Sitemaps
-Sitemap: https://connorlove.com/sitemap.xml
+Sitemap: https://www.connorlove.com/sitemap.xml
