@@ -97,12 +97,7 @@ function MyApp({ Component, pageProps, router }) {
         <Scrollbar />
         <Navbar />
         <Analytics />
-        <Script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id="9ceddcf9-64f0-4f36-869b-e00dd4de7696"
-          strategy="afterInteractive"
-        />
+        <Script defer src="https://cloud.umami.is/script.js" data-website-id="9ceddcf9-64f0-4f36-869b-e00dd4de7696" strategy="afterInteractive" />
       </>
     ),
     [],
