@@ -16,6 +16,7 @@ import Layout from '@src/components/dom/Layout';
 import Lenis from 'lenis';
 import Loader from '@src/components/dom/Loader';
 import Navbar from '@src/components/dom/navbar/Index';
+import Script from 'next/script';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Scrollbar from '@src/components/dom/Scrollbar';
 import Stats from '@src/components/stats/Index';
@@ -96,6 +97,12 @@ function MyApp({ Component, pageProps, router }) {
         <Scrollbar />
         <Navbar />
         <Analytics />
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="9ceddcf9-64f0-4f36-869b-e00dd4de7696"
+          strategy="afterInteractive"
+        />
       </>
     ),
     [],
