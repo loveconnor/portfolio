@@ -111,6 +111,21 @@ function MenuLinks() {
     }, 850);
   };
 
+  const handleGetInTouchClick = (event) => {
+    event.preventDefault();
+    setIsMenuOpen(false);
+    lenis?.start?.();
+
+    const mailto = 'mailto:loveconnor2005@gmail.com';
+    window.location.assign(mailto);
+
+    window.setTimeout(() => {
+      if (document.visibilityState === 'visible') {
+        window.location.assign('https://mail.google.com/mail/?view=cm&fs=1&to=loveconnor2005%40gmail.com');
+      }
+    }, 700);
+  };
+
   const l1 = menuLinks.length;
   const l2 = projectsLinks.length;
 
@@ -192,10 +207,7 @@ function MenuLinks() {
             <a
               aria-label="Send email"
               href="mailto:loveconnor2005@gmail.com"
-              onClick={() => {
-                setIsMenuOpen(false);
-                lenis?.start?.();
-              }}
+              onClick={handleGetInTouchClick}
             >
               <span>GET IN TOUCH</span>
             </a>

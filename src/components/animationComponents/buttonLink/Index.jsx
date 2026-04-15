@@ -9,6 +9,7 @@ import styles from '@src/components/animationComponents/buttonLink/buttonLink.mo
 function ButtonLink({ href, label, target = false }) {
   const spanRef = useRef(null);
   const relsRef = useRef({ relX: 0, relY: 0 });
+  const isMailtoHref = /^mailto:/i.test(href);
   const isExternalHref = /^(https?:\/\/|mailto:|tel:)/i.test(href);
   const useNativeAnchor = target || isExternalHref;
 
@@ -45,6 +46,25 @@ function ButtonLink({ href, label, target = false }) {
     });
   }, []);
 
+  const handleMailtoClick = useCallback(
+    (event) => {
+      if (!isMailtoHref) {
+        return;
+      }
+
+      event.preventDefault();
+      window.location.assign(href);
+
+      const fallbackUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(href.replace(/^mailto:/i, ''))}`;
+      window.setTimeout(() => {
+        if (document.visibilityState === 'visible') {
+          window.location.assign(fallbackUrl);
+        }
+      }, 700);
+    },
+    [href, isMailtoHref],
+  );
+
   return (
     useNativeAnchor ? (
       <a
@@ -53,6 +73,7 @@ function ButtonLink({ href, label, target = false }) {
         aria-label={label}
         href={href}
         className={clsx('p-xs', styles.btnPosnawr)}
+        onClick={isMailtoHref ? handleMailtoClick : undefined}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

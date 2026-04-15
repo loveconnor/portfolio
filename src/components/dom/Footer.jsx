@@ -69,6 +69,18 @@ function Footer() {
         }
       };
 
+      const handleEmailClick = (event) => {
+        event.preventDefault();
+        const mailto = 'mailto:loveconnor2005@gmail.com';
+        window.location.assign(mailto);
+
+        window.setTimeout(() => {
+          if (document.visibilityState === 'visible') {
+            window.location.assign('https://mail.google.com/mail/?view=cm&fs=1&to=loveconnor2005%40gmail.com');
+          }
+        }, 700);
+      };
+
       setupFooterAnimation(footerRef, windowSize);
     }
 
@@ -115,7 +127,7 @@ function Footer() {
           <h4 className={clsx(styles.workWithMe, 'h4')}>Work With Me:</h4>
           <div>
             <div className={styles.link}>
-              <a aria-label="Send email" href="mailto:loveconnor2005@gmail.com">
+              <a aria-label="Send email" href="mailto:loveconnor2005@gmail.com" onClick={handleEmailClick}>
                 <h4 className={clsx(styles.email, 'h4')}>loveconnor2005@gmail.com</h4>
               </a>
               {/* class="link__graphic link__graphic--slide" */}
