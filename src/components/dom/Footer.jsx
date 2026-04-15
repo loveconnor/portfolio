@@ -1,5 +1,4 @@
 import AppearTitle from '@src/components/animationComponents/appearTitle/Index';
-import Link from 'next/link';
 import LinkText from '@src/components/animationComponents/linkText/Index';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import clsx from 'clsx';
@@ -24,6 +23,18 @@ function Footer() {
   const rafIdRef = useRef(null);
   const [isLoading] = useStore(useShallow((state) => [state.isLoading]));
   const windowSize = useWindowSize();
+
+  const handleEmailClick = (event) => {
+    event.preventDefault();
+    const mailto = 'mailto:loveconnor2005@gmail.com';
+    window.location.assign(mailto);
+
+    window.setTimeout(() => {
+      if (document.visibilityState === 'visible') {
+        window.location.assign('https://mail.google.com/mail/?view=cm&fs=1&to=loveconnor2005%40gmail.com');
+      }
+    }, 700);
+  };
 
   useIsomorphicLayoutEffect(() => {
     if (!isLoading) {
@@ -67,18 +78,6 @@ function Footer() {
             }
           });
         }
-      };
-
-      const handleEmailClick = (event) => {
-        event.preventDefault();
-        const mailto = 'mailto:loveconnor2005@gmail.com';
-        window.location.assign(mailto);
-
-        window.setTimeout(() => {
-          if (document.visibilityState === 'visible') {
-            window.location.assign('https://mail.google.com/mail/?view=cm&fs=1&to=loveconnor2005%40gmail.com');
-          }
-        }, 700);
       };
 
       setupFooterAnimation(footerRef, windowSize);
