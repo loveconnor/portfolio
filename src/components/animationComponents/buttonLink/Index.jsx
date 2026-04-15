@@ -7,12 +7,13 @@ import gsap from 'gsap';
 import styles from '@src/components/animationComponents/buttonLink/buttonLink.module.scss';
 
 function ButtonLink({ href, label, target = false }) {
-  const buttonRef = useRef(null);
   const spanRef = useRef(null);
   const relsRef = useRef({ relX: 0, relY: 0 });
+  const isExternalHref = /^(https?:\/\/|mailto:|tel:)/i.test(href);
+  const useNativeAnchor = target || isExternalHref;
 
   const handleMouseEnter = useCallback((e) => {
-    const button = buttonRef.current;
+    const button = e.currentTarget;
     const span = spanRef.current;
     if (!button || !span) return;
 
@@ -45,13 +46,34 @@ function ButtonLink({ href, label, target = false }) {
   }, []);
 
   return (
-    <Link target={target ? '_blank' : undefined} rel={target ? 'noopener noreferrer' : undefined} aria-label={label} scroll={false} href={href}>
-      <button type="button" aria-label={label} ref={buttonRef} className={clsx('p-xs', styles.btnPosnawr)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    useNativeAnchor ? (
+      <a
+        target={target ? '_blank' : undefined}
+        rel={target ? 'noopener noreferrer' : undefined}
+        aria-label={label}
+        href={href}
+        className={clsx('p-xs', styles.btnPosnawr)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <span className={clsx('p-x', styles.labelClassic)}>{label}</span>
         <Arrow className={styles.arrowClassic} />
         <span className={styles.ball} ref={spanRef} />
-      </button>
-    </Link>
+      </a>
+    ) : (
+      <Link
+        aria-label={label}
+        scroll={false}
+        href={href}
+        className={clsx('p-xs', styles.btnPosnawr)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <span className={clsx('p-x', styles.labelClassic)}>{label}</span>
+        <Arrow className={styles.arrowClassic} />
+        <span className={styles.ball} ref={spanRef} />
+      </Link>
+    )
   );
 }
 
