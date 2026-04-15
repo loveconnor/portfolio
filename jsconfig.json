@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "jsx": "preserve",
     "target": "esnext",
     "module": "esnext",
-    "lib": ["dom", "es2017"],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "noEmit": true,
     "allowJs": true,
     "moduleResolution": "node",
@@ -26,9 +30,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      "@src/*": ["src/*"],
+      "@src/*": [
+        "src/*"
+      ],
     }
   },
-  "exclude": ["node_modules", "dist"],
-  "include": ["**/*.js", "**/*.jsx"]
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": [
+    "**/*.js",
+    "**/*.jsx"
+  ]
 }

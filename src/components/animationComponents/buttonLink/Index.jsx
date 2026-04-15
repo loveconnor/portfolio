@@ -65,36 +65,27 @@ function ButtonLink({ href, label, target = false }) {
     [href, isMailtoHref],
   );
 
-  return (
-    useNativeAnchor ? (
-      <a
-        target={target ? '_blank' : undefined}
-        rel={target ? 'noopener noreferrer' : undefined}
-        aria-label={label}
-        href={href}
-        className={clsx('p-xs', styles.btnPosnawr)}
-        onClick={isMailtoHref ? handleMailtoClick : undefined}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <span className={clsx('p-x', styles.labelClassic)}>{label}</span>
-        <Arrow className={styles.arrowClassic} />
-        <span className={styles.ball} ref={spanRef} />
-      </a>
-    ) : (
-      <Link
-        aria-label={label}
-        scroll={false}
-        href={href}
-        className={clsx('p-xs', styles.btnPosnawr)}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <span className={clsx('p-x', styles.labelClassic)}>{label}</span>
-        <Arrow className={styles.arrowClassic} />
-        <span className={styles.ball} ref={spanRef} />
-      </Link>
-    )
+  return useNativeAnchor ? (
+    <a
+      target={target ? '_blank' : undefined}
+      rel={target ? 'noopener noreferrer' : undefined}
+      aria-label={label}
+      href={href}
+      className={clsx('p-xs', styles.btnPosnawr)}
+      onClick={isMailtoHref ? handleMailtoClick : undefined}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <span className={clsx('p-x', styles.labelClassic)}>{label}</span>
+      <Arrow className={styles.arrowClassic} />
+      <span className={styles.ball} ref={spanRef} />
+    </a>
+  ) : (
+    <Link aria-label={label} scroll={false} href={href} className={clsx('p-xs', styles.btnPosnawr)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <span className={clsx('p-x', styles.labelClassic)}>{label}</span>
+      <Arrow className={styles.arrowClassic} />
+      <span className={styles.ball} ref={spanRef} />
+    </Link>
   );
 }
 
