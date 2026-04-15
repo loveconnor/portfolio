@@ -189,9 +189,16 @@ function MenuLinks() {
             }}
             className={styles.menuListItem}
           >
-            <Link aria-label="Send email" scroll={false} href="mailto:loveconnor2005@gmail.com">
+            <a
+              aria-label="Send email"
+              href="mailto:loveconnor2005@gmail.com"
+              onClick={() => {
+                setIsMenuOpen(false);
+                lenis?.start?.();
+              }}
+            >
               <span>GET IN TOUCH</span>
-            </Link>
+            </a>
           </div>
         </div>
         <div
