@@ -9,10 +9,44 @@ const getSchema = () => ({
   '@context': 'http://schema.org',
   '@type': 'Person',
   name: 'Connor Love',
-  jobTitle: 'CSE Student & Frontend Developer',
+  jobTitle: 'Creative Developer & Frontend Developer',
   url: SITE_URL,
   image: OG_IMAGE,
   email: 'mailto:loveconnor2005@gmail.com',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Connor Love',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Columbus',
+    addressRegion: 'OH',
+    addressCountry: 'US',
+  },
+  areaServed: [
+    {
+      '@type': 'City',
+      name: 'Columbus',
+    },
+    {
+      '@type': 'State',
+      name: 'Ohio',
+    },
+    {
+      '@type': 'Place',
+      name: 'Northeast Ohio',
+    },
+  ],
+  knowsAbout: [
+    'Creative development',
+    'Creative developer',
+    'Website development',
+    'Frontend development',
+    'Web applications',
+    'Interactive websites',
+    'React development',
+    'Next.js development',
+  ],
   sameAs: ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'],
 });
 

@@ -17,14 +17,18 @@ import { useWindowSize } from '@darkroom.engineering/hamo';
 
 const seo = {
   title: 'Connor Love - Projects',
-  description: 'Explore my portfolio to see a range of frontend projects, from responsive websites to web applications. Discover my work with React, Nextjs, React three fiber, Electron and more.',
+  description:
+    'Explore creative development and website development projects by Connor Love, a Columbus, Ohio developer building responsive websites, web applications, and interactive product experiences.',
   keywords: [
     'Connor Love Projects',
     'Portfolio Showcase',
+    'Creative Developer Portfolio',
+    'Creative Development Projects',
     'Frontend Development Examples',
     'Web Design Portfolio',
     'Responsive Web Projects',
     'Web Applications Portfolio',
+    'Website Development',
     'HTML and CSS Projects',
     'JavaScript Development',
     'React Work',
@@ -32,7 +36,10 @@ const seo = {
     'React Three Fiber Projects',
     'Electron Projects',
     'Professional Web Development',
-    'Connor Love Projects',
+    'Columbus Ohio',
+    'Ohio',
+    'Northeast Ohio',
+    'Ohio State',
   ],
 };
 

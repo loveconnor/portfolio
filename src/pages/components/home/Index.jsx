@@ -232,12 +232,12 @@ function Home() {
     <section ref={rootRef} className={clsx(styles.root)}>
       <div className={clsx(styles.topContainer, 'layout-grid-inner')}>
         <div className={styles.leftContainer}>
-          <h2 className="h2">Creative</h2>
-          <h2 className={clsx('h2', 'bold')}>Web Experiences</h2>
+          <h1 className="h2">Creative Developer</h1>
+          <h2 className={clsx('h2', 'bold')}>in Columbus, Ohio</h2>
         </div>
         {!isMobile && (
           <h6 className={clsx('h6', styles.rightContainer)}>
-            I design and develop fast, interactive web applications with a focus on performance and detail. Built to feel smooth, responsive, and intentional.
+            I design and develop fast, interactive websites and web applications for Columbus, Ohio and Northeast Ohio with a focus on performance, detail, and intentional user experience.
           </h6>
         )}
       </div>
@@ -257,7 +257,7 @@ function Home() {
       </div>
       {isMobile && (
         <div className={styles.rightContainerMobile}>
-          <h6 className="h6"> I design and develop fast, interactive web applications with a focus on performance and detail. Built to feel smooth, responsive, and intentional.</h6>
+          <h6 className="h6">I design and develop fast, interactive websites and web applications for Columbus, Ohio and Northeast Ohio with a focus on performance, detail, and intentional user experience.</h6>
         </div>
       )}
 
