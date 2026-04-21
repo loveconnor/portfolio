@@ -37,16 +37,7 @@ const getSchema = () => ({
       name: 'Northeast Ohio',
     },
   ],
-  knowsAbout: [
-    'Creative development',
-    'Creative developer',
-    'Website development',
-    'Frontend development',
-    'Web applications',
-    'Interactive websites',
-    'React development',
-    'Next.js development',
-  ],
+  knowsAbout: ['Creative development', 'Creative developer', 'Website development', 'Frontend development', 'Web applications', 'Interactive websites', 'React development', 'Next.js development'],
   sameAs: ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'],
 });
 

@@ -7,7 +7,8 @@ import CustomHead from '@src/components/dom/CustomHead';
 
 const seo = {
   title: 'Connor Love - About',
-  description: 'Learn about Connor Love, a creative developer from Columbus, Ohio, focused on creative development, website development, and polished digital experiences across Ohio and Northeast Ohio.',
+  description:
+    'Learn about Connor Love, a creative developer from Columbus, Ohio, focused on creative development, website development, and polished digital experiences across Ohio and Northeast Ohio.',
   keywords: [
     'Connor Love',
     'About Connor Love',

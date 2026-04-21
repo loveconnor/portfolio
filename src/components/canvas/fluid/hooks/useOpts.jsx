@@ -22,7 +22,7 @@ const useOpts = () => {
       dyeRes: isMobile ? 64 : 256,
       simRes: isMobile ? 16 : 50,
     }),
-    [],
+    [isMobile],
   );
   return OPTS;
 };

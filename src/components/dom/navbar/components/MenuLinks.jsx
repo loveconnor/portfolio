@@ -69,7 +69,7 @@ function MenuLinks() {
     timeline.current = tl;
     const refs = { menuRef, menuLinksItemsRef };
     const ctx = gsap.context(() => {
-      setupMenuAnimation(tl, refs, isMobile);
+      setupMenuAnimation(tl, refs);
     });
 
     return () => {

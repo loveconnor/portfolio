@@ -257,7 +257,9 @@ function Home() {
       </div>
       {isMobile && (
         <div className={styles.rightContainerMobile}>
-          <h6 className="h6">I design and develop fast, interactive websites and web applications for Columbus, Ohio and Northeast Ohio with a focus on performance, detail, and intentional user experience.</h6>
+          <h6 className="h6">
+            I design and develop fast, interactive websites and web applications for Columbus, Ohio and Northeast Ohio with a focus on performance, detail, and intentional user experience.
+          </h6>
         </div>
       )}
 
