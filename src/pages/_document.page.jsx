@@ -5,6 +5,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <meta name="google-site-verification" content="_GxugHkYj4_FXIf1a7C_V27nz6byPmPrtgf8jIC4HfY" />
           <link href="/fonts/NeueHaasDisplayBold.woff2" as="font" type="font/woff2" />
           <link href="/fonts/NeueHaasDisplayLight.woff2" as="font" type="font/woff2" />
           <link href="/fonts/NeueHaasDisplayLightItalic.woff2" as="font" type="font/woff2" />
