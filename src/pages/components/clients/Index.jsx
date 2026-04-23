@@ -50,9 +50,9 @@ function Clients() {
 
   return (
     <section ref={rootRef} className={clsx(styles.root, 'layout-grid-inner')}>
-      <h1 className={clsx(styles.sectionTitle, 'h1')}>
+      <h2 className={clsx(styles.sectionTitle, 'h1')}>
         <AppearByWords>Work</AppearByWords>
-      </h1>
+      </h2>
       {isMobile ? <div className={styles.mobileEmpty} /> : null}
       {isMobile ? (
         <div className={styles.mobileCount}>
@@ -71,7 +71,7 @@ function Clients() {
       {isMobile ? (
         <div className={styles.textMobile}>
           <AppearTitle>
-            <h4 className={clsx('h4', 'bold')}>Modern Telecom</h4>
+            <h3 className={clsx('h4', 'bold')}>Modern Telecom</h3>
           </AppearTitle>
           <AppearTitle>
             <div className="p-l">Lorem ipsum dolor sit amet, consectetur</div>
@@ -95,10 +95,10 @@ function Clients() {
             className={styles.firstText}
           >
             <AppearTitle>
-              <h6 className="h6">2026</h6>
+              <p className="h6">2026</p>
             </AppearTitle>
             <AppearTitle>
-              <h4 className={clsx('h4', 'bold', styles.title)}>Modern Telecom</h4>
+              <h3 className={clsx('h4', 'bold', styles.title)}>Modern Telecom</h3>
             </AppearTitle>
             <AppearTitle>
               <div className="p-l">Modern Telecom provides business phone and</div>

@@ -5,6 +5,7 @@ import Quote from '@src/pages/components/quote/Index';
 import Projects from '@src/pages/components/projects/Index';
 import Clients from '@src/pages/components/clients/Index';
 import CustomHead from '@src/components/dom/CustomHead';
+import SeoContent from '@src/pages/components/seo/Index';
 
 const seo = {
   title: 'Creative Developer in Columbus, Ohio | Connor Love',
@@ -56,6 +57,7 @@ function Page() {
       <Home />
       <About />
       <Clients />
+      <SeoContent />
       <Quote />
       <Projects />
     </>

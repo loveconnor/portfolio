@@ -1,0 +1,39 @@
+.root {
+  padding-top: 10vw;
+  padding-bottom: 10vw;
+  row-gap: 4vw;
+}
+
+.heading {
+  grid-column: 1 / 6;
+
+  p {
+    margin-bottom: 1.2vw;
+    color: var(--secondary);
+  }
+}
+
+.content {
+  grid-column: 7 / 13;
+
+  h3 {
+    margin-bottom: 1.5vw;
+  }
+
+  p + p {
+    margin-top: 1.6vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .root {
+    padding-top: 20vw;
+    padding-bottom: 20vw;
+    row-gap: 10vw;
+  }
+
+  .heading,
+  .content {
+    grid-column: 1 / -1;
+  }
+}

@@ -62,9 +62,9 @@ function Projects() {
   return (
     <>
       <section className={clsx(styles.titleContainer, 'layout-grid-inner')}>
-        <h1 className={clsx(styles.title, 'h1')}>
+        <h2 className={clsx(styles.title, 'h1')}>
           <AppearByWords>Selected Projects</AppearByWords>
-        </h1>
+        </h2>
       </section>
       <section ref={rootRef} className={clsx(styles.root, 'layout-block-inner')}>
         <div className={styles.innerContainer}>
@@ -86,7 +86,7 @@ function Projects() {
               >
                 <div className={clsx(styles.container, 'layout-grid-inner')}>
                   <div className={styles.projectsDetails}>
-                    <h6 className="h6">{project.date}</h6>
+                    <p className="h6">{project.date}</p>
                     <h3 className="h3">{project.title}</h3>
                   </div>
                   <div className={styles.imageContainer}>

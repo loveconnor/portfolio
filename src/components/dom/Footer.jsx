@@ -99,7 +99,7 @@ function Footer() {
     <section ref={footerRef} className={clsx(styles.root, 'layout-grid-inner')} role="contentinfo">
       <div style={{ gridColumn: isMobile ? '1 / 3' : '1 / 5' }} className={styles.linksContainer}>
         <AppearTitle isFooter>
-          <h6 className={clsx(styles.title, 'h6')}>Sitemap</h6>
+          <p className={clsx(styles.title, 'h6')}>Sitemap</p>
           {menuLinks.slice(0, -1).map((link) => (
             <div key={link.title} className={styles.linkTextContainer}>
               <LinkText className={styles.linkText} title={link.title} href={link.href}>
@@ -111,7 +111,7 @@ function Footer() {
       </div>
       <div style={{ gridColumn: isMobile ? '3 / 7' : '5 / 9' }} className={styles.linksContainer}>
         <AppearTitle isFooter>
-          <h6 className={clsx(styles.title, 'h6')}>Follow me</h6>
+          <p className={clsx(styles.title, 'h6')}>Follow me</p>
           {footerLinks.map((link) => (
             <div key={link.title} className={styles.linkTextContainer}>
               <LinkText target className={styles.linkText} title={link.title} href={link.href}>
@@ -123,11 +123,11 @@ function Footer() {
       </div>
       <div className={styles.emailContaineer}>
         <AppearTitle isFooter>
-          <h4 className={clsx(styles.workWithMe, 'h4')}>Work With Me:</h4>
+          <p className={clsx(styles.workWithMe, 'h4')}>Work With Me:</p>
           <div>
             <div className={styles.link}>
               <a aria-label="Send email" href="mailto:loveconnor2005@gmail.com" onClick={handleEmailClick}>
-                <h4 className={clsx(styles.email, 'h4')}>loveconnor2005@gmail.com</h4>
+                <span className={clsx(styles.email, 'h4')}>loveconnor2005@gmail.com</span>
               </a>
               {/* class="link__graphic link__graphic--slide" */}
               <svg className={clsx(styles.linkGraphic)} width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">

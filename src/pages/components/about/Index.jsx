@@ -50,8 +50,8 @@ function About() {
     <section ref={rootRef} className={styles.root}>
       <div className={clsx(styles.nameContainer, 'layout-block-inner')}>
         <AppearTitle>
-          <h1 className={clsx('h1', 'medium')}>Hey, My name&apos;s</h1>
-          <h1 className={clsx('h1', 'medium')}>Connor Love!</h1>
+          <h2 className={clsx('h1', 'medium')}>Hey, My name&apos;s</h2>
+          <p className={clsx('h1', 'medium')}>Connor Love!</p>
         </AppearTitle>
       </div>
 
@@ -68,18 +68,18 @@ function About() {
         <div className={clsx(styles.descWrapperBottom)}>
           {!isMobile ? (
             <AppearTitle key="desktop-descWrapperBottom">
-              <h6 className="h6">A creative developer focused on building modern</h6>
-              <h6 className="h6">web experiences with a strong balance of design</h6>
-              <h6 className="h6">and engineering. I specialize in creating fast,</h6>
-              <h6 className="h6">interactive applications that are clean, scalable,</h6>
-              <h6 className="h6">and built to perform.</h6>
+              <p className="h6">A creative developer focused on building modern</p>
+              <p className="h6">web experiences with a strong balance of design</p>
+              <p className="h6">and engineering. I specialize in creating fast,</p>
+              <p className="h6">interactive applications that are clean, scalable,</p>
+              <p className="h6">and built to perform.</p>
             </AppearTitle>
           ) : (
             <AppearTitle key="mobile-descWrapperBottom">
-              <h6 className="h6">A creative developer focused on building modern web</h6>
-              <h6 className="h6">experiences with a strong balance of design and</h6>
-              <h6 className="h6">engineering. I specialize in creating fast, interactive</h6>
-              <h6 className="h6">applications that are clean, scalable, and built to perform.</h6>
+              <p className="h6">A creative developer focused on building modern web</p>
+              <p className="h6">experiences with a strong balance of design and</p>
+              <p className="h6">engineering. I specialize in creating fast, interactive</p>
+              <p className="h6">applications that are clean, scalable, and built to perform.</p>
             </AppearTitle>
           )}
           <div className={clsx(styles.buttonContainer)}>

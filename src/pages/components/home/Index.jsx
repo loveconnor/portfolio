@@ -236,9 +236,9 @@ function Home() {
           <h2 className={clsx('h2', 'bold')}>in Columbus, Ohio</h2>
         </div>
         {!isMobile && (
-          <h6 className={clsx('h6', styles.rightContainer)}>
+          <p className={clsx('h6', styles.rightContainer)}>
             I design and develop fast, interactive websites and web applications for Columbus, Ohio and Northeast Ohio with a focus on performance, detail, and intentional user experience.
-          </h6>
+          </p>
         )}
       </div>
 
@@ -257,9 +257,9 @@ function Home() {
       </div>
       {isMobile && (
         <div className={styles.rightContainerMobile}>
-          <h6 className="h6">
+          <p className="h6">
             I design and develop fast, interactive websites and web applications for Columbus, Ohio and Northeast Ohio with a focus on performance, detail, and intentional user experience.
-          </h6>
+          </p>
         </div>
       )}
 

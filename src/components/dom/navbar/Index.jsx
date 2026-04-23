@@ -44,7 +44,7 @@ function Navbar() {
       <header className={styles.root} role="banner">
         <div className={styles.innerHeader}>
           <Link onClick={goToTop} aria-label="Go home" scroll={false} href="/">
-            <h4 className={clsx('bold', 'h4')}>CONNOR</h4>
+            <span className={clsx('bold', 'h4')}>CONNOR</span>
           </Link>
 
           <div className={styles.rightContainer}>

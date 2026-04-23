@@ -112,6 +112,7 @@ function CustomHead({ title = '', description, keywords }) {
         <meta name="author" content="Connor Love" />
         <meta name="referrer" content="no-referrer" />
         <meta name="format-detection" content="telephone=no" />
+        <meta httpEquiv="content-language" content="en-US" />
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="Columbus, Ohio" />
         <meta name="description" content={description} />
