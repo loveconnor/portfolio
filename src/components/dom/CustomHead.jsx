@@ -1,47 +1,105 @@
 import NextHead from 'next/head';
 import { NextSeo } from 'next-seo';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 
 const SITE_URL = 'https://www.connorlove.com';
 const OG_IMAGE = `${SITE_URL}/og.png`;
 
-const getSchema = () => ({
-  '@context': 'http://schema.org',
-  '@type': 'Person',
-  name: 'Connor Love',
-  jobTitle: 'Creative Developer & Frontend Developer',
-  url: SITE_URL,
-  image: OG_IMAGE,
-  email: 'mailto:loveconnor2005@gmail.com',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Connor Love',
-  },
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Columbus',
-    addressRegion: 'OH',
-    addressCountry: 'US',
-  },
-  areaServed: [
+const normalizePath = (path) => {
+  const cleanPath = path?.split('?')[0].split('#')[0] || '/';
+  return cleanPath === '/' ? '' : cleanPath.replace(/\/$/, '');
+};
+
+const getSchema = ({ canonicalUrl, title, description }) => ({
+  '@context': 'https://schema.org',
+  '@graph': [
     {
-      '@type': 'City',
-      name: 'Columbus',
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: 'Connor Love',
+      jobTitle: 'Creative Developer & Frontend Developer',
+      url: SITE_URL,
+      image: OG_IMAGE,
+      email: 'mailto:loveconnor2005@gmail.com',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Columbus',
+        addressRegion: 'OH',
+        addressCountry: 'US',
+      },
+      areaServed: [
+        {
+          '@type': 'City',
+          name: 'Columbus',
+        },
+        {
+          '@type': 'State',
+          name: 'Ohio',
+        },
+        {
+          '@type': 'Place',
+          name: 'Northeast Ohio',
+        },
+      ],
+      knowsAbout: [
+        'Creative development',
+        'Creative developer',
+        'Website development',
+        'Frontend development',
+        'Web applications',
+        'Interactive websites',
+        'React development',
+        'Next.js development',
+        'AI product development',
+        'Generative engine optimization',
+      ],
+      sameAs: ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'],
     },
     {
-      '@type': 'State',
-      name: 'Ohio',
+      '@type': 'ProfessionalService',
+      '@id': `${SITE_URL}/#services`,
+      name: 'Connor Love Creative Development',
+      url: SITE_URL,
+      image: OG_IMAGE,
+      founder: {
+        '@id': `${SITE_URL}/#person`,
+      },
+      areaServed: ['Columbus, Ohio', 'Ohio', 'Northeast Ohio', 'United States'],
+      serviceType: ['Creative development', 'Frontend development', 'Website development', 'Interactive web applications', 'AI product interfaces'],
+      description: 'Connor Love builds custom websites, web applications, and interactive digital experiences with a focus on performance, polished interaction, and scalable frontend systems.',
     },
     {
-      '@type': 'Place',
-      name: 'Northeast Ohio',
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: 'Connor Love Portfolio',
+      publisher: {
+        '@id': `${SITE_URL}/#person`,
+      },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: title,
+      description,
+      isPartOf: {
+        '@id': `${SITE_URL}/#website`,
+      },
+      about: {
+        '@id': `${SITE_URL}/#person`,
+      },
+      inLanguage: 'en-US',
     },
   ],
-  knowsAbout: ['Creative development', 'Creative developer', 'Website development', 'Frontend development', 'Web applications', 'Interactive websites', 'React development', 'Next.js development'],
-  sameAs: ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'],
 });
 
 function CustomHead({ title = '', description, keywords }) {
+  const router = useRouter();
+  const canonicalUrl = `${SITE_URL}${normalizePath(router.asPath)}`;
+
   return (
     <>
       <NextHead>
@@ -55,9 +113,11 @@ function CustomHead({ title = '', description, keywords }) {
         <meta name="referrer" content="no-referrer" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="geo.region" content="US" />
+        <meta name="geo.placename" content="Columbus, Ohio" />
+        <meta name="description" content={description} />
 
         {/* Canonical and Title */}
-        <link rel="canonical" href={SITE_URL} />
+        <link rel="canonical" href={canonicalUrl} />
         <title>{title}</title>
 
         {/* OpenGraph Meta Tags */}
@@ -65,10 +125,11 @@ function CustomHead({ title = '', description, keywords }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={SITE_URL} />
+        <meta property="og:url" content={canonicalUrl} />
 
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={OG_IMAGE} />
 
@@ -78,15 +139,16 @@ function CustomHead({ title = '', description, keywords }) {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="AI-readable site summary" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#333333" />
         <meta name="msapplication-TileColor" content="#f8e9cc" />
         <meta name="theme-color" content="#f8e9cc" />
 
         {/* Schema */}
         {/* eslint-disable-next-line react/no-danger */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getSchema()) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getSchema({ canonicalUrl, title, description })) }} />
       </NextHead>
-      <NextSeo title={title} description={description} />
+      <NextSeo title={title} description={description} canonical={canonicalUrl} openGraph={{ title, description, url: canonicalUrl, images: [{ url: OG_IMAGE }] }} />
     </>
   );
 }

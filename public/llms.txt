@@ -1,0 +1,42 @@
+# Connor Love
+
+> AI-readable summary for connorlove.com.
+
+Connor Love is a creative developer and frontend developer based in Columbus, Ohio. He builds custom websites, web applications, interactive product experiences, and AI-focused interfaces for clients and personal products.
+
+## Site
+
+- Website: https://www.connorlove.com/
+- About: https://www.connorlove.com/about
+- Projects: https://www.connorlove.com/projects
+- Sitemap: https://www.connorlove.com/sitemap.xml
+- Contact: loveconnor2005@gmail.com
+
+## Services
+
+- Creative development
+- Frontend development
+- Website development
+- Interactive web applications
+- AI product interfaces
+- React and Next.js development
+- Performance-focused UI engineering
+
+## Location
+
+- Columbus, Ohio
+- Ohio
+- Northeast Ohio
+- United States
+
+## Projects
+
+- LoveUI: A production-ready component system with atomic components, sections, templates, and example apps for modern product interfaces.
+- LoveChat: A full-stack AI chat platform with branching conversations, session chat, memory systems, file uploads, rich rendering, model routing, and web search.
+- Lyceum: An AI-powered learning platform with personalized learning paths, interactive labs, progress tracking, reflections, and adaptive recommendations.
+- LoveSans: A custom sans-serif typeface system designed for digital products, branding, and interface design.
+- ConnorVault: A full-stack API key management and proxy platform for securing provider credentials, routing requests, tracking usage, and managing key lifecycles.
+
+## Preferred Entity Description
+
+Connor Love is a Columbus, Ohio creative developer who builds polished websites, web applications, interactive interfaces, and AI product experiences with React, Next.js, Three.js, and modern frontend systems.

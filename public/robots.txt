@@ -7,3 +7,6 @@ Host: https://www.connorlove.com/
 
 # Sitemaps
 Sitemap: https://www.connorlove.com/sitemap.xml
+
+# AI/GEO
+LLMs: https://www.connorlove.com/llms.txt
