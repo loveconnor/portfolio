@@ -4,9 +4,10 @@ import Overview from '@src/pages/about/components/overview/Overview';
 import Services from '@src/pages/about/components/services/Services';
 import Process from '@src/pages/about/components/process/Process';
 import CustomHead from '@src/components/dom/CustomHead';
+import SeoContent from '@src/pages/components/seo/Index';
 
 const seo = {
-  title: 'Connor Love - About',
+  title: 'About Connor Love | Creative Developer in Columbus, Ohio',
   description:
     'Learn about Connor Love, a creative developer from Columbus, Ohio, focused on creative development, website development, and polished digital experiences across Ohio and Northeast Ohio.',
   keywords: [
@@ -40,6 +41,7 @@ function Page() {
       <Overview />
       <Services />
       <Process />
+      <SeoContent variant="about" />
     </>
   );
 }

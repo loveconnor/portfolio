@@ -4,6 +4,7 @@
 import CustomHead from '@src/components/dom/CustomHead';
 import Image from 'next/image';
 import Link from 'next/link';
+import SeoContent from '@src/pages/components/seo/Index';
 import clsx from 'clsx';
 import { gsap } from 'gsap';
 import projects from '@src/constants/projects';
@@ -16,7 +17,7 @@ import { useStore } from '@src/store';
 import { useWindowSize } from '@darkroom.engineering/hamo';
 
 const seo = {
-  title: 'Connor Love - Projects',
+  title: 'Projects | Connor Love Creative Developer Portfolio',
   description:
     'Explore creative development and website development projects by Connor Love, a Columbus, Ohio developer building responsive websites, web applications, and interactive product experiences.',
   keywords: [
@@ -110,8 +111,8 @@ function Page() {
               >
                 <div className={clsx(styles.container, 'layout-grid-inner')}>
                   <div className={styles.projectsDetails}>
-                    <h6 className={clsx(styles.text, 'h6')}>{project.date}</h6>
-                    <h3 className={clsx(styles.text, 'h3')}>{project.title}</h3>
+                    <p className={clsx(styles.text, 'h6')}>{project.date}</p>
+                    <h2 className={clsx(styles.text, 'h3')}>{project.title}</h2>
                   </div>
                   <div className={styles.imageContainer}>
                     <Image priority={index === 0} sizes="100%" src={project.img} fill alt={project.title} />
@@ -137,6 +138,7 @@ function Page() {
           ))}
         </div>
       </section>
+      <SeoContent variant="projects" />
     </>
   );
 }

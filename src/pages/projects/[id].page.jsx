@@ -6,6 +6,7 @@ import NextProject from '@src/pages/projects/components/nextProject/NextProject'
 import ProjectDetails from '@src/pages/projects/components/projectDetails/ProjectDetails';
 import ProjectImages from '@src/pages/projects/components/projectsImages/ProjectImages';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import SeoContent from '@src/pages/components/seo/Index';
 import clsx from 'clsx';
 import { gsap } from 'gsap';
 import projects from '@src/constants/projects';
@@ -51,8 +52,8 @@ function Page({ id }) {
 
   const seo = useMemo(
     () => ({
-      title: `Connor Love - ${currentProject.title} Project`,
-      description: `Check out Connor Love's ${currentProject.title} project, a creative development and website development case study from a Columbus, Ohio frontend developer focused on polished digital experiences.`,
+      title: `${currentProject.title} Case Study | Connor Love Creative Developer`,
+      description: `${currentProject.title} is a creative development case study by Connor Love, a Columbus, Ohio frontend developer building polished websites, web applications, and AI product experiences.`,
       keywords: [
         `${currentProject.title} project`,
         `${currentProject.title} development`,
@@ -75,7 +76,7 @@ function Page({ id }) {
 
   return (
     <>
-      <CustomHead {...seo} />
+      <CustomHead {...seo} project={currentProject} />
       <section className={clsx(styles.root, 'layout-grid-inner')}>
         <div ref={leftContainerRef} className={styles.leftContainer}>
           <ProjectDetails project={currentProject} />
@@ -84,6 +85,7 @@ function Page({ id }) {
           <ProjectImages project={currentProject} />
         </div>
       </section>
+      <SeoContent variant="projects" project={currentProject} />
       <NextProject nextProject={projectIndex === projects.length - 1 ? projects[0] : projects[projectIndex + 1]} />
     </>
   );

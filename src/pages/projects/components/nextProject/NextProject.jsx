@@ -8,9 +8,9 @@ function NextProject({ nextProject }) {
   return (
     <>
       <section className={clsx(styles.titleContainer, 'layout-block-inner')}>
-        <h1 className={clsx(styles.title, 'h1')}>
+        <h2 className={clsx(styles.title, 'h1')}>
           <AppearByWords>Next Project</AppearByWords>
-        </h1>
+        </h2>
       </section>
       <section className={clsx(styles.nextRoot, 'layout-block-inner')}>
         <div className={styles.innerContainer}>
@@ -18,7 +18,7 @@ function NextProject({ nextProject }) {
             <div className={styles.projectsWrap}>
               <div className={clsx(styles.container, 'layout-grid-inner')}>
                 <div className={styles.projectsDetails}>
-                  <h6 className={clsx(styles.text, 'h6')}>{nextProject.date}</h6>
+                  <p className={clsx(styles.text, 'h6')}>{nextProject.date}</p>
 
                   <h3 className={clsx(styles.text, 'h3')}>{nextProject.title}</h3>
                 </div>

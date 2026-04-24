@@ -48,7 +48,7 @@ function Hero() {
   return (
     <section ref={rootRef} className={clsx(styles.root, 'layout-block-inner')}>
       <header className={styles.titleContainer}>
-        <h2 className={clsx(styles.title, 'h2')}>I build fast, clean, scalable web applications.</h2>
+        <h1 className={clsx(styles.title, 'h2')}>Connor Love builds fast, clean, scalable web applications.</h1>
       </header>
       <div className={styles.wrapper}>
         <div ref={heroImageRef} className={styles.imageContainer}>

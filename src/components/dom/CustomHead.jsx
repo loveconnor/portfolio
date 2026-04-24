@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import NextHead from 'next/head';
 import { NextSeo } from 'next-seo';
 import PropTypes from 'prop-types';
@@ -11,92 +12,159 @@ const normalizePath = (path) => {
   return cleanPath === '/' ? '' : cleanPath.replace(/\/$/, '');
 };
 
-const getSchema = ({ canonicalUrl, title, description }) => ({
-  '@context': 'https://schema.org',
-  '@graph': [
+const getBreadcrumbItems = (canonicalUrl) => {
+  const path = canonicalUrl.replace(SITE_URL, '');
+  const segments = path.split('/').filter(Boolean);
+  const items = [
     {
-      '@type': 'Person',
-      '@id': `${SITE_URL}/#person`,
-      name: 'Connor Love',
-      jobTitle: 'Creative Developer & Frontend Developer',
-      url: SITE_URL,
-      image: OG_IMAGE,
-      email: 'mailto:loveconnor2005@gmail.com',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Columbus',
-        addressRegion: 'OH',
-        addressCountry: 'US',
-      },
-      areaServed: [
-        {
-          '@type': 'City',
-          name: 'Columbus',
-        },
-        {
-          '@type': 'State',
-          name: 'Ohio',
-        },
-        {
-          '@type': 'Place',
-          name: 'Northeast Ohio',
-        },
-      ],
-      knowsAbout: [
-        'Creative development',
-        'Creative developer',
-        'Website development',
-        'Frontend development',
-        'Web applications',
-        'Interactive websites',
-        'React development',
-        'Next.js development',
-        'AI product development',
-        'Generative engine optimization',
-      ],
-      sameAs: ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'],
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: SITE_URL,
     },
-    {
-      '@type': 'ProfessionalService',
-      '@id': `${SITE_URL}/#services`,
-      name: 'Connor Love Creative Development',
-      url: SITE_URL,
-      image: OG_IMAGE,
-      founder: {
-        '@id': `${SITE_URL}/#person`,
-      },
-      areaServed: ['Columbus, Ohio', 'Ohio', 'Northeast Ohio', 'United States'],
-      serviceType: ['Creative development', 'Frontend development', 'Website development', 'Interactive web applications', 'AI product interfaces'],
-      description: 'Connor Love builds custom websites, web applications, and interactive digital experiences with a focus on performance, polished interaction, and scalable frontend systems.',
-    },
-    {
-      '@type': 'WebSite',
-      '@id': `${SITE_URL}/#website`,
-      url: SITE_URL,
-      name: 'Connor Love Portfolio',
-      publisher: {
-        '@id': `${SITE_URL}/#person`,
-      },
-      inLanguage: 'en-US',
-    },
-    {
-      '@type': 'WebPage',
-      '@id': `${canonicalUrl}#webpage`,
-      url: canonicalUrl,
-      name: title,
-      description,
-      isPartOf: {
-        '@id': `${SITE_URL}/#website`,
-      },
-      about: {
-        '@id': `${SITE_URL}/#person`,
-      },
-      inLanguage: 'en-US',
-    },
-  ],
-});
+  ];
 
-function CustomHead({ title = '', description, keywords }) {
+  segments.forEach((segment, index) => {
+    const itemPath = segments.slice(0, index + 1).join('/');
+    items.push({
+      '@type': 'ListItem',
+      position: index + 2,
+      name: segment
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' '),
+      item: `${SITE_URL}/${itemPath}`,
+    });
+  });
+
+  return items;
+};
+
+const getSchema = ({ canonicalUrl, title, description, project }) => {
+  const breadcrumbId = `${canonicalUrl}#breadcrumb`;
+  const projectSchema = project
+    ? [
+        {
+          '@type': 'CreativeWork',
+          '@id': `${canonicalUrl}#creative-work`,
+          name: `${project.title} case study`,
+          url: canonicalUrl,
+          image: `${SITE_URL}${project.img}`,
+          dateCreated: project.date,
+          creator: {
+            '@id': `${SITE_URL}/#person`,
+          },
+          about: ['Creative development', 'Frontend development', 'Website development', 'Interactive web applications'],
+          description: project.desc.join(' '),
+        },
+      ]
+    : [];
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': `${SITE_URL}/#person`,
+        name: 'Connor Love',
+        jobTitle: 'Creative Developer & Frontend Developer',
+        url: SITE_URL,
+        image: OG_IMAGE,
+        email: 'mailto:loveconnor2005@gmail.com',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Columbus',
+          addressRegion: 'OH',
+          addressCountry: 'US',
+        },
+        areaServed: [
+          {
+            '@type': 'City',
+            name: 'Columbus',
+          },
+          {
+            '@type': 'State',
+            name: 'Ohio',
+          },
+          {
+            '@type': 'Place',
+            name: 'Northeast Ohio',
+          },
+        ],
+        knowsAbout: [
+          'Creative development',
+          'Creative developer',
+          'Website development',
+          'Frontend development',
+          'Web applications',
+          'Interactive websites',
+          'React development',
+          'Next.js development',
+          'AI product development',
+          'Generative engine optimization',
+        ],
+        knowsLanguage: 'en-US',
+        sameAs: ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'],
+      },
+      {
+        '@type': 'ProfessionalService',
+        '@id': `${SITE_URL}/#services`,
+        name: 'Connor Love Creative Development',
+        url: SITE_URL,
+        image: OG_IMAGE,
+        founder: {
+          '@id': `${SITE_URL}/#person`,
+        },
+        areaServed: ['Columbus, Ohio', 'Ohio', 'Northeast Ohio', 'United States'],
+        serviceType: ['Creative development', 'Frontend development', 'Website development', 'Interactive web applications', 'AI product interfaces'],
+        knowsAbout: ['React', 'Next.js', 'Three.js', 'TypeScript', 'AI product interfaces', 'Performance optimization'],
+        description: 'Connor Love builds custom websites, web applications, and interactive digital experiences with a focus on performance, polished interaction, and scalable frontend systems.',
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: 'Connor Love Portfolio',
+        publisher: {
+          '@id': `${SITE_URL}/#person`,
+        },
+        inLanguage: 'en-US',
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: title,
+        description,
+        isPartOf: {
+          '@id': `${SITE_URL}/#website`,
+        },
+        about: {
+          '@id': `${SITE_URL}/#person`,
+        },
+        breadcrumb: {
+          '@id': breadcrumbId,
+        },
+        mainEntity: project
+          ? {
+              '@id': `${canonicalUrl}#creative-work`,
+            }
+          : {
+              '@id': `${SITE_URL}/#services`,
+            },
+        inLanguage: 'en-US',
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': breadcrumbId,
+        itemListElement: getBreadcrumbItems(canonicalUrl),
+      },
+      ...projectSchema,
+    ],
+  };
+};
+
+function CustomHead({ title = '', description, keywords, project }) {
   const router = useRouter();
   const canonicalUrl = `${SITE_URL}${normalizePath(router.asPath)}`;
 
@@ -108,7 +176,7 @@ function CustomHead({ title = '', description, keywords }) {
         <meta httpEquiv="x-dns-prefetch-control" content="off" />
         <meta name="robots" content={process.env.NODE_ENV !== 'development' ? 'index,follow' : 'noindex,nofollow'} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="keywords" content={keywords && keywords.length ? keywords.join(',') : keywords} />
+        {keywords?.length ? <meta name="keywords" content={keywords.join(',')} /> : null}
         <meta name="author" content="Connor Love" />
         <meta name="referrer" content="no-referrer" />
         <meta name="format-detection" content="telephone=no" />
@@ -146,10 +214,24 @@ function CustomHead({ title = '', description, keywords }) {
         <meta name="theme-color" content="#f8e9cc" />
 
         {/* Schema */}
-        {/* eslint-disable-next-line react/no-danger */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getSchema({ canonicalUrl, title, description })) }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getSchema({ canonicalUrl, title, description, project })),
+          }}
+        />
       </NextHead>
-      <NextSeo title={title} description={description} canonical={canonicalUrl} openGraph={{ title, description, url: canonicalUrl, images: [{ url: OG_IMAGE }] }} />
+      <NextSeo
+        title={title}
+        description={description}
+        canonical={canonicalUrl}
+        openGraph={{
+          title,
+          description,
+          url: canonicalUrl,
+          images: [{ url: OG_IMAGE }],
+        }}
+      />
     </>
   );
 }
@@ -158,10 +240,17 @@ CustomHead.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   keywords: PropTypes.arrayOf(PropTypes.string),
+  project: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    desc: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 CustomHead.defaultProps = {
   keywords: [],
+  project: null,
 };
 
 export default CustomHead;

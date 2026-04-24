@@ -6,14 +6,14 @@ import styles from '@src/pages/projects/components/projectDetails/styles/project
 function ProjectDetails({ project }) {
   return (
     <div className={styles.root}>
-      <h3 className={clsx(styles.title, 'h3')}>{project.title}</h3>
-      <h4 className={clsx(styles.date, 'h4')}>({project.date})</h4>
+      <h1 className={clsx(styles.title, 'h3')}>{project.title}</h1>
+      <p className={clsx(styles.date, 'h4')}>({project.date})</p>
       <div className={styles.others}>
         <div className={styles.desc}>
           {project.desc.map((des, index) => (
-            <div className="p-l" key={`${project.title}-${index}`}>
+            <p className="p-l" key={`${project.title}-${index}`}>
               {des}
-            </div>
+            </p>
           ))}
         </div>
         {project.liveLink ? (
