@@ -6,10 +6,10 @@ Connor Love is a creative developer and frontend developer based in Columbus, Oh
 
 ## Site
 
-- Website: https://www.connorlove.com/
-- About: https://www.connorlove.com/about
-- Projects: https://www.connorlove.com/projects
-- Sitemap: https://www.connorlove.com/sitemap.xml
+- Website: https://connorlove.com/
+- About: https://connorlove.com/about
+- Projects: https://connorlove.com/projects
+- Sitemap: https://connorlove.com/sitemap.xml
 - Contact: loveconnor2005@gmail.com
 
 ## Services

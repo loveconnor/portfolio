@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: 'https://www.connorlove.com/',
+  siteUrl: 'https://connorlove.com/',
   generateRobotsTxt: false,
   generateIndexSitemap: false,
 };

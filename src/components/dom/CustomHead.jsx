@@ -4,8 +4,11 @@ import { NextSeo } from 'next-seo';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
-const SITE_URL = 'https://www.connorlove.com';
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://connorlove.com').replace(/\/$/, '');
+const SITE_NAME = 'Connor Love';
+const TWITTER_HANDLE = '@cando145';
 const OG_IMAGE = `${SITE_URL}/og.png`;
+const OG_IMAGE_ALT = 'Connor Love creative developer portfolio preview';
 
 const normalizePath = (path) => {
   const cleanPath = path?.split('?')[0].split('#')[0] || '/';
@@ -166,7 +169,9 @@ const getSchema = ({ canonicalUrl, title, description, project }) => {
 
 function CustomHead({ title = '', description, keywords, project }) {
   const router = useRouter();
-  const canonicalUrl = `${SITE_URL}${normalizePath(router.asPath)}`;
+  const normalizedPath = normalizePath(router.asPath);
+  const canonicalUrl = `${SITE_URL}${normalizedPath}`;
+  const openGraphType = project ? 'article' : 'website';
 
   return (
     <>
@@ -174,10 +179,13 @@ function CustomHead({ title = '', description, keywords, project }) {
         {/* General Meta Tags */}
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta httpEquiv="x-dns-prefetch-control" content="off" />
-        <meta name="robots" content={process.env.NODE_ENV !== 'development' ? 'index,follow' : 'noindex,nofollow'} />
+        <meta name="robots" content={process.env.NODE_ENV !== 'development' ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow'} />
+        <meta name="googlebot" content={process.env.NODE_ENV !== 'development' ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow'} />
+        <meta name="bingbot" content={process.env.NODE_ENV !== 'development' ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow'} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         {keywords?.length ? <meta name="keywords" content={keywords.join(',')} /> : null}
         <meta name="author" content="Connor Love" />
+        <meta name="application-name" content={SITE_NAME} />
         <meta name="referrer" content="no-referrer" />
         <meta name="format-detection" content="telephone=no" />
         <meta httpEquiv="content-language" content="en-US" />
@@ -187,11 +195,18 @@ function CustomHead({ title = '', description, keywords, project }) {
 
         {/* Canonical and Title */}
         <link rel="canonical" href={canonicalUrl} />
+        <link rel="alternate" hrefLang="en-US" href={canonicalUrl} />
+        <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
         <title>{title}</title>
 
         {/* OpenGraph Meta Tags */}
         <meta property="og:image" content={OG_IMAGE} />
-        <meta property="og:type" content="website" />
+        <meta property="og:image:secure_url" content={OG_IMAGE} />
+        <meta property="og:image:alt" content={OG_IMAGE_ALT} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:type" content={openGraphType} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonicalUrl} />
@@ -201,6 +216,9 @@ function CustomHead({ title = '', description, keywords, project }) {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={OG_IMAGE} />
+        <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
+        <meta name="twitter:site" content={TWITTER_HANDLE} />
+        <meta name="twitter:creator" content={TWITTER_HANDLE} />
 
         {/* Favicons */}
         <link rel="icon" href="/favicon.ico" />
@@ -208,7 +226,7 @@ function CustomHead({ title = '', description, keywords, project }) {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="alternate" type="text/plain" href="/llms.txt" title="AI-readable site summary" />
+        <link rel="alternate" type="text/plain" href={`${SITE_URL}/llms.txt`} title="AI-readable site summary" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#333333" />
         <meta name="msapplication-TileColor" content="#f8e9cc" />
         <meta name="theme-color" content="#f8e9cc" />
@@ -229,7 +247,15 @@ function CustomHead({ title = '', description, keywords, project }) {
           title,
           description,
           url: canonicalUrl,
-          images: [{ url: OG_IMAGE }],
+          type: openGraphType,
+          locale: 'en_US',
+          siteName: SITE_NAME,
+          images: [{ url: OG_IMAGE, alt: OG_IMAGE_ALT }],
+        }}
+        twitter={{
+          handle: TWITTER_HANDLE,
+          site: TWITTER_HANDLE,
+          cardType: 'summary_large_image',
         }}
       />
     </>
