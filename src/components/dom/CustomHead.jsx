@@ -10,6 +10,21 @@ const TWITTER_HANDLE = '@cando145';
 const OG_IMAGE = `${SITE_URL}/og.png`;
 const OG_IMAGE_ALT = 'Connor Love creative developer portfolio preview';
 
+const faqQuestions = [
+  {
+    question: 'Who is Connor Love?',
+    answer: 'Connor Love is a creative developer and frontend developer in Columbus, Ohio who builds custom websites, web applications, interactive interfaces, and AI product experiences.',
+  },
+  {
+    question: 'What services does Connor Love offer?',
+    answer: 'Connor Love offers creative development, frontend development, website development, React and Next.js implementation, interactive web experiences, and AI product interface development.',
+  },
+  {
+    question: 'Where is Connor Love based?',
+    answer: 'Connor Love is based in Columbus, Ohio and works with clients across Ohio, Northeast Ohio, and the United States.',
+  },
+];
+
 const normalizePath = (path) => {
   const cleanPath = path?.split('?')[0].split('#')[0] || '/';
   return cleanPath === '/' ? '' : cleanPath.replace(/\/$/, '');
@@ -69,11 +84,14 @@ const getSchema = ({ canonicalUrl, title, description, project }) => {
       {
         '@type': 'Person',
         '@id': `${SITE_URL}/#person`,
-        name: 'Connor Love',
+        name: SITE_NAME,
         jobTitle: 'Creative Developer & Frontend Developer',
         url: SITE_URL,
         image: OG_IMAGE,
         email: 'mailto:loveconnor2005@gmail.com',
+        worksFor: {
+          '@id': `${SITE_URL}/#organization`,
+        },
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Columbus',
@@ -103,33 +121,57 @@ const getSchema = ({ canonicalUrl, title, description, project }) => {
           'Interactive websites',
           'React development',
           'Next.js development',
-          'AI product development',
-          'Generative engine optimization',
+          'Product interface development',
+          'Structured data and search visibility',
         ],
         knowsLanguage: 'en-US',
         sameAs: ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'],
       },
       {
-        '@type': 'ProfessionalService',
-        '@id': `${SITE_URL}/#services`,
-        name: 'Connor Love Creative Development',
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: SITE_NAME,
+        legalName: SITE_NAME,
+        alternateName: 'Connor Love Creative Development',
         url: SITE_URL,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${SITE_URL}/icon.png`,
+        },
         image: OG_IMAGE,
+        email: 'mailto:loveconnor2005@gmail.com',
         founder: {
           '@id': `${SITE_URL}/#person`,
         },
+        sameAs: ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'],
+      },
+      {
+        '@type': 'ProfessionalService',
+        '@id': `${SITE_URL}/#services`,
+        name: SITE_NAME,
+        alternateName: 'Connor Love Creative Development',
+        url: SITE_URL,
+        image: OG_IMAGE,
+        logo: `${SITE_URL}/icon.png`,
+        founder: {
+          '@id': `${SITE_URL}/#person`,
+        },
+        provider: {
+          '@id': `${SITE_URL}/#organization`,
+        },
         areaServed: ['Columbus, Ohio', 'Ohio', 'Northeast Ohio', 'United States'],
-        serviceType: ['Creative development', 'Frontend development', 'Website development', 'Interactive web applications', 'AI product interfaces'],
-        knowsAbout: ['React', 'Next.js', 'Three.js', 'TypeScript', 'AI product interfaces', 'Performance optimization'],
+        serviceType: ['Creative development', 'Frontend development', 'Website development', 'Interactive web applications', 'Product interfaces'],
+        knowsAbout: ['React', 'Next.js', 'Three.js', 'TypeScript', 'Product interfaces', 'Performance optimization'],
         description: 'Connor Love builds custom websites, web applications, and interactive digital experiences with a focus on performance, polished interaction, and scalable frontend systems.',
       },
       {
         '@type': 'WebSite',
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
-        name: 'Connor Love Portfolio',
+        name: SITE_NAME,
+        alternateName: 'Connor Love Portfolio',
         publisher: {
-          '@id': `${SITE_URL}/#person`,
+          '@id': `${SITE_URL}/#organization`,
         },
         inLanguage: 'en-US',
       },
@@ -141,6 +183,12 @@ const getSchema = ({ canonicalUrl, title, description, project }) => {
         description,
         isPartOf: {
           '@id': `${SITE_URL}/#website`,
+        },
+        author: {
+          '@id': `${SITE_URL}/#person`,
+        },
+        publisher: {
+          '@id': `${SITE_URL}/#organization`,
         },
         about: {
           '@id': `${SITE_URL}/#person`,
@@ -161,6 +209,68 @@ const getSchema = ({ canonicalUrl, title, description, project }) => {
         '@type': 'BreadcrumbList',
         '@id': breadcrumbId,
         itemListElement: getBreadcrumbItems(canonicalUrl),
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${canonicalUrl}#faq`,
+        mainEntity: faqQuestions.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      },
+      {
+        '@type': 'HowTo',
+        '@id': `${canonicalUrl}#process`,
+        name: 'How Connor Love approaches a web development project',
+        description: 'A practical overview of how Connor Love plans, designs, builds, and optimizes custom websites, web applications, and product interfaces.',
+        step: [
+          {
+            '@type': 'HowToStep',
+            name: 'Clarify the product goal',
+            text: 'Define the audience, business goal, required content, technical constraints, and core user workflows.',
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Design the interface system',
+            text: 'Plan responsive layouts, reusable components, interaction states, accessibility needs, and visual details.',
+          },
+          {
+            '@type': 'HowToStep',
+            name: 'Build and optimize the experience',
+            text: 'Implement the site or application with semantic HTML, structured data, performance-minded frontend code, and clear content.',
+          },
+        ],
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${canonicalUrl}#services-list`,
+        name: 'Connor Love services',
+        itemListElement: ['Creative development', 'Frontend development', 'Website development', 'Interactive web applications', 'Product interfaces'].map((name, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name,
+        })),
+      },
+      {
+        '@type': 'Article',
+        '@id': `${canonicalUrl}#article`,
+        headline: title,
+        description,
+        image: OG_IMAGE,
+        author: {
+          '@id': `${SITE_URL}/#person`,
+        },
+        publisher: {
+          '@id': `${SITE_URL}/#organization`,
+        },
+        mainEntityOfPage: {
+          '@id': `${canonicalUrl}#webpage`,
+        },
+        inLanguage: 'en-US',
       },
       ...projectSchema,
     ],

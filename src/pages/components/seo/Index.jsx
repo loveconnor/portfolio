@@ -2,48 +2,67 @@ import clsx from 'clsx';
 import styles from '@src/pages/components/seo/styles/seo.module.scss';
 import PropTypes from 'prop-types';
 
+const defaultServices = [
+  {
+    title: 'Creative development',
+    text: 'Interactive websites, motion systems, and details that make interfaces feel intentional.',
+  },
+  {
+    title: 'Frontend systems',
+    text: 'React, Next.js, responsive layouts, reusable components, and maintainable architecture.',
+  },
+  {
+    title: 'Product interfaces',
+    text: 'Dashboards, learning tools, workflow products, design systems, and rich content rendering.',
+  },
+  {
+    title: 'Performance',
+    text: 'Fast pages, semantic HTML, structured content, and frontend code that can scale.',
+  },
+];
+
 const content = {
   home: {
-    eyebrow: 'Creative development, frontend systems, and AI product interfaces',
-    heading: 'Websites and web apps built for people, search, and AI discovery.',
-    subheading: 'What I build',
+    eyebrow: 'Creative development, frontend systems, and product interfaces',
+    heading: 'What I do',
+    subheading: 'Creative systems for the web.',
     paragraphs: [
-      'I am Connor Love, a creative developer in Columbus, Ohio building custom websites, interactive web applications, and product interfaces with React, Next.js, Three.js, and modern frontend tooling. My work focuses on clear structure, fast performance, accessible interaction, and polished details that make digital products easier to use and easier to understand.',
-      'I work across creative development, website development, frontend engineering, and AI product interfaces. Recent projects include component systems, AI chat platforms, learning tools, typeface systems, and secure developer infrastructure. Each project is designed with durable content, semantic HTML, metadata, and structured data so search engines and generative engines can identify who the site represents, what services are offered, where the work is based, and which projects best demonstrate the work.',
-      'For clients and collaborators in Columbus, Ohio, Northeast Ohio, and across the United States, I focus on practical implementation: responsive layouts, reusable components, readable content, fast page loading, and stable frontend architecture that can support long-term product growth.',
+      'I build custom websites, interactive web applications, and product interfaces with React, Next.js, Three.js, and modern frontend tooling.',
+      'My work sits between design and engineering: clear structure, strong performance, accessible interaction, and polished details that make digital products easier to use and easier to maintain.',
     ],
+    services: defaultServices,
   },
   about: {
     eyebrow: 'About Connor Love and the development practice',
-    heading: 'Creative development grounded in performance, usability, and clear technical structure.',
-    subheading: 'How I approach web projects',
+    heading: 'How I work',
+    subheading: 'Built with structure, motion, and intent.',
     paragraphs: [
       'My work combines frontend engineering, interaction design, and product thinking. I build web applications and marketing sites that need to feel polished while still being easy to maintain, measure, and extend.',
-      'The technical foundation usually includes React, Next.js, structured content, accessible HTML, thoughtful animation, and performance-minded implementation. I care about how a site feels to use, but I also care that the markup, metadata, and page copy explain the work clearly to search engines, AI assistants, and people evaluating the site.',
-      'I am based in Columbus, Ohio and work with clients, startups, and product teams that need custom websites, interactive interfaces, AI product experiences, and frontend systems that can scale beyond a first version.',
+      'The technical foundation usually includes React, Next.js, structured content, accessible HTML, thoughtful animation, and performance-minded implementation.',
     ],
+    services: defaultServices,
   },
   projects: {
     eyebrow: 'Creative development portfolio and case studies',
-    heading: 'Selected web applications, AI tools, design systems, and interactive product experiences.',
-    subheading: 'What these projects show',
+    heading: 'What the work shows',
+    subheading: 'Selected systems, tools, and interfaces.',
     paragraphs: [
-      'The projects in this portfolio show how I approach product interfaces from both the design and engineering sides. Each project focuses on a specific problem: reusable UI systems, AI chat workflows, personalized learning, typography for digital products, or secure API infrastructure.',
-      'Across the work, the common thread is frontend quality. I build responsive interfaces, component systems, animation, data-driven UI, and product experiences with enough structure for people, search engines, and AI systems to understand what each project does and why it matters.',
-      'These case studies represent creative development and website development work from Columbus, Ohio, with an emphasis on React, Next.js, TypeScript, Three.js, AI interfaces, design systems, performance, and maintainable product architecture.',
+      'The projects in this portfolio show how I approach product interfaces from both the design and engineering sides. Each project focuses on a specific problem: reusable UI systems, chat workflows, personalized learning, typography for digital products, or secure API infrastructure.',
+      'Across the work, the common thread is frontend quality: responsive interfaces, component systems, animation, data-driven UI, and maintainable product architecture.',
     ],
+    services: defaultServices,
   },
 };
 
 const getProjectContent = (project) => ({
   eyebrow: `${project.title} case study`,
-  heading: `${project.title} is a ${project.date} creative development project by Connor Love.`,
+  heading: `${project.title}, built with intent.`,
   subheading: 'Project focus',
   paragraphs: [
-    `${project.title} is part of Connor Love's creative development portfolio, showing frontend engineering, product interface design, and modern web application implementation from a Columbus, Ohio developer.`,
+    `${project.title} is part of my creative development portfolio. It shows how I approach frontend engineering, product interface design, and modern web application implementation from Columbus, Ohio.`,
     ...project.desc,
-    `The project demonstrates practical experience with structured product thinking, responsive interface development, and clear technical presentation for users, search engines, and AI discovery systems evaluating Connor Love's work.`,
   ],
+  services: defaultServices,
 });
 
 function SeoContent({ variant = 'home', project }) {
@@ -64,6 +83,17 @@ function SeoContent({ variant = 'home', project }) {
             {paragraph}
           </p>
         ))}
+        <div className={styles.extractableContent}>
+          <h3 className="h4">Core services</h3>
+          <ul className={styles.list}>
+            {selectedContent.services.map((service) => (
+              <li key={service.title}>
+                <span className="h6">{service.title}</span>
+                <p className="p-l">{service.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
