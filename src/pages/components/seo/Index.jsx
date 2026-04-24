@@ -29,6 +29,7 @@ const content = {
     paragraphs: [
       'I build custom websites, interactive web applications, and product interfaces with React, Next.js, Three.js, and modern frontend tooling.',
       'My work sits between design and engineering: clear structure, strong performance, accessible interaction, and polished details that make digital products easier to use and easier to maintain.',
+      'I care about the full shape of a build, from the first layout pass to the final production details. That means clean components, readable content, purposeful motion, responsive behavior, and code that can keep moving after launch.',
     ],
     services: defaultServices,
   },

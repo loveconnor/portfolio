@@ -25,6 +25,24 @@ const faqQuestions = [
   },
 ];
 
+const serviceTableRows = [
+  {
+    service: 'Creative development',
+    scope: 'Interactive websites, animation, motion systems, and polished product moments',
+    value: 'Motion and interaction are used to make the work feel intentional without losing clarity, structure, or performance.',
+  },
+  {
+    service: 'Frontend systems',
+    scope: 'React, Next.js, responsive layouts, reusable components, and application architecture',
+    value: 'Structured interfaces are easier to use, maintain, scale, and explain.',
+  },
+  {
+    service: 'Product interfaces',
+    scope: 'Dashboards, learning tools, workflow products, design systems, and rich content rendering',
+    value: 'Product functionality is connected to clear interface decisions, durable content, and practical implementation details.',
+  },
+];
+
 const normalizePath = (path) => {
   const cleanPath = path?.split('?')[0].split('#')[0] || '/';
   return cleanPath === '/' ? '' : cleanPath.replace(/\/$/, '');
@@ -203,6 +221,11 @@ const getSchema = ({ canonicalUrl, title, description, project }) => {
           : {
               '@id': `${SITE_URL}/#services`,
             },
+        hasPart: [
+          {
+            '@id': `${canonicalUrl}#service-table`,
+          },
+        ],
         inLanguage: 'en-US',
       },
       {
@@ -253,6 +276,35 @@ const getSchema = ({ canonicalUrl, title, description, project }) => {
           '@type': 'ListItem',
           position: index + 1,
           name,
+        })),
+      },
+      {
+        '@type': 'Table',
+        '@id': `${canonicalUrl}#service-table`,
+        name: 'Connor Love service focus table',
+        about: {
+          '@id': `${SITE_URL}/#services`,
+        },
+        description: 'A structured table summarizing Connor Love service categories, project scope, and practical value.',
+        mainEntity: serviceTableRows.map((row) => ({
+          '@type': 'Thing',
+          name: row.service,
+          description: `${row.scope}. ${row.value}`,
+        })),
+      },
+      {
+        '@type': 'Dataset',
+        '@id': `${canonicalUrl}#service-dataset`,
+        name: 'Connor Love service focus dataset',
+        description: 'Structured service data for creative development, frontend systems, and product interface work.',
+        creator: {
+          '@id': `${SITE_URL}/#person`,
+        },
+        variableMeasured: ['Service', 'Scope', 'Why it matters'],
+        about: serviceTableRows.map((row) => ({
+          '@type': 'DefinedTerm',
+          name: row.service,
+          description: `${row.scope}. ${row.value}`,
         })),
       },
       {
