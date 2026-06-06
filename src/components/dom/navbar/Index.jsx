@@ -1,4 +1,5 @@
 import ButtonLink from '@src/components/animationComponents/buttonLink/Index';
+import { BOOK_CALL_URL } from '@src/constants/contact';
 import Link from 'next/link';
 import MenuButton from '@src/components/dom/navbar/components/MenuButton';
 import MenuLinks from '@src/components/dom/navbar/components/MenuLinks';
@@ -48,7 +49,7 @@ function Navbar() {
           </Link>
 
           <div className={styles.rightContainer}>
-            {!isMobile && <ButtonLink href="mailto:loveconnor2005@gmail.com" label="GET IN TOUCH" />}
+            {!isMobile && <ButtonLink href={BOOK_CALL_URL} label="BOOK A CALL" target />}
             <MenuButton />
           </div>
         </div>

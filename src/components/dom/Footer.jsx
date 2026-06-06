@@ -1,4 +1,5 @@
 import AppearTitle from '@src/components/animationComponents/appearTitle/Index';
+import { CONTACT_EMAIL } from '@src/constants/contact';
 import LinkText from '@src/components/animationComponents/linkText/Index';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import clsx from 'clsx';
@@ -26,12 +27,12 @@ function Footer() {
 
   const handleEmailClick = (event) => {
     event.preventDefault();
-    const mailto = 'mailto:loveconnor2005@gmail.com';
+    const mailto = `mailto:${CONTACT_EMAIL}`;
     window.location.assign(mailto);
 
     window.setTimeout(() => {
       if (document.visibilityState === 'visible') {
-        window.location.assign('https://mail.google.com/mail/?view=cm&fs=1&to=loveconnor2005%40gmail.com');
+        window.location.assign(`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT_EMAIL)}`);
       }
     }, 700);
   };
@@ -126,8 +127,8 @@ function Footer() {
           <p className={clsx(styles.workWithMe, 'h4')}>Work With Me:</p>
           <div>
             <div className={styles.link}>
-              <a aria-label="Send email" href="mailto:loveconnor2005@gmail.com" onClick={handleEmailClick}>
-                <span className={clsx(styles.email, 'h4')}>loveconnor2005@gmail.com</span>
+              <a aria-label="Send email" href={`mailto:${CONTACT_EMAIL}`} onClick={handleEmailClick}>
+                <span className={clsx(styles.email, 'h4')}>{CONTACT_EMAIL}</span>
               </a>
               {/* class="link__graphic link__graphic--slide" */}
               <svg className={clsx(styles.linkGraphic)} width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">

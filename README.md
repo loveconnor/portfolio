@@ -287,7 +287,7 @@ Current active projects:
 
 - Left: brand text (`CONNOR`) linking home
 - Right:
-  - desktop "GET IN TOUCH" mailto button
+  - desktop "BOOK A CALL" Cal.com button
   - menu button
 
 ### Menu Overlay
@@ -296,7 +296,7 @@ Contains:
 
 - Main links (Home, About me, Projects, Contact)
 - Featured project links
-- Email contact link
+- Book a call link
 - Social links
 
 Special behavior:
@@ -470,4 +470,3 @@ This portfolio is considered healthy when:
 - Menu opens/closes cleanly and contact actions work
 - Footer and pre-footer interactions behave correctly on desktop and mobile
 - Build, lint, and sitemap generation pass
-

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 
+import { BOOK_CALL_URL } from '@src/constants/contact';
 import Link from 'next/link';
 import clsx from 'clsx';
 import footerLinks from '@src/components/dom/navbar/constants/footerLinks';
@@ -114,21 +115,6 @@ function MenuLinks() {
     }, 850);
   };
 
-  const handleGetInTouchClick = (event) => {
-    event.preventDefault();
-    setIsMenuOpen(false);
-    lenis?.start?.();
-
-    const mailto = 'mailto:loveconnor2005@gmail.com';
-    window.location.assign(mailto);
-
-    window.setTimeout(() => {
-      if (document.visibilityState === 'visible') {
-        window.location.assign('https://mail.google.com/mail/?view=cm&fs=1&to=loveconnor2005%40gmail.com');
-      }
-    }, 700);
-  };
-
   const l1 = menuLinks.length;
   const l2 = projectsLinks.length;
 
@@ -207,8 +193,17 @@ function MenuLinks() {
             }}
             className={styles.menuListItem}
           >
-            <a aria-label="Send email" href="mailto:loveconnor2005@gmail.com" onClick={handleGetInTouchClick}>
-              <span>GET IN TOUCH</span>
+            <a
+              aria-label="Book a call"
+              href={BOOK_CALL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                setIsMenuOpen(false);
+                lenis?.start?.();
+              }}
+            >
+              <span>BOOK A CALL</span>
             </a>
           </div>
         </div>
