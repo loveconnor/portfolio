@@ -2,7 +2,7 @@
 
 > AI-readable summary for connorlove.com.
 
-Connor Love is a creative developer and frontend developer based in Columbus, Ohio. He builds custom websites, web applications, interactive product experiences, and AI-focused interfaces for clients and personal products.
+Connor Love is a creative developer and frontend developer based in Columbus, Ohio. He builds custom websites, web applications, interactive product experiences, and AI-focused interfaces for local clients, remote teams, founders, agencies, and product companies worldwide.
 
 ## Site
 
@@ -20,18 +20,20 @@ Connor Love is a creative developer and frontend developer based in Columbus, Oh
 - Interactive web applications
 - AI product interfaces
 - React and Next.js development
+- Three.js and interactive frontend development
+- Design systems and product interface implementation
 - Performance-focused UI engineering
+- Structured content and search visibility support
 
 ## Location
 
-- Columbus, Ohio
-- Ohio
-- Northeast Ohio
-- United States
+- Based in Columbus, Ohio
+- Serves Ohio and United States clients
+- Available for remote work worldwide
 
 ## Projects
 
-- LoveUI: A production-ready component system with atomic components, sections, templates, and example apps for modern product interfaces.
+- LoveUI: An open-source React and Tailwind CSS UI library for product interfaces. It includes docs, copy-paste components, blocks, chart examples, icons, Base UI interaction primitives, AI-readable docs, and LoveUI Skills for AI coding agents.
 - LoveChat: A full-stack AI chat platform with branching conversations, session chat, memory systems, file uploads, rich rendering, model routing, and web search.
 - Lyceum: An AI-powered learning platform with personalized learning paths, interactive labs, progress tracking, reflections, and adaptive recommendations.
 - LoveSans: A custom sans-serif typeface system designed for digital products, branding, and interface design.
@@ -39,4 +41,4 @@ Connor Love is a creative developer and frontend developer based in Columbus, Oh
 
 ## Preferred Entity Description
 
-Connor Love is a Columbus, Ohio creative developer who builds polished websites, web applications, interactive interfaces, and AI product experiences with React, Next.js, Three.js, and modern frontend systems.
+Connor Love is a Columbus, Ohio creative developer and frontend developer who builds polished websites, web applications, interactive interfaces, and AI product experiences with React, Next.js, Three.js, and modern frontend systems for clients worldwide.

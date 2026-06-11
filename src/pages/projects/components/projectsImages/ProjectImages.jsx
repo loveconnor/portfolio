@@ -10,6 +10,7 @@ import useIsMobile from '@src/hooks/useIsMobile';
 
 function ProjectImages({ project }) {
   const isMobile = useIsMobile();
+  const getAltText = useCallback((title, index) => `${title} project interface screenshot ${index + 1} from Connor Love's creative development portfolio`, []);
 
   const renderMediaContainer = useCallback(
     ({ tag, src, isRight, index, title }) => {
@@ -24,28 +25,33 @@ function ProjectImages({ project }) {
       }
       if (tag === 'small') {
         return (
-          <div style={{ gridColumn: !isMobile ? (!isRight ? '1 / 9' : ' 9 / 17') : !isRight ? '1 / 4' : ' 4 / 7' }} className={styles.imageContainer}>
-            <Image priority sizes="100%" src={src} fill alt={`Image-${title}-${index}`} />
+          <div
+            style={{
+              gridColumn: !isMobile ? (!isRight ? '1 / 9' : ' 9 / 17') : !isRight ? '1 / 4' : ' 4 / 7',
+            }}
+            className={styles.imageContainer}
+          >
+            <Image priority sizes="100%" src={src} fill alt={getAltText(title, index)} />
           </div>
         );
       }
       if (tag === 'big') {
         return (
           <div className={styles.bigContainer}>
-            <Image priority sizes="100%" src={src} fill alt={`Image-${title}-${index}`} />
+            <Image priority sizes="100%" src={src} fill alt={getAltText(title, index)} />
           </div>
         );
       }
       if (tag === 'medium') {
         return (
           <div className={styles.mediumContainer}>
-            <Image priority sizes="100%" src={src} fill alt={`Image-${title}-${index}`} />
+            <Image priority sizes="100%" src={src} fill alt={getAltText(title, index)} />
           </div>
         );
       }
       return null;
     },
-    [isMobile],
+    [getAltText, isMobile],
   );
 
   return (

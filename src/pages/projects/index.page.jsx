@@ -17,30 +17,22 @@ import { useStore } from '@src/store';
 import { useWindowSize } from '@darkroom.engineering/hamo';
 
 const seo = {
-  title: 'Projects | Connor Love Creative Developer Portfolio',
-  description:
-    'Explore creative development and website development projects by Connor Love, a Columbus, Ohio developer building responsive websites, web applications, and interactive product experiences.',
+  title: 'Creative Development Projects & Case Studies | Connor Love',
+  description: 'Explore Connor Love projects across creative development, React and Next.js apps, AI product interfaces, design systems, and interactive web experiences.',
   keywords: [
     'Connor Love Projects',
-    'Portfolio Showcase',
     'Creative Developer Portfolio',
     'Creative Development Projects',
     'Frontend Development Examples',
-    'Web Design Portfolio',
-    'Responsive Web Projects',
     'Web Applications Portfolio',
-    'Website Development',
-    'HTML and CSS Projects',
-    'JavaScript Development',
+    'Product Interface Case Studies',
+    'AI Product Interface Portfolio',
     'React Work',
     'Next.js Projects',
     'React Three Fiber Projects',
-    'Electron Projects',
-    'Professional Web Development',
+    'Design System Projects',
+    'Remote Creative Developer',
     'Columbus Ohio',
-    'Ohio',
-    'Northeast Ohio',
-    'Ohio State',
   ],
 };
 
@@ -87,7 +79,7 @@ function Page() {
 
   return (
     <>
-      <CustomHead {...seo} />
+      <CustomHead {...seo} pageType="projects" />
       <section className={clsx(styles.titleContainer, 'layout-block-inner')}>
         <h1 className={clsx(styles.title, 'h1')}>All Projects</h1>
       </section>

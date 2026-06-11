@@ -4,13 +4,15 @@ import clsx from 'clsx';
 import styles from '@src/pages/projects/components/projectDetails/styles/projectDetails.module.scss';
 
 function ProjectDetails({ project }) {
+  const intro = project.intro || project.desc;
+
   return (
     <div className={styles.root}>
       <h1 className={clsx(styles.title, 'h3')}>{project.title}</h1>
       <p className={clsx(styles.date, 'h4')}>({project.date})</p>
       <div className={styles.others}>
         <div className={styles.desc}>
-          {project.desc.map((des, index) => (
+          {intro.map((des, index) => (
             <p className="p-l" key={`${project.title}-${index}`}>
               {des}
             </p>

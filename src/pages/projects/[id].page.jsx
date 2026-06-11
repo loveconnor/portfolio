@@ -52,8 +52,10 @@ function Page({ id }) {
 
   const seo = useMemo(
     () => ({
-      title: `${currentProject.title} Case Study | Connor Love Creative Developer`,
-      description: `${currentProject.title} is a creative development case study by Connor Love, a Columbus, Ohio frontend developer building polished websites, web applications, and AI product experiences.`,
+      title: currentProject.seoTitle || `${currentProject.title} Case Study | Connor Love Creative Developer`,
+      description:
+        currentProject.seoDescription ||
+        `${currentProject.title} is a creative development case study by Connor Love, a Columbus-based frontend developer building websites, web apps, and AI product interfaces for clients worldwide.`,
       keywords: [
         `${currentProject.title} project`,
         `${currentProject.title} development`,
@@ -65,10 +67,11 @@ function Page({ id }) {
         `Website development ${currentProject.title}`,
         `Responsive design ${currentProject.title}`,
         `User interactions ${currentProject.title}`,
+        `AI product interface ${currentProject.title}`,
+        'Remote frontend developer',
+        'Worldwide creative developer',
         'Columbus Ohio',
-        'Ohio',
-        'Northeast Ohio',
-        'Ohio State',
+        ...(currentProject.seoKeywords || []),
       ],
     }),
     [currentProject],
@@ -76,7 +79,7 @@ function Page({ id }) {
 
   return (
     <>
-      <CustomHead {...seo} project={currentProject} />
+      <CustomHead {...seo} pageType="projects" project={currentProject} />
       <section className={clsx(styles.root, 'layout-grid-inner')}>
         <div ref={leftContainerRef} className={styles.leftContainer}>
           <ProjectDetails project={currentProject} />

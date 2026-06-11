@@ -7,35 +7,27 @@ import CustomHead from '@src/components/dom/CustomHead';
 import SeoContent from '@src/pages/components/seo/Index';
 
 const seo = {
-  title: 'About Connor Love | Creative Developer in Columbus, Ohio',
-  description:
-    'Learn about Connor Love, a creative developer from Columbus, Ohio, focused on creative development, website development, and polished digital experiences across Ohio and Northeast Ohio.',
+  title: 'About Connor Love | Creative Developer & Frontend Engineer',
+  description: 'Learn about Connor Love, a Columbus-based creative developer building fast websites, web applications, and product interfaces for local and remote teams worldwide.',
   keywords: [
     'Connor Love',
     'About Connor Love',
-    'About me',
     'Creative Developer',
     'Creative Development',
-    'Frontend Developer Journey',
-    'Web Developer Story',
-    'Professional Web Development',
+    'Frontend Engineer',
+    'Remote Frontend Developer',
     'Website Development',
-    'Frontend Development Expertise',
-    'Web Design Skills',
-    'Web Development Services',
-    'Web Design Expertise',
-    'Developer Profile',
-    'Quality Web Solutions',
+    'Product Interface Development',
+    'React Developer',
+    'Next.js Developer',
     'Columbus Ohio',
-    'Ohio',
-    'Northeast Ohio',
-    'Ohio State',
+    'Worldwide Web Developer',
   ],
 };
 function Page() {
   return (
     <>
-      <CustomHead {...seo} />
+      <CustomHead {...seo} pageType="about" />
 
       <Hero />
       <Overview />

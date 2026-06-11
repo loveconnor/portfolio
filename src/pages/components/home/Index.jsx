@@ -223,8 +223,19 @@ function Home() {
   };
 
   const renderRects = useMemo(
-    // eslint-disable-next-line no-return-assign
-    () => initialPositions.map(({ index, x, y }) => <rect key={index} ref={(ref) => (rectRefs.current[index] = ref)} x={x} y={y} width={`${gridWidth}%`} height={`${gridHeight}%`} />),
+    () =>
+      initialPositions.map(({ index, x, y }) => (
+        <rect
+          key={index}
+          ref={(ref) => {
+            rectRefs.current[index] = ref;
+          }}
+          x={x}
+          y={y}
+          width={`${gridWidth}%`}
+          height={`${gridHeight}%`}
+        />
+      )),
     [initialPositions, gridWidth, gridHeight],
   );
 
@@ -233,11 +244,12 @@ function Home() {
       <div className={clsx(styles.topContainer, 'layout-grid-inner')}>
         <div className={styles.leftContainer}>
           <h1 className="h2">Creative Developer</h1>
-          <h2 className={clsx('h2', 'bold')}>in Columbus, Ohio</h2>
+          <h2 className={clsx('h2', 'bold')}>for web products worldwide</h2>
         </div>
         {!isMobile && (
           <p className={clsx('h6', styles.rightContainer)}>
-            I design and develop fast, interactive websites and web applications for Columbus, Ohio and Northeast Ohio with a focus on performance, detail, and intentional user experience.
+            I design and develop fast, interactive websites and web applications from Columbus, Ohio for teams across the United States and worldwide, with a focus on performance, detail, and
+            intentional user experience.
           </p>
         )}
       </div>
@@ -258,7 +270,8 @@ function Home() {
       {isMobile && (
         <div className={styles.rightContainerMobile}>
           <p className="h6">
-            I design and develop fast, interactive websites and web applications for Columbus, Ohio and Northeast Ohio with a focus on performance, detail, and intentional user experience.
+            I design and develop fast, interactive websites and web applications from Columbus, Ohio for teams across the United States and worldwide, with a focus on performance, detail, and
+            intentional user experience.
           </p>
         </div>
       )}

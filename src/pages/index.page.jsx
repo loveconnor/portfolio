@@ -8,52 +8,34 @@ import CustomHead from '@src/components/dom/CustomHead';
 import SeoContent from '@src/pages/components/seo/Index';
 
 const seo = {
-  title: 'Creative Developer in Columbus, Ohio | Connor Love',
-  description:
-    'Connor Love is a creative developer in Columbus, Ohio building custom websites, web apps, and interactive digital experiences for brands and clients across Columbus, Ohio, and Northeast Ohio.',
+  title: 'Creative Developer for Websites & Product Interfaces | Connor Love',
+  description: 'Connor Love is a Columbus, Ohio creative developer building custom websites, web apps, interactive interfaces, and AI product experiences for clients worldwide.',
   keywords: [
     'Connor Love',
-    'Portfolio',
     'Creative Developer',
     'Creative Developer Columbus Ohio',
-    'Creative Developer Ohio',
+    'Remote Creative Developer',
+    'Global Creative Developer',
     'Creative Development',
     'Frontend Developer',
     'Frontend Engineer',
-    'Web Development',
-    'Website Development',
-    'Website Development Columbus Ohio',
-    'Website Developer Columbus Ohio',
     'React Developer',
-    'Developer',
+    'Next.js Developer',
+    'Product Interface Developer',
+    'AI Product Interfaces',
+    'Website Development Columbus Ohio',
     'Web Applications',
-    'Responsive Design',
-    'Progressive Web Apps',
-    'Freelance Developer',
-    'Modern Web Development',
-    'Cross-Platform Development',
-    'Ohio Web Developer',
+    'Interactive Websites',
+    'Freelance Frontend Developer',
     'Columbus Ohio',
-    'Columbus Ohio Developer',
-    'Columbus Creative Developer',
-    'Ohio',
-    'Northeast Ohio',
-    'Northeast Ohio Developer',
-    'JavaScript',
-    'Typescript',
-    'Next.js',
-    'React',
-    'React Native',
-    'Electron js',
-    'HTML',
-    'CSS',
+    'Worldwide Web Developer',
   ],
 };
 
 function Page() {
   return (
     <>
-      <CustomHead {...seo} />
+      <CustomHead {...seo} pageType="home" />
       <Home />
       <About />
       <Clients />
