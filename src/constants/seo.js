@@ -6,26 +6,30 @@ export const TWITTER_HANDLE = '@cando145';
 
 export const OG_IMAGE = `${SITE_URL}/og.png`;
 
-export const OG_IMAGE_ALT = 'Connor Love creative developer portfolio preview';
+export const OG_IMAGE_ALT = 'Connor Love Ohio web developer portfolio preview';
 
 export const sameAsProfiles = ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'];
 
 export const serviceFocus = [
   {
-    title: 'Creative development',
-    text: 'Interactive websites, motion systems, 3D web experiences, and polished details that make interfaces feel intentional.',
+    title: 'Web development',
+    text: 'Custom websites, web applications, and marketing pages built for Ohio businesses, Columbus teams, and remote clients.',
   },
   {
-    title: 'Frontend systems',
-    text: 'React, Next.js, responsive layouts, reusable components, semantic HTML, and maintainable application architecture.',
+    title: 'Frontend development',
+    text: 'React, Next.js, responsive layouts, reusable components, semantic HTML, and maintainable frontend architecture.',
+  },
+  {
+    title: 'Creative development',
+    text: 'Interactive websites, motion systems, 3D web experiences, and polished details that make interfaces feel intentional.',
   },
   {
     title: 'Product interfaces',
     text: 'Dashboards, learning tools, AI chat products, workflow software, design systems, and rich content rendering.',
   },
   {
-    title: 'Performance and search visibility',
-    text: 'Fast pages, structured content, accessible interaction, crawlable content, and frontend code that can scale after launch.',
+    title: 'SEO, AEO, and GEO foundations',
+    text: 'Fast pages, structured data, answer-ready content, AI-readable summaries, accessible interaction, and crawlable frontend code.',
   },
 ];
 
@@ -35,8 +39,32 @@ export const serviceAreas = [
     name: 'Columbus',
   },
   {
+    '@type': 'Place',
+    name: 'Central Ohio',
+  },
+  {
     '@type': 'State',
     name: 'Ohio',
+  },
+  {
+    '@type': 'City',
+    name: 'Cleveland',
+  },
+  {
+    '@type': 'City',
+    name: 'Cincinnati',
+  },
+  {
+    '@type': 'City',
+    name: 'Dayton',
+  },
+  {
+    '@type': 'City',
+    name: 'Toledo',
+  },
+  {
+    '@type': 'City',
+    name: 'Akron',
   },
   {
     '@type': 'Country',
@@ -52,22 +80,29 @@ export const faqContent = {
   home: [
     {
       question: 'Who is Connor Love?',
-      answer: 'Connor Love is a creative developer and frontend developer based in Columbus, Ohio. He builds custom websites, web applications, interactive interfaces, and AI product experiences.',
+      answer:
+        'Connor Love is a web developer, creative developer, and frontend developer based in Columbus, Ohio. He builds custom websites, web applications, interactive interfaces, and AI product experiences.',
+    },
+    {
+      question: 'Is Connor Love a web developer in Ohio?',
+      answer:
+        'Yes. Connor is an Ohio web developer based in Columbus who builds websites and web applications for clients in Columbus, across Ohio, throughout the United States, and remotely worldwide.',
     },
     {
       question: 'Does Connor Love work with clients outside Ohio?',
-      answer: 'Yes. Connor is based in Columbus, Ohio and works remotely with clients, founders, agencies, and product teams across the United States and worldwide.',
+      answer: 'Yes. Connor is based in Columbus, Ohio and works remotely with clients, founders, agencies, businesses, and product teams across Ohio, the United States, and worldwide.',
     },
     {
       question: 'What services does Connor Love offer?',
       answer:
-        'Connor offers creative development, frontend development, React and Next.js implementation, interactive web experiences, product interface development, and performance-focused UI engineering.',
+        'Connor offers web development, website development, frontend development, React and Next.js implementation, interactive web experiences, product interface development, SEO foundations, AEO/GEO-friendly structured content, and performance-focused UI engineering.',
     },
   ],
   about: [
     {
       question: 'What kind of developer is Connor Love?',
-      answer: 'Connor is a creative developer who works across frontend engineering, interaction design, product interfaces, animation, and production web implementation.',
+      answer:
+        'Connor is an Ohio web developer and creative developer who works across frontend engineering, website development, interaction design, product interfaces, animation, and production web implementation.',
     },
     {
       question: 'How does Connor Love approach projects?',
@@ -75,7 +110,7 @@ export const faqContent = {
     },
     {
       question: 'Where can Connor Love work from?',
-      answer: 'Connor is located in Columbus, Ohio and can work with local teams, United States clients, and international teams remotely.',
+      answer: 'Connor is located in Columbus, Ohio and can work with local Columbus teams, clients across Ohio, United States clients, and international teams remotely.',
     },
   ],
   projects: [
@@ -89,7 +124,7 @@ export const faqContent = {
     },
     {
       question: 'Can Connor Love build similar projects for global clients?',
-      answer: 'Yes. Connor builds websites, web applications, and product interfaces for Columbus, Ohio clients as well as remote teams across the United States and worldwide.',
+      answer: 'Yes. Connor builds websites, web applications, and product interfaces for Columbus clients, Ohio businesses, and remote teams across the United States and worldwide.',
     },
   ],
 };
@@ -110,7 +145,7 @@ export const getProjectFaqs = (project) => {
     },
     {
       question: 'Can Connor Love build similar work for clients worldwide?',
-      answer: 'Yes. Connor is based in Columbus, Ohio and works with remote clients and teams across the United States and worldwide.',
+      answer: 'Yes. Connor is a web developer based in Columbus, Ohio and works with Ohio clients, remote teams across the United States, and clients worldwide.',
     },
   ];
 };

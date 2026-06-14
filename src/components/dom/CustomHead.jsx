@@ -73,7 +73,8 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType }) => {
         '@type': 'Person',
         '@id': `${SITE_URL}/#person`,
         name: SITE_NAME,
-        jobTitle: 'Creative Developer & Frontend Developer',
+        jobTitle: 'Ohio Web Developer, Creative Developer & Frontend Developer',
+        alternateName: ['Connor Love Web Developer', 'Connor Love Ohio Web Developer', 'Connor Love Columbus Web Developer'],
         url: SITE_URL,
         image: OG_IMAGE,
         email: 'mailto:loveconnor2005@gmail.com',
@@ -92,10 +93,16 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType }) => {
         },
         workLocation: serviceAreas,
         knowsAbout: [
+          'Web developer',
+          'Ohio web developer',
+          'Columbus Ohio web developer',
+          'Website development',
+          'Web development',
+          'Web development in Ohio',
           'Creative development',
           'Creative developer',
-          'Website development',
           'Frontend development',
+          'Frontend developer',
           'Web applications',
           'Interactive websites',
           'React development',
@@ -103,6 +110,10 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType }) => {
           'Product interface development',
           'AI product interfaces',
           'Global remote web development',
+          'SEO',
+          'AEO',
+          'GEO',
+          'Generative engine optimization',
           'Structured data and search visibility',
         ],
         knowsLanguage: 'en-US',
@@ -113,7 +124,7 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType }) => {
         '@id': `${SITE_URL}/#organization`,
         name: SITE_NAME,
         legalName: SITE_NAME,
-        alternateName: 'Connor Love Creative Development',
+        alternateName: ['Connor Love Creative Development', 'Connor Love Web Development', 'Connor Love Ohio Web Developer'],
         url: SITE_URL,
         logo: {
           '@type': 'ImageObject',
@@ -129,8 +140,8 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType }) => {
       {
         '@type': 'ProfessionalService',
         '@id': `${SITE_URL}/#services`,
-        name: SITE_NAME,
-        alternateName: 'Connor Love Creative Development',
+        name: 'Connor Love Web Development',
+        alternateName: ['Connor Love', 'Connor Love Creative Development', 'Connor Love Ohio Web Developer'],
         url: SITE_URL,
         image: OG_IMAGE,
         logo: `${SITE_URL}/icon.png`,
@@ -146,11 +157,27 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType }) => {
           name: 'English',
         },
         serviceType: serviceFocus.map((service) => service.title),
-        knowsAbout: ['React', 'Next.js', 'Three.js', 'TypeScript', 'Product interfaces', 'AI product interfaces', 'Performance optimization'],
-        description: 'Connor Love builds custom websites, web applications, and interactive digital experiences for Columbus, Ohio clients and remote teams worldwide.',
+        knowsAbout: [
+          'Web development',
+          'Website development',
+          'Ohio web development',
+          'React',
+          'Next.js',
+          'Three.js',
+          'TypeScript',
+          'Product interfaces',
+          'AI product interfaces',
+          'Performance optimization',
+          'SEO',
+          'AEO',
+          'GEO',
+          'Structured data',
+        ],
+        description:
+          'Connor Love is an Ohio web developer based in Columbus who builds custom websites, web applications, interactive digital experiences, and AI product interfaces for businesses across Ohio and remote teams worldwide.',
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
-          name: 'Creative development services',
+          name: 'Web development services',
           itemListElement: serviceFocus.map((service) => ({
             '@type': 'Offer',
             itemOffered: {
@@ -170,7 +197,7 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType }) => {
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
         name: SITE_NAME,
-        alternateName: 'Connor Love Portfolio',
+        alternateName: ['Connor Love Portfolio', 'Connor Love Web Developer Portfolio', 'Ohio Web Developer Portfolio'],
         publisher: {
           '@id': `${SITE_URL}/#organization`,
         },
@@ -270,6 +297,8 @@ function CustomHead({ title = '', description, keywords, project, pageType }) {
       <meta httpEquiv="content-language" content="en-US" />
       <meta name="geo.region" content="US-OH" />
       <meta name="geo.placename" content="Columbus, Ohio" />
+      <meta name="coverage" content="Columbus, Ohio; Central Ohio; Ohio; United States; Worldwide" />
+      <meta name="subject" content="Ohio web development, website development, frontend development, React development, Next.js development, SEO, AEO, and GEO" />
       <meta name="description" content={description} />
 
       {/* Canonical and Title */}

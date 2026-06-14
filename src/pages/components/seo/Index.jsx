@@ -5,36 +5,36 @@ import { faqContent, getProjectFaqs, serviceFocus } from '@src/constants/seo';
 
 const content = {
   home: {
-    eyebrow: 'Creative development, frontend systems, and product interfaces',
-    heading: 'What I do',
-    subheading: 'Creative systems for the web.',
+    eyebrow: 'Ohio web development, frontend systems, and product interfaces',
+    heading: 'Web developer in Ohio',
+    subheading: 'Custom websites and web apps from Columbus.',
     paragraphs: [
-      'I build custom websites, interactive web applications, and product interfaces with React, Next.js, Three.js, and modern frontend tooling for local and remote teams.',
+      'I build custom websites, interactive web applications, and product interfaces with React, Next.js, Three.js, and modern frontend tooling for Columbus, Ohio clients, businesses across Ohio, and remote teams.',
       'My work sits between design and engineering: clear structure, strong performance, accessible interaction, and polished details that make digital products easier to use and easier to maintain.',
-      'I care about the full shape of a build, from the first layout pass to the final production details. That means clean components, readable content, purposeful motion, responsive behavior, and code that can keep moving after launch as the product changes and the team learns more.',
-      'I am based in Columbus, Ohio, but the work is not limited to one region. I can build for founders, agencies, product teams, and businesses across the United States and worldwide.',
+      'I care about the full shape of a web development project, from the first layout pass to the final production details. That means clean components, readable content, purposeful motion, responsive behavior, crawlable pages, and code that can keep moving after launch.',
+      'I am based in Columbus, Ohio, but the work is not limited to one city. I can build for founders, agencies, product teams, and businesses across Central Ohio, Cleveland, Cincinnati, Dayton, Toledo, Akron, the rest of Ohio, the United States, and worldwide.',
     ],
     services: serviceFocus,
   },
   about: {
-    eyebrow: 'About Connor Love and the development practice',
+    eyebrow: 'About Connor Love and the web development practice',
     heading: 'How I work',
-    subheading: 'Built with structure, motion, and intent.',
+    subheading: 'Built with structure, motion, visibility, and intent.',
     paragraphs: [
-      'My work combines frontend engineering, interaction design, and product thinking. I build web applications and marketing sites that need to feel polished while still being easy to maintain, measure, and extend.',
-      'The technical foundation usually includes React, Next.js, structured content, accessible HTML, thoughtful animation, and performance-minded implementation.',
-      'The practice is Columbus-based and remote-friendly, so I can support Ohio teams, United States clients, and international product work without tying the service area to a single city.',
+      'My work combines web development, frontend engineering, interaction design, and product thinking. I build websites, web applications, and marketing sites that need to feel polished while still being easy to maintain, measure, and extend.',
+      'The technical foundation usually includes React, Next.js, structured content, accessible HTML, thoughtful animation, performance-minded implementation, and SEO/AEO/GEO signals that help people and answer engines understand the work.',
+      'The practice is Columbus-based and remote-friendly, so I can support local Columbus teams, clients across Ohio, United States clients, and international product work without tying the service area to a single city.',
     ],
     services: serviceFocus,
   },
   projects: {
-    eyebrow: 'Creative development portfolio and case studies',
+    eyebrow: 'Web development portfolio and case studies',
     heading: 'What the work shows',
     subheading: 'Selected systems, tools, and interfaces.',
     paragraphs: [
       'The projects in this portfolio show how I approach product interfaces from both the design and engineering sides. Each project focuses on a specific problem: reusable UI systems, chat workflows, personalized learning, typography for digital products, or secure API infrastructure.',
       'Across the work, the common thread is frontend quality: responsive interfaces, component systems, animation, data-driven UI, and maintainable product architecture.',
-      'These case studies are relevant for teams looking for a creative developer, frontend developer, React developer, Next.js developer, or product interface builder who can work remotely across time zones.',
+      'These case studies are relevant for teams looking for an Ohio web developer, Columbus web developer, creative developer, frontend developer, React developer, Next.js developer, or product interface builder who can work remotely across time zones.',
     ],
     services: serviceFocus,
   },
@@ -45,7 +45,7 @@ const getProjectContent = (project) => ({
   heading: `${project.title}, built with intent.`,
   subheading: 'Project focus',
   paragraphs: [
-    `${project.title} is part of my creative development portfolio. It shows how I approach frontend engineering, product interface design, and modern web application implementation from Columbus, Ohio for clients and teams anywhere.`,
+    `${project.title} is part of my web development and creative development portfolio. It shows how I approach frontend engineering, product interface design, and modern web application implementation from Columbus, Ohio for clients across Ohio and teams anywhere.`,
     ...project.desc,
   ],
   services: serviceFocus,

@@ -52,15 +52,18 @@ function Page({ id }) {
 
   const seo = useMemo(
     () => ({
-      title: currentProject.seoTitle || `${currentProject.title} Case Study | Connor Love Creative Developer`,
+      title: currentProject.seoTitle || `${currentProject.title} Case Study | Connor Love Ohio Web Developer`,
       description:
         currentProject.seoDescription ||
-        `${currentProject.title} is a creative development case study by Connor Love, a Columbus-based frontend developer building websites, web apps, and AI product interfaces for clients worldwide.`,
+        `${currentProject.title} is a web development case study by Connor Love, a Columbus-based Ohio web developer building websites, web apps, and AI product interfaces for clients across Ohio and worldwide.`,
       keywords: [
         `${currentProject.title} project`,
         `${currentProject.title} development`,
         `Connor Love ${currentProject.title}`,
         `Connor ${currentProject.title}`,
+        `Web developer ${currentProject.title}`,
+        `Web development ${currentProject.title}`,
+        `Ohio web developer ${currentProject.title}`,
         `Creative developer ${currentProject.title}`,
         `Creative development ${currentProject.title}`,
         `Frontend development ${currentProject.title}`,
@@ -68,6 +71,9 @@ function Page({ id }) {
         `Responsive design ${currentProject.title}`,
         `User interactions ${currentProject.title}`,
         `AI product interface ${currentProject.title}`,
+        'Ohio web developer',
+        'Web developer Columbus Ohio',
+        'Website development Ohio',
         'Remote frontend developer',
         'Worldwide creative developer',
         'Columbus Ohio',

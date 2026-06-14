@@ -17,10 +17,14 @@ import { useStore } from '@src/store';
 import { useWindowSize } from '@darkroom.engineering/hamo';
 
 const seo = {
-  title: 'Creative Development Projects & Case Studies | Connor Love',
-  description: 'Explore Connor Love projects across creative development, React and Next.js apps, AI product interfaces, design systems, and interactive web experiences.',
+  title: 'Web Development Projects & Case Studies | Connor Love',
+  description: 'Explore Ohio web developer Connor Love projects across custom websites, React and Next.js apps, AI product interfaces, design systems, and interactive web experiences.',
   keywords: [
     'Connor Love Projects',
+    'Ohio Web Developer Portfolio',
+    'Web Developer Ohio Portfolio',
+    'Web Development Projects',
+    'Website Development Portfolio',
     'Creative Developer Portfolio',
     'Creative Development Projects',
     'Frontend Development Examples',
@@ -33,6 +37,7 @@ const seo = {
     'Design System Projects',
     'Remote Creative Developer',
     'Columbus Ohio',
+    'Ohio',
   ],
 };
 
