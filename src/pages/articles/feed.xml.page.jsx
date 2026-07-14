@@ -1,4 +1,5 @@
 import { getAllArticles } from '@src/lib/articles';
+import { SITE_URL } from '@src/constants/seo';
 
 const escapeXml = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
 
@@ -7,14 +8,13 @@ function Feed() {
 }
 
 export function getServerSideProps({ res }) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://connorlove.com';
   const items = getAllArticles()
     .map(
       (article) => `
         <item>
           <title>${escapeXml(article.title)}</title>
-          <link>${siteUrl}/articles/${escapeXml(article.slug)}</link>
-          <guid>${siteUrl}/articles/${escapeXml(article.slug)}</guid>
+          <link>${SITE_URL}/articles/${escapeXml(article.slug)}</link>
+          <guid>${SITE_URL}/articles/${escapeXml(article.slug)}</guid>
           <pubDate>${new Date(`${article.dateReleased}T12:00:00Z`).toUTCString()}</pubDate>
           <author>loveconnor2005@gmail.com (${escapeXml(article.author)})</author>
           ${article.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join('')}
@@ -27,7 +27,7 @@ export function getServerSideProps({ res }) {
     <rss version="2.0">
       <channel>
         <title>Connor Love — Articles</title>
-        <link>${siteUrl}/articles</link>
+        <link>${SITE_URL}/articles</link>
         <description>Notes on design, development, and building thoughtful digital products.</description>
         <language>en-us</language>
         <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>

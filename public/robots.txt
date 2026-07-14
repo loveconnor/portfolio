@@ -3,10 +3,10 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://connorlove.com/
+Host: https://www.connorlove.com/
 
 # Sitemaps
-Sitemap: https://connorlove.com/sitemap.xml
+Sitemap: https://www.connorlove.com/sitemap.xml
 
 # AI/GEO
-LLMs: https://connorlove.com/llms.txt
+LLMs: https://www.connorlove.com/llms.txt

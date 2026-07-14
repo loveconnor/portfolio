@@ -26,7 +26,7 @@ if (fs.existsSync(articlesDirectory)) {
 const latestArticleDate = [...articleDates.values()].sort().at(-1);
 
 module.exports = {
-  siteUrl: 'https://connorlove.com',
+  siteUrl: 'https://www.connorlove.com',
   generateRobotsTxt: false,
   generateIndexSitemap: false,
   exclude: ['/articles/feed.xml'],

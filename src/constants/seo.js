@@ -1,4 +1,9 @@
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://connorlove.com').replace(/\/$/, '');
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.connorlove.com';
+
+// Vercel serves this site from the www host. Keep every canonical, Open Graph,
+// and structured-data URL on that host so social crawlers never have to follow
+// a cross-host redirect before they can build a preview.
+export const SITE_URL = configuredSiteUrl.replace(/^https:\/\/connorlove\.com(?=\/|$)/, 'https://www.connorlove.com').replace(/\/$/, '');
 
 export const SITE_NAME = 'Connor Love';
 
