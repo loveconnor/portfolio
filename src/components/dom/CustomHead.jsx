@@ -44,7 +44,197 @@ const getProjectImages = (project) => {
   return [getAbsoluteAssetUrl(project.img), ...images].filter(Boolean);
 };
 
-const getSchema = ({ canonicalUrl, title, description, project, pageType }) => {
+const getArticleSchema = ({ canonicalUrl, title, description, article, articles = [] }) => {
+  const breadcrumbId = `${canonicalUrl}#breadcrumb`;
+  const personId = `${SITE_URL}/#person`;
+  const organizationId = `${SITE_URL}/#organization`;
+  const websiteId = `${SITE_URL}/#website`;
+  const blogId = `${SITE_URL}/articles#blog`;
+  const commonGraph = [
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: SITE_NAME,
+      url: SITE_URL,
+      image: `${SITE_URL}/icon.png`,
+      sameAs: sameAsProfiles,
+    },
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/icon.png`,
+      },
+      founder: {
+        '@id': personId,
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: SITE_URL,
+      name: SITE_NAME,
+      publisher: {
+        '@id': organizationId,
+      },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': breadcrumbId,
+      itemListElement: getBreadcrumbItems(canonicalUrl),
+    },
+  ];
+
+  if (article) {
+    const articleId = `${canonicalUrl}#article`;
+    const imageUrl = getAbsoluteAssetUrl(article.ogImage);
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        ...commonGraph,
+        {
+          '@type': 'WebPage',
+          '@id': `${canonicalUrl}#webpage`,
+          url: canonicalUrl,
+          name: title,
+          description,
+          isPartOf: {
+            '@id': websiteId,
+          },
+          breadcrumb: {
+            '@id': breadcrumbId,
+          },
+          mainEntity: {
+            '@id': articleId,
+          },
+          inLanguage: 'en-US',
+        },
+        {
+          '@type': 'BlogPosting',
+          '@id': articleId,
+          url: canonicalUrl,
+          headline: article.title,
+          alternativeHeadline: article.subtitle || undefined,
+          description: article.description,
+          image: {
+            '@type': 'ImageObject',
+            url: imageUrl,
+            width: 1200,
+            height: 630,
+          },
+          datePublished: article.dateReleased,
+          dateModified: article.dateModified,
+          author: {
+            '@id': personId,
+            name: article.author,
+          },
+          publisher: {
+            '@id': organizationId,
+          },
+          mainEntityOfPage: {
+            '@id': `${canonicalUrl}#webpage`,
+          },
+          isPartOf: {
+            '@id': blogId,
+          },
+          articleSection: article.category,
+          keywords: article.tags,
+          about: article.tags.map((tag) => ({
+            '@type': 'Thing',
+            name: tag,
+          })),
+          wordCount: article.wordCount,
+          inLanguage: 'en-US',
+        },
+      ],
+    };
+  }
+
+  const blogPosts = articles.map((item) => {
+    const url = `${SITE_URL}/articles/${item.slug}`;
+    return {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      url,
+      headline: item.title,
+      description: item.description,
+      datePublished: item.dateReleased,
+      dateModified: item.dateModified,
+      image: getAbsoluteAssetUrl(item.ogImage),
+      author: {
+        '@id': personId,
+      },
+      articleSection: item.category,
+      keywords: item.tags,
+    };
+  });
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      ...commonGraph,
+      {
+        '@type': 'CollectionPage',
+        '@id': `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: title,
+        description,
+        isPartOf: {
+          '@id': websiteId,
+        },
+        breadcrumb: {
+          '@id': breadcrumbId,
+        },
+        mainEntity: {
+          '@id': blogId,
+        },
+        hasPart: {
+          '@id': `${canonicalUrl}#article-list`,
+        },
+        inLanguage: 'en-US',
+      },
+      {
+        '@type': 'Blog',
+        '@id': blogId,
+        url: `${SITE_URL}/articles`,
+        name: 'Connor Love Articles',
+        description,
+        publisher: {
+          '@id': organizationId,
+        },
+        mainEntityOfPage: {
+          '@id': `${canonicalUrl}#webpage`,
+        },
+        blogPost: blogPosts,
+        inLanguage: 'en-US',
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${canonicalUrl}#article-list`,
+        name: 'Connor Love articles',
+        numberOfItems: blogPosts.length,
+        itemListElement: blogPosts.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@id': item['@id'],
+          },
+        })),
+      },
+    ],
+  };
+};
+
+const getSchema = ({ canonicalUrl, title, description, project, pageType, article, articles }) => {
+  if (pageType === 'articles') {
+    return getArticleSchema({ canonicalUrl, title, description, article, articles });
+  }
+
   const breadcrumbId = `${canonicalUrl}#breadcrumb`;
   const selectedFaqs = project ? getProjectFaqs(project) : faqContent[pageType] || faqContent.home;
   const projectSchema = project
@@ -274,11 +464,13 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType }) => {
   };
 };
 
-function CustomHead({ title = '', description, keywords, project, pageType }) {
+function CustomHead({ title = '', description, keywords, project, pageType, article, articles }) {
   const router = useRouter();
   const normalizedPath = normalizePath(router.asPath);
   const canonicalUrl = `${SITE_URL}${normalizedPath}`;
-  const openGraphType = project ? 'article' : 'website';
+  const openGraphType = project || article ? 'article' : 'website';
+  const socialImage = article?.ogImage ? getAbsoluteAssetUrl(article.ogImage) : OG_IMAGE;
+  const socialImageAlt = article ? `${article.title} — article by ${article.author}` : OG_IMAGE_ALT;
 
   return (
     <NextHead>
@@ -290,7 +482,7 @@ function CustomHead({ title = '', description, keywords, project, pageType }) {
       <meta name="bingbot" content={process.env.NODE_ENV !== 'development' ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow'} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       {keywords?.length ? <meta name="keywords" content={keywords.join(',')} /> : null}
-      <meta name="author" content="Connor Love" />
+      <meta name="author" content={article?.author || 'Connor Love'} />
       <meta name="application-name" content={SITE_NAME} />
       <meta name="referrer" content="strict-origin-when-cross-origin" />
       <meta name="format-detection" content="telephone=no" />
@@ -305,26 +497,37 @@ function CustomHead({ title = '', description, keywords, project, pageType }) {
       <link rel="canonical" href={canonicalUrl} />
       <link rel="alternate" hrefLang="en-US" href={canonicalUrl} />
       <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+      {pageType === 'articles' ? <link rel="alternate" type="application/rss+xml" title="Connor Love — Articles" href={`${SITE_URL}/articles/feed.xml`} /> : null}
+      <link rel="author" href={`${SITE_URL}/`} />
       <title>{title}</title>
 
       {/* OpenGraph Meta Tags */}
-      <meta property="og:image" content={OG_IMAGE} />
-      <meta property="og:image:secure_url" content={OG_IMAGE} />
-      <meta property="og:image:alt" content={OG_IMAGE_ALT} />
+      <meta property="og:image" content={socialImage} />
+      <meta property="og:image:secure_url" content={socialImage} />
+      <meta property="og:image:alt" content={socialImageAlt} />
       <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="en_US" />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:type" content={openGraphType} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonicalUrl} />
+      {article ? <meta property="article:published_time" content={article.dateReleased} /> : null}
+      {article ? <meta property="article:modified_time" content={article.dateModified} /> : null}
+      {article ? <meta property="article:author" content={`${SITE_URL}/`} /> : null}
+      {article ? <meta property="article:section" content={article.category} /> : null}
+      {article?.tags.map((tag) => (
+        <meta property="article:tag" content={tag} key={tag} />
+      ))}
 
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={OG_IMAGE} />
-      <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
+      <meta name="twitter:image" content={socialImage} />
+      <meta name="twitter:image:alt" content={socialImageAlt} />
       <meta name="twitter:site" content={TWITTER_HANDLE} />
       <meta name="twitter:creator" content={TWITTER_HANDLE} />
 
@@ -350,6 +553,8 @@ function CustomHead({ title = '', description, keywords, project, pageType }) {
               description,
               project,
               pageType,
+              article,
+              articles,
             }),
           ),
         }}
@@ -383,13 +588,40 @@ CustomHead.propTypes = {
       }),
     ),
   }),
-  pageType: PropTypes.oneOf(['home', 'about', 'projects']),
+  pageType: PropTypes.oneOf(['home', 'about', 'projects', 'articles']),
+  article: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string,
+    description: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    dateReleased: PropTypes.string.isRequired,
+    dateModified: PropTypes.string.isRequired,
+    ogImage: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    wordCount: PropTypes.number.isRequired,
+  }),
+  articles: PropTypes.arrayOf(
+    PropTypes.shape({
+      slug: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      category: PropTypes.string.isRequired,
+      dateReleased: PropTypes.string.isRequired,
+      dateModified: PropTypes.string.isRequired,
+      ogImage: PropTypes.string.isRequired,
+      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }),
+  ),
 };
 
 CustomHead.defaultProps = {
   keywords: [],
   project: null,
   pageType: 'home',
+  article: null,
+  articles: [],
 };
 
 export default CustomHead;

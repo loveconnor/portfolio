@@ -2,11 +2,12 @@
 
 /*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
 
-/**
- * 1. Correct the line height in all browsers.
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- * 3. Improve font rendering.
- */
+@layer reset {
+  /**
+   * 1. Correct the line height in all browsers.
+   * 2. Prevent adjustments of font size after orientation changes in iOS.
+   * 3. Improve font rendering.
+   */
 
 html {
   line-height: 1.15; /* 1 */
@@ -51,4 +52,5 @@ table {
 /* revert the 'white-space' property for textarea elements on Safari */
 textarea {
   white-space: revert;
+}
 }

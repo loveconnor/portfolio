@@ -9,6 +9,8 @@ Connor Love is a web developer, creative developer, and frontend developer based
 - Website: https://connorlove.com/
 - About: https://connorlove.com/about
 - Projects: https://connorlove.com/projects
+- Articles: https://connorlove.com/articles
+- RSS feed: https://connorlove.com/articles/feed.xml
 - Sitemap: https://connorlove.com/sitemap.xml
 - Contact: loveconnor2005@gmail.com
 
@@ -42,6 +44,16 @@ Connor Love is a web developer, creative developer, and frontend developer based
 - Lyceum: An AI-powered learning platform with personalized learning paths, interactive labs, progress tracking, reflections, and adaptive recommendations.
 - LoveSans: A custom sans-serif typeface system designed for digital products, branding, and interface design.
 - ConnorVault: A full-stack API key management and proxy platform for securing provider credentials, routing requests, tracking usage, and managing key lifecycles.
+
+## Articles
+
+### When Code Becomes Cheap, Judgment Becomes Valuable
+
+- URL: https://connorlove.com/articles/web-developer-age-of-ai
+- Published: 2026-07-14
+- Topics: Web Development, Artificial Intelligence, Career, Product Thinking
+- Summary: AI can produce code faster than ever. The web developers who thrive next will be the ones who know what to build, how to judge it, verify its quality, and take responsibility for the final product.
+- Direct answer: As AI makes code generation cheaper, a web developer's value increasingly comes from understanding the problem, directing the work, applying technical judgment, verifying quality, and owning what ships.
 
 ## Preferred Entity Description
 

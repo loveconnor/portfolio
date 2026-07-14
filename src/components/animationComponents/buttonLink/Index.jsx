@@ -6,12 +6,12 @@ import clsx from 'clsx';
 import gsap from 'gsap';
 import styles from '@src/components/animationComponents/buttonLink/buttonLink.module.scss';
 
-function ButtonLink({ href, label, target = false }) {
+function ButtonLink({ href, label, target = false, reloadDocument = false }) {
   const spanRef = useRef(null);
   const relsRef = useRef({ relX: 0, relY: 0 });
   const isMailtoHref = /^mailto:/i.test(href);
   const isExternalHref = /^(https?:\/\/|mailto:|tel:)/i.test(href);
-  const useNativeAnchor = target || isExternalHref;
+  const useNativeAnchor = target || isExternalHref || reloadDocument;
 
   const handleMouseEnter = useCallback((e) => {
     const button = e.currentTarget;

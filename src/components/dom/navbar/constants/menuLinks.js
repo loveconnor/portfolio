@@ -12,6 +12,10 @@ const menuLinks = [
     href: '/projects',
   },
   {
+    title: 'Articles',
+    href: '/articles',
+  },
+  {
     title: 'Contact',
     href: undefined,
   },

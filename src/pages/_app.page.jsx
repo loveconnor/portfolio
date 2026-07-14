@@ -23,6 +23,7 @@ import Stats from '@src/components/stats/Index';
 import Tempus from '@darkroom.engineering/tempus';
 import { View } from '@react-three/drei';
 import { gsap } from 'gsap';
+import { Noto_Sans as NotoSans, Nunito_Sans as NunitoSans, Raleway } from 'next/font/google';
 import styles from '@src/pages/app.module.scss';
 import useFoucFix from '@src/hooks/useFoucFix';
 import { useFrame } from '@darkroom.engineering/hamo';
@@ -30,6 +31,21 @@ import { useIsomorphicLayoutEffect } from '@src/hooks/useIsomorphicLayoutEffect'
 import useScroll from '@src/hooks/useScroll';
 import { useShallow } from 'zustand/react/shallow';
 import { useStore } from '@src/store';
+
+const nunitoSans = NunitoSans({
+  subsets: ['latin'],
+  variable: '--font-nunito-sans',
+});
+
+const notoSans = NotoSans({
+  subsets: ['latin'],
+  variable: '--font-noto-sans',
+});
+
+const raleway = Raleway({
+  subsets: ['latin'],
+  variable: '--font-raleway',
+});
 
 if (typeof window !== 'undefined') {
   gsap.defaults({ ease: 'none' });
@@ -124,7 +140,7 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <Stats />
-      <div className={styles.root}>
+      <div className={`${styles.root} ${nunitoSans.variable} ${notoSans.variable} ${raleway.variable}`}>
         {domElements}
         <div ref={layoutRef} id="layout" className={styles.layout}>
           {canvasElements}
