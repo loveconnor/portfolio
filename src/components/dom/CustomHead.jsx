@@ -2,7 +2,7 @@
 import NextHead from 'next/head';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { OG_IMAGE, OG_IMAGE_ALT, SITE_NAME, SITE_URL, TWITTER_HANDLE, faqContent, getProjectFaqs, sameAsProfiles, serviceAreas, serviceFocus } from '@src/constants/seo';
+import { OG_IMAGE, OG_IMAGE_ALT, SITE_NAME, SITE_URL, TWITTER_HANDLE, sameAsProfiles, serviceAreas, serviceFocus } from '@src/constants/seo';
 
 const normalizePath = (path) => {
   const cleanPath = path?.split('?')[0].split('#')[0] || '/';
@@ -236,7 +236,6 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
   }
 
   const breadcrumbId = `${canonicalUrl}#breadcrumb`;
-  const selectedFaqs = project ? getProjectFaqs(project) : faqContent[pageType] || faqContent.home;
   const projectSchema = project
     ? [
         {
@@ -421,25 +420,15 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
           : {
               '@id': `${SITE_URL}/#services`,
             },
-        hasPart: [{ '@id': `${canonicalUrl}#services-list` }, { '@id': `${canonicalUrl}#faq` }],
+        hasPart: {
+          '@id': `${canonicalUrl}#services-list`,
+        },
         inLanguage: 'en-US',
       },
       {
         '@type': 'BreadcrumbList',
         '@id': breadcrumbId,
         itemListElement: getBreadcrumbItems(canonicalUrl),
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': `${canonicalUrl}#faq`,
-        mainEntity: selectedFaqs.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.answer,
-          },
-        })),
       },
       {
         '@type': 'ItemList',
@@ -573,12 +562,6 @@ CustomHead.propTypes = {
     img: PropTypes.string.isRequired,
     desc: PropTypes.arrayOf(PropTypes.string).isRequired,
     topics: PropTypes.arrayOf(PropTypes.string),
-    faqs: PropTypes.arrayOf(
-      PropTypes.shape({
-        question: PropTypes.string.isRequired,
-        answer: PropTypes.string.isRequired,
-      }),
-    ),
     liveLink: PropTypes.string,
     githubLink: PropTypes.string,
     images: PropTypes.arrayOf(

@@ -70,27 +70,6 @@
   }
 }
 
-.faqs {
-  margin-top: 4vw;
-}
-
-.faq {
-  padding-top: 1.6vw;
-  border-top: 1px solid rgba(11, 31, 42, 0.18);
-
-  + .faq {
-    margin-top: 1.6vw;
-  }
-
-  h4 {
-    margin-bottom: 0.6vw;
-  }
-
-  p {
-    color: rgba(11, 31, 42, 0.74);
-  }
-}
-
 @media (max-width: 768px) {
   .root {
     padding-top: 20vw;
@@ -115,21 +94,8 @@
     }
   }
 
-  .list,
-  .faqs {
+  .list {
     margin-top: 4vw;
-  }
-
-  .faq {
-    padding-top: 4vw;
-
-    + .faq {
-      margin-top: 4vw;
-    }
-
-    h4 {
-      margin-bottom: 2vw;
-    }
   }
 
   .list {

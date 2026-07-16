@@ -44,25 +44,6 @@ const projects = [
       'AI coding agent skill pack',
       'AI-readable documentation',
     ],
-    faqs: [
-      {
-        question: 'What is LoveUI?',
-        answer:
-          'LoveUI is an open-source React UI library for product interfaces. It provides docs, reusable components, copy-paste blocks, chart examples, icons, and guidance for building polished screens.',
-      },
-      {
-        question: 'Who should use LoveUI?',
-        answer: 'LoveUI is for developers, founders, agencies, and product teams building dashboards, SaaS apps, admin tools, internal tools, and marketing pages with React and Tailwind CSS.',
-      },
-      {
-        question: 'How is LoveUI different from a normal component package?',
-        answer: 'LoveUI is source-first. Teams copy components and blocks into their app, then inspect, edit, version, and own the code instead of depending on a black-box UI package.',
-      },
-      {
-        question: 'Does LoveUI support AI coding agents?',
-        answer: 'Yes. LoveUI includes LoveUI Skills, a skill pack that gives AI coding agents design rules, workflows, quality checks, and specialist guidance for building and improving interfaces.',
-      },
-    ],
     intro: [
       'LoveUI is a source-first React UI library for product teams, developers, and AI-assisted workflows.',
       'It brings docs, components, blocks, charts, icons, and LoveUI Skills into one clear product surface.',
