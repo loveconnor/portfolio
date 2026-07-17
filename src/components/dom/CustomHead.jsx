@@ -337,15 +337,13 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
         founder: {
           '@id': `${SITE_URL}/#person`,
         },
-        provider: {
-          '@id': `${SITE_URL}/#organization`,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Columbus',
+          addressRegion: 'OH',
+          addressCountry: 'US',
         },
         areaServed: serviceAreas,
-        availableLanguage: {
-          '@type': 'Language',
-          name: 'English',
-        },
-        serviceType: serviceFocus.map((service) => service.title),
         knowsAbout: [
           'Web development',
           'Website development',
@@ -372,6 +370,7 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
             itemOffered: {
               '@type': 'Service',
               name: service.title,
+              serviceType: service.title,
               description: service.text,
               provider: {
                 '@id': `${SITE_URL}/#organization`,
@@ -440,6 +439,7 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
           item: {
             '@type': 'Service',
             name: service.title,
+            serviceType: service.title,
             description: service.text,
             provider: {
               '@id': `${SITE_URL}/#organization`,
