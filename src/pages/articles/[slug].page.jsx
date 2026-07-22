@@ -1,12 +1,57 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import CustomHead from '@src/components/dom/CustomHead';
 import Link from 'next/link';
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import clsx from 'clsx';
 import { getAllArticles, getArticleBySlug } from '@src/lib/articles';
 import formatArticleDate from '@src/utils/articles';
 import remarkGfm from 'remark-gfm';
+import SamenessMachine from '@src/pages/articles/components/SamenessMachine';
 import styles from '@src/pages/articles/styles/article.module.scss';
+
+const articleImageDimensions = {
+  '/articles/internet-sameness/default-websites-transparent.png': { width: 1462, height: 754 },
+  '/articles/internet-sameness/purpose-shaped-websites-transparent.png': { width: 1450, height: 832 },
+};
+
+const markdownComponents = {
+  p: ({ node, children }) => {
+    const containsOnlyImage = node.children.length === 1 && node.children[0].tagName === 'img';
+
+    return containsOnlyImage ? children : <p>{children}</p>;
+  },
+  img: ({ src, alt, title }) => {
+    const dimensions = articleImageDimensions[src] || { width: 1536, height: 1024 };
+
+    return (
+      <figure className={styles.articleFigure}>
+        <Image src={src} alt={alt || ''} width={dimensions.width} height={dimensions.height} sizes="(max-width: 768px) 88vw, 42rem" />
+        {title && <figcaption>{title}</figcaption>}
+      </figure>
+    );
+  },
+};
+
+function ArticleContent({ content }) {
+  const [beforeDemo, afterDemo] = content.split('[[SAMENESS_MACHINE]]');
+
+  return (
+    <>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+        {beforeDemo}
+      </ReactMarkdown>
+      {afterDemo !== undefined && (
+        <>
+          <SamenessMachine />
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+            {afterDemo}
+          </ReactMarkdown>
+        </>
+      )}
+    </>
+  );
+}
 
 function Page({ article }) {
   return (
@@ -48,7 +93,7 @@ function Page({ article }) {
         </aside>
 
         <article className={clsx(styles.articleBody, 'typeset', 'typeset-docs')}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.content}</ReactMarkdown>
+          <ArticleContent content={article.content} />
         </article>
       </section>
     </>

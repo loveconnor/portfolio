@@ -137,3 +137,27 @@ $muted: color-mix(in srgb, var(--black) 64%, transparent);
     padding-left: calc(var(--layout-columns-gap) * 2);
   }
 }
+
+.articleFigure {
+  display: grid;
+  row-gap: 0.35rem;
+  margin-block: var(--typeset-flow);
+  margin-inline: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  figcaption {
+    max-width: 62ch;
+    margin: 0 auto;
+    color: $muted;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    text-align: center;
+    text-wrap: balance;
+  }
+}
