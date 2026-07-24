@@ -29,7 +29,7 @@ const content = {
     heading: 'A closer look at my work.',
     subheading: 'Different problems, the same attention to detail.',
     paragraphs: [
-      'These projects cover reusable interface systems, conversational products, learning tools, digital typography, and secure infrastructure. Each one began with a different problem and called for a different balance of design and engineering.',
+      'These projects cover reusable interface systems, color tools, tokenizer research, and digital typography. Each one began with a different problem and called for a different balance of design and engineering.',
       'Across the work, I focus on responsive interfaces, useful motion, durable component systems, and code that stays understandable as a product grows.',
     ],
     services: serviceFocus,

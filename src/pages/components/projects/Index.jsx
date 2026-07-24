@@ -23,7 +23,7 @@ function Projects() {
   const rootRef = useRef();
   const projectRefs = useRef([]);
 
-  const selectedProjectIds = ['loveui', 'lovechat', 'lyceum'];
+  const selectedProjectIds = ['loveui', 'clove-colors', 'tokenizer'];
   const newProjects = selectedProjectIds.map((projectId) => projects.find((project) => project.id === projectId)).filter(Boolean);
 
   const setupProjectAnimations = () => {
@@ -90,12 +90,12 @@ function Projects() {
                     <h3 className="h3">{project.title}</h3>
                   </div>
                   <div className={styles.imageContainer}>
-                    <Image src={project.img} fill sizes="100%" alt={project.title} />
+                    <Image src={project.img} fill sizes="100%" alt={project.imgAlt || project.title} />
                   </div>
                 </div>
               </div>
               <div ref={(el) => (projectRefs.current[index] = el)} className={styles.canvas}>
-                <Image priority className={index === 0 ? styles.firstCard : index === newProjects.length - 1 ? styles.lastCard : undefined} src={project.img} fill sizes="100%" alt={project.title} />
+                <Image priority className={index === 0 ? styles.firstCard : index === newProjects.length - 1 ? styles.lastCard : undefined} src={project.img} fill sizes="100%" alt="" />
               </div>
             </Link>
           ))}

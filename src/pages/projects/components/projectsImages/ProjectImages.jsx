@@ -13,7 +13,8 @@ function ProjectImages({ project }) {
   const getAltText = useCallback((title, index) => `${title} project interface screenshot ${index + 1} from Connor Love's creative development portfolio`, []);
 
   const renderMediaContainer = useCallback(
-    ({ tag, src, isRight, index, title }) => {
+    ({ tag, src, isRight, alt, index, title }) => {
+      const altText = alt || getAltText(title, index);
       if (tag === 'video') {
         return (
           <div className={styles.videoContainer}>
@@ -31,21 +32,21 @@ function ProjectImages({ project }) {
             }}
             className={styles.imageContainer}
           >
-            <Image priority sizes="100%" src={src} fill alt={getAltText(title, index)} />
+            <Image priority sizes="100%" src={src} fill alt={altText} />
           </div>
         );
       }
       if (tag === 'big') {
         return (
           <div className={styles.bigContainer}>
-            <Image priority sizes="100%" src={src} fill alt={getAltText(title, index)} />
+            <Image priority sizes="100%" src={src} fill alt={altText} />
           </div>
         );
       }
       if (tag === 'medium') {
         return (
           <div className={styles.mediumContainer}>
-            <Image priority sizes="100%" src={src} fill alt={getAltText(title, index)} />
+            <Image priority sizes="100%" src={src} fill alt={altText} />
           </div>
         );
       }
@@ -70,6 +71,7 @@ ProjectImages.propTypes = {
       PropTypes.shape({
         tag: PropTypes.string.isRequired,
         src: PropTypes.string.isRequired,
+        alt: PropTypes.string,
         isRight: PropTypes.bool,
       }),
     ).isRequired,

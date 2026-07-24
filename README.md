@@ -181,8 +181,8 @@ Composed in this order:
 
 - Displays 3 featured project cards:
   - LoveUI
-  - LoveChat
-  - Lyceum
+  - Clove Colors
+  - Tokenizer
 - Scroll-based stacked card animation
 - CTA button to `/projects`
 
@@ -254,6 +254,7 @@ Each project object includes:
 - `id`: URL-safe unique slug (used for route)
 - `title`: display name
 - `img`: main thumbnail image path
+- `imgAlt`: optional descriptive text for the main project image
 - `link`: route path (usually `/projects/{id}`)
 - `date`: display year
 - `liveLink`: optional external URL
@@ -267,6 +268,7 @@ Each project object includes:
   - `fluidColor`
 - `images`: media array for detail page
   - `src`
+  - `alt` (optional descriptive text for screenshots)
   - `tag` (`video`, `big`, `medium`, `small`)
   - `isRight` (used by some layouts)
 - `desc`: paragraph array used in project detail text
@@ -274,10 +276,9 @@ Each project object includes:
 Current active projects:
 
 - loveui
-- lovechat
-- lyceum
+- clove-colors
+- tokenizer
 - lovesans
-- connorvault
 
 ---
 

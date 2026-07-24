@@ -112,7 +112,7 @@ function Page() {
                     <h2 className={clsx(styles.text, 'h3')}>{project.title}</h2>
                   </div>
                   <div className={styles.imageContainer}>
-                    <Image priority={index === 0} sizes="100%" src={project.img} fill alt={project.title} />
+                    <Image priority={index === 0} sizes="100%" src={project.img} fill alt={project.imgAlt || project.title} />
                   </div>
                 </div>
               </div>
@@ -122,14 +122,7 @@ function Page() {
                 }}
                 className={styles.canvas}
               >
-                <Image
-                  priority={index === 0}
-                  sizes="100%"
-                  className={index === 0 ? styles.firstCard : index === projects.length - 1 ? styles.lastCard : undefined}
-                  src={project.img}
-                  fill
-                  alt={project.title}
-                />
+                <Image priority={index === 0} sizes="100%" className={index === 0 ? styles.firstCard : index === projects.length - 1 ? styles.lastCard : undefined} src={project.img} fill alt="" />
               </div>
             </Link>
           ))}

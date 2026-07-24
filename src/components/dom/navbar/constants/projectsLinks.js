@@ -4,12 +4,12 @@ const projectsLinks = [
     href: '/projects/loveui',
   },
   {
-    title: 'LoveChat',
-    href: '/projects/lovechat',
+    title: 'Clove Colors',
+    href: '/projects/clove-colors',
   },
   {
-    title: 'Lyceum',
-    href: '/projects/lyceum',
+    title: 'Tokenizer',
+    href: '/projects/tokenizer',
   },
 ];
 export default projectsLinks;
