@@ -180,7 +180,7 @@ Composed in this order:
 ### Selected projects details
 
 - Displays 3 featured project cards:
-  - LoveUI
+  - HonestUI
   - Clove Colors
   - Tokenizer
 - Scroll-based stacked card animation
@@ -275,7 +275,7 @@ Each project object includes:
 
 Current active projects:
 
-- loveui
+- honestui
 - clove-colors
 - tokenizer
 - lovesans

@@ -62,6 +62,11 @@ const nextConfig = {
       destination: '/',
       permanent: true,
     },
+    {
+      source: '/projects/loveui',
+      destination: '/projects/honestui',
+      permanent: true,
+    },
   ],
 };
 

@@ -11,6 +11,9 @@
   height: 100svh;
 
   box-shadow: 0 0 0 var(--layout-columns-gap) var(--white);
+  @include desktop {
+    padding-right: calc(var(--layout-columns-gap) * 0.5);
+  }
   @include mobile {
     height: auto;
   }

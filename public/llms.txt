@@ -39,7 +39,7 @@ Connor Love is a web developer, creative developer, and frontend developer based
 
 ## Projects
 
-- LoveUI: An open-source React and Tailwind CSS UI library for product interfaces. It includes docs, copy-paste components, blocks, chart examples, icons, Base UI interaction primitives, AI-readable docs, and LoveUI Skills for AI coding agents.
+- HonestUI: A source-first React component library with accessible UI components, semantic themes, Apache ECharts charts, icons, visual effects, and editable MIT-licensed source code.
 - Clove Colors: A free color workbench for creating palettes, semantic color systems, light and dark themes, contrast reports, visual previews, and production-ready design tokens.
 - Tokenizer: An interactive browser tool that compares Connor's byte-lossless Unigram tokenizer with nine established tokenizer baselines and a reproducible benchmark suite.
 - LoveSans: A custom sans-serif typeface system designed for digital products, branding, and interface design.

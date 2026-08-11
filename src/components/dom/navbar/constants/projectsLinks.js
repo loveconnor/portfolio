@@ -1,7 +1,7 @@
 const projectsLinks = [
   {
-    title: 'LoveUI',
-    href: '/projects/loveui',
+    title: 'HonestUI',
+    href: '/projects/honestui',
   },
   {
     title: 'Clove Colors',
