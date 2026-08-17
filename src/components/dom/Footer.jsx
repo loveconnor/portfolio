@@ -141,9 +141,9 @@ function Footer() {
 
       <div className={styles.middleContainer} style={{ gridColumn: '1 / 9' }}>
         <AppearTitle isFooter>
-          <div className="p-x">Based in Columbus, Ohio</div>
+          <div className="p-x">Connor Love — Freelance Web Developer</div>
           <div className={clsx('p-x', styles.middleText)}>
-            Current Time: <Time />
+            Columbus, Ohio · Current time: <Time />
           </div>
         </AppearTitle>
       </div>

@@ -56,7 +56,7 @@ function ArticleContent({ content }) {
 function Page({ article }) {
   return (
     <>
-      <CustomHead title={`${article.title} | Connor Love`} description={article.description} keywords={['Connor Love', article.title, ...article.tags]} pageType="articles" article={article} />
+      <CustomHead title={`${article.title} | Connor Love`} description={article.description} pageType="articles" article={article} />
 
       <section className={clsx(styles.hero, 'layout-grid-inner')}>
         <Link className={clsx(styles.backLink, 'p-x')} scroll={false} href="/articles">

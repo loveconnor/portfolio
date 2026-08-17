@@ -9,25 +9,6 @@ import SeoContent from '@src/pages/components/seo/Index';
 const seo = {
   title: 'About Connor Love | Ohio Web Developer & Frontend Engineer',
   description: 'Learn about Connor Love, a Columbus-based Ohio web developer building fast websites, web applications, and product interfaces for local Ohio and remote teams.',
-  keywords: [
-    'Connor Love',
-    'About Connor Love',
-    'Ohio Web Developer',
-    'Web Developer Ohio',
-    'Web Developer Columbus Ohio',
-    'Website Developer Ohio',
-    'Creative Developer',
-    'Creative Development',
-    'Frontend Engineer',
-    'Remote Frontend Developer',
-    'Website Development',
-    'Website Development Ohio',
-    'Product Interface Development',
-    'React Developer',
-    'Next.js Developer',
-    'Columbus Ohio',
-    'Worldwide Web Developer',
-  ],
 };
 function Page() {
   return (

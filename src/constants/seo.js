@@ -7,11 +7,15 @@ export const SITE_URL = configuredSiteUrl.replace(/^https:\/\/connorlove\.com(?=
 
 export const SITE_NAME = 'Connor Love';
 
+export const PROFESSIONAL_TITLE = 'Freelance Web Developer';
+
+export const LOCATION_NAME = 'Columbus, Ohio';
+
 export const TWITTER_HANDLE = '@cando145';
 
 export const OG_IMAGE = `${SITE_URL}/og.png`;
 
-export const OG_IMAGE_ALT = 'Connor Love Ohio web developer portfolio preview';
+export const OG_IMAGE_ALT = `${SITE_NAME}, ${PROFESSIONAL_TITLE} in ${LOCATION_NAME}`;
 
 export const sameAsProfiles = ['https://www.linkedin.com/in/loveconnor/', 'https://github.com/loveconnor', 'https://twitter.com/cando145', 'https://www.instagram.com/connorlove__/'];
 
@@ -50,26 +54,6 @@ export const serviceAreas = [
   {
     '@type': 'State',
     name: 'Ohio',
-  },
-  {
-    '@type': 'City',
-    name: 'Cleveland',
-  },
-  {
-    '@type': 'City',
-    name: 'Cincinnati',
-  },
-  {
-    '@type': 'City',
-    name: 'Dayton',
-  },
-  {
-    '@type': 'City',
-    name: 'Toledo',
-  },
-  {
-    '@type': 'City',
-    name: 'Akron',
   },
   {
     '@type': 'Country',

@@ -19,26 +19,6 @@ import { useWindowSize } from '@darkroom.engineering/hamo';
 const seo = {
   title: 'Web Development Projects & Case Studies | Connor Love',
   description: 'Explore Ohio web developer Connor Love projects across custom websites, React and Next.js apps, AI product interfaces, design systems, and interactive web experiences.',
-  keywords: [
-    'Connor Love Projects',
-    'Ohio Web Developer Portfolio',
-    'Web Developer Ohio Portfolio',
-    'Web Development Projects',
-    'Website Development Portfolio',
-    'Creative Developer Portfolio',
-    'Creative Development Projects',
-    'Frontend Development Examples',
-    'Web Applications Portfolio',
-    'Product Interface Case Studies',
-    'AI Product Interface Portfolio',
-    'React Work',
-    'Next.js Projects',
-    'React Three Fiber Projects',
-    'Design System Projects',
-    'Remote Creative Developer',
-    'Columbus Ohio',
-    'Ohio',
-  ],
 };
 
 function Page() {

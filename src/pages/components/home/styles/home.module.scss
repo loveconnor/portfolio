@@ -44,6 +44,10 @@
         width: 100%;
       }
     }
+    .primaryTitle {
+      display: flex;
+      flex-direction: column;
+    }
     .rightContainer {
       height: auto;
       grid-column: 11 / 17;

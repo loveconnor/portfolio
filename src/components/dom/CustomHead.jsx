@@ -2,7 +2,12 @@
 import NextHead from 'next/head';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { OG_IMAGE, OG_IMAGE_ALT, SITE_NAME, SITE_URL, TWITTER_HANDLE, sameAsProfiles, serviceAreas, serviceFocus } from '@src/constants/seo';
+import { CONTACT_EMAIL } from '@src/constants/contact';
+import { LOCATION_NAME, OG_IMAGE, OG_IMAGE_ALT, PROFESSIONAL_TITLE, SITE_NAME, SITE_URL, TWITTER_HANDLE, sameAsProfiles, serviceAreas, serviceFocus } from '@src/constants/seo';
+
+const PERSON_ID = `${SITE_URL}/#person`;
+const SERVICE_ID = `${SITE_URL}/#professional-service`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
 
 const normalizePath = (path) => {
   const cleanPath = path?.split('?')[0].split('#')[0] || '/';
@@ -44,44 +49,94 @@ const getProjectImages = (project) => {
   return [getAbsoluteAssetUrl(project.img), ...images].filter(Boolean);
 };
 
+const getPersonSchema = () => ({
+  '@type': 'Person',
+  '@id': PERSON_ID,
+  name: SITE_NAME,
+  jobTitle: PROFESSIONAL_TITLE,
+  description: `${SITE_NAME} is a ${PROFESSIONAL_TITLE.toLowerCase()} based in ${LOCATION_NAME}.`,
+  url: SITE_URL,
+  image: `${SITE_URL}/connor/front.webp`,
+  email: CONTACT_EMAIL,
+  worksFor: {
+    '@id': SERVICE_ID,
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Columbus',
+    addressRegion: 'OH',
+    addressCountry: 'US',
+  },
+  knowsAbout: ['Web development', 'Frontend development', 'Web applications', 'React', 'Next.js', 'Three.js', 'Accessible web development', 'Web performance', 'Interaction design'],
+  knowsLanguage: 'en-US',
+  sameAs: sameAsProfiles,
+});
+
+const getProfessionalServiceSchema = ({ includeOfferCatalog = true } = {}) => {
+  const schema = {
+    '@type': 'ProfessionalService',
+    '@id': SERVICE_ID,
+    name: SITE_NAME,
+    url: SITE_URL,
+    image: OG_IMAGE,
+    logo: `${SITE_URL}/icon.png`,
+    email: CONTACT_EMAIL,
+    founder: {
+      '@id': PERSON_ID,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Columbus',
+      addressRegion: 'OH',
+      addressCountry: 'US',
+    },
+    areaServed: serviceAreas,
+    description: `${SITE_NAME} is a ${PROFESSIONAL_TITLE.toLowerCase()} in ${LOCATION_NAME}, building custom websites, web applications, and interactive product experiences.`,
+    sameAs: sameAsProfiles,
+  };
+
+  if (includeOfferCatalog) {
+    schema.hasOfferCatalog = {
+      '@type': 'OfferCatalog',
+      name: 'Web development services',
+      itemListElement: serviceFocus.map((service) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: service.title,
+          serviceType: service.title,
+          description: service.text,
+          provider: {
+            '@id': SERVICE_ID,
+          },
+          areaServed: serviceAreas,
+        },
+      })),
+    };
+  }
+
+  return schema;
+};
+
+const getWebsiteSchema = () => ({
+  '@type': 'WebSite',
+  '@id': WEBSITE_ID,
+  url: SITE_URL,
+  name: SITE_NAME,
+  alternateName: 'Connor Love Portfolio',
+  publisher: {
+    '@id': SERVICE_ID,
+  },
+  inLanguage: 'en-US',
+});
+
 const getArticleSchema = ({ canonicalUrl, title, description, article, articles = [] }) => {
   const breadcrumbId = `${canonicalUrl}#breadcrumb`;
-  const personId = `${SITE_URL}/#person`;
-  const organizationId = `${SITE_URL}/#organization`;
-  const websiteId = `${SITE_URL}/#website`;
   const blogId = `${SITE_URL}/articles#blog`;
   const commonGraph = [
-    {
-      '@type': 'Person',
-      '@id': personId,
-      name: SITE_NAME,
-      url: SITE_URL,
-      image: `${SITE_URL}/icon.png`,
-      sameAs: sameAsProfiles,
-    },
-    {
-      '@type': 'Organization',
-      '@id': organizationId,
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${SITE_URL}/icon.png`,
-      },
-      founder: {
-        '@id': personId,
-      },
-    },
-    {
-      '@type': 'WebSite',
-      '@id': websiteId,
-      url: SITE_URL,
-      name: SITE_NAME,
-      publisher: {
-        '@id': organizationId,
-      },
-      inLanguage: 'en-US',
-    },
+    getPersonSchema(),
+    getProfessionalServiceSchema({ includeOfferCatalog: false }),
+    getWebsiteSchema(),
     {
       '@type': 'BreadcrumbList',
       '@id': breadcrumbId,
@@ -104,7 +159,7 @@ const getArticleSchema = ({ canonicalUrl, title, description, article, articles 
           name: title,
           description,
           isPartOf: {
-            '@id': websiteId,
+            '@id': WEBSITE_ID,
           },
           breadcrumb: {
             '@id': breadcrumbId,
@@ -130,11 +185,11 @@ const getArticleSchema = ({ canonicalUrl, title, description, article, articles 
           datePublished: article.dateReleased,
           dateModified: article.dateModified,
           author: {
-            '@id': personId,
+            '@id': PERSON_ID,
             name: article.author,
           },
           publisher: {
-            '@id': organizationId,
+            '@id': SERVICE_ID,
           },
           mainEntityOfPage: {
             '@id': `${canonicalUrl}#webpage`,
@@ -167,7 +222,7 @@ const getArticleSchema = ({ canonicalUrl, title, description, article, articles 
       dateModified: item.dateModified,
       image: getAbsoluteAssetUrl(item.ogImage),
       author: {
-        '@id': personId,
+        '@id': PERSON_ID,
       },
       articleSection: item.category,
       keywords: item.tags,
@@ -185,7 +240,7 @@ const getArticleSchema = ({ canonicalUrl, title, description, article, articles 
         name: title,
         description,
         isPartOf: {
-          '@id': websiteId,
+          '@id': WEBSITE_ID,
         },
         breadcrumb: {
           '@id': breadcrumbId,
@@ -205,7 +260,7 @@ const getArticleSchema = ({ canonicalUrl, title, description, article, articles 
         name: 'Connor Love Articles',
         description,
         publisher: {
-          '@id': organizationId,
+          '@id': SERVICE_ID,
         },
         mainEntityOfPage: {
           '@id': `${canonicalUrl}#webpage`,
@@ -246,7 +301,7 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
           image: getProjectImages(project),
           dateCreated: project.date,
           creator: {
-            '@id': `${SITE_URL}/#person`,
+            '@id': PERSON_ID,
           },
           about: project.topics || ['Creative development', 'Frontend development', 'Website development', 'Interactive web applications', 'Product interface design'],
           description: project.desc.join(' '),
@@ -254,143 +309,22 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
         },
       ]
     : [];
+  let mainEntity;
+
+  if (project) {
+    mainEntity = { '@id': `${canonicalUrl}#creative-work` };
+  } else if (pageType === 'about') {
+    mainEntity = { '@id': PERSON_ID };
+  } else if (pageType === 'home') {
+    mainEntity = { '@id': SERVICE_ID };
+  }
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'Person',
-        '@id': `${SITE_URL}/#person`,
-        name: SITE_NAME,
-        jobTitle: 'Ohio Web Developer, Creative Developer & Frontend Developer',
-        alternateName: ['Connor Love Web Developer', 'Connor Love Ohio Web Developer', 'Connor Love Columbus Web Developer'],
-        url: SITE_URL,
-        image: OG_IMAGE,
-        email: 'mailto:loveconnor2005@gmail.com',
-        worksFor: {
-          '@id': `${SITE_URL}/#organization`,
-        },
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Columbus',
-          addressRegion: 'OH',
-          addressCountry: 'US',
-        },
-        homeLocation: {
-          '@type': 'Place',
-          name: 'Columbus, Ohio',
-        },
-        workLocation: serviceAreas,
-        knowsAbout: [
-          'Web developer',
-          'Ohio web developer',
-          'Columbus Ohio web developer',
-          'Website development',
-          'Web development',
-          'Web development in Ohio',
-          'Creative development',
-          'Creative developer',
-          'Frontend development',
-          'Frontend developer',
-          'Web applications',
-          'Interactive websites',
-          'React development',
-          'Next.js development',
-          'Product interface development',
-          'AI product interfaces',
-          'Global remote web development',
-          'SEO',
-          'AEO',
-          'GEO',
-          'Generative engine optimization',
-          'Structured data and search visibility',
-        ],
-        knowsLanguage: 'en-US',
-        sameAs: sameAsProfiles,
-      },
-      {
-        '@type': 'Organization',
-        '@id': `${SITE_URL}/#organization`,
-        name: SITE_NAME,
-        legalName: SITE_NAME,
-        alternateName: ['Connor Love Creative Development', 'Connor Love Web Development', 'Connor Love Ohio Web Developer'],
-        url: SITE_URL,
-        logo: {
-          '@type': 'ImageObject',
-          url: `${SITE_URL}/icon.png`,
-        },
-        image: OG_IMAGE,
-        email: 'mailto:loveconnor2005@gmail.com',
-        founder: {
-          '@id': `${SITE_URL}/#person`,
-        },
-        sameAs: sameAsProfiles,
-      },
-      {
-        '@type': 'ProfessionalService',
-        '@id': `${SITE_URL}/#services`,
-        name: 'Connor Love Web Development',
-        alternateName: ['Connor Love', 'Connor Love Creative Development', 'Connor Love Ohio Web Developer'],
-        url: SITE_URL,
-        image: OG_IMAGE,
-        logo: `${SITE_URL}/icon.png`,
-        founder: {
-          '@id': `${SITE_URL}/#person`,
-        },
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Columbus',
-          addressRegion: 'OH',
-          addressCountry: 'US',
-        },
-        areaServed: serviceAreas,
-        knowsAbout: [
-          'Web development',
-          'Website development',
-          'Ohio web development',
-          'React',
-          'Next.js',
-          'Three.js',
-          'TypeScript',
-          'Product interfaces',
-          'AI product interfaces',
-          'Performance optimization',
-          'SEO',
-          'AEO',
-          'GEO',
-          'Structured data',
-        ],
-        description:
-          'Connor Love is an Ohio web developer based in Columbus who builds custom websites, web applications, interactive digital experiences, and AI product interfaces for businesses across Ohio and remote teams worldwide.',
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name: 'Web development services',
-          itemListElement: serviceFocus.map((service) => ({
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: service.title,
-              serviceType: service.title,
-              description: service.text,
-              provider: {
-                '@id': `${SITE_URL}/#organization`,
-              },
-              areaServed: serviceAreas,
-            },
-          })),
-        },
-      },
-      {
-        '@type': 'WebSite',
-        '@id': `${SITE_URL}/#website`,
-        url: SITE_URL,
-        name: SITE_NAME,
-        alternateName: ['Connor Love Portfolio', 'Connor Love Web Developer Portfolio', 'Ohio Web Developer Portfolio'],
-        publisher: {
-          '@id': `${SITE_URL}/#organization`,
-        },
-        inLanguage: 'en-US',
-      },
+      getPersonSchema(),
+      getProfessionalServiceSchema(),
+      getWebsiteSchema(),
       {
         '@type': 'WebPage',
         '@id': `${canonicalUrl}#webpage`,
@@ -398,27 +332,21 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
         name: title,
         description,
         isPartOf: {
-          '@id': `${SITE_URL}/#website`,
+          '@id': WEBSITE_ID,
         },
         author: {
-          '@id': `${SITE_URL}/#person`,
+          '@id': PERSON_ID,
         },
         publisher: {
-          '@id': `${SITE_URL}/#organization`,
+          '@id': SERVICE_ID,
         },
         about: {
-          '@id': `${SITE_URL}/#person`,
+          '@id': PERSON_ID,
         },
         breadcrumb: {
           '@id': breadcrumbId,
         },
-        mainEntity: project
-          ? {
-              '@id': `${canonicalUrl}#creative-work`,
-            }
-          : {
-              '@id': `${SITE_URL}/#services`,
-            },
+        mainEntity,
         hasPart: {
           '@id': `${canonicalUrl}#services-list`,
         },
@@ -442,7 +370,7 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
             serviceType: service.title,
             description: service.text,
             provider: {
-              '@id': `${SITE_URL}/#organization`,
+              '@id': SERVICE_ID,
             },
             areaServed: serviceAreas,
           },
@@ -453,7 +381,7 @@ const getSchema = ({ canonicalUrl, title, description, project, pageType, articl
   };
 };
 
-function CustomHead({ title = '', description, keywords, project, pageType, article, articles }) {
+function CustomHead({ title = '', description, project, pageType, article, articles }) {
   const router = useRouter();
   const normalizedPath = normalizePath(router.asPath);
   const canonicalUrl = `${SITE_URL}${normalizedPath}`;
@@ -470,7 +398,6 @@ function CustomHead({ title = '', description, keywords, project, pageType, arti
       <meta name="googlebot" content={process.env.NODE_ENV !== 'development' ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow'} />
       <meta name="bingbot" content={process.env.NODE_ENV !== 'development' ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' : 'noindex,nofollow'} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      {keywords?.length ? <meta name="keywords" content={keywords.join(',')} /> : null}
       <meta name="author" content={article?.author || 'Connor Love'} />
       <meta name="application-name" content={SITE_NAME} />
       <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -479,7 +406,6 @@ function CustomHead({ title = '', description, keywords, project, pageType, arti
       <meta name="geo.region" content="US-OH" />
       <meta name="geo.placename" content="Columbus, Ohio" />
       <meta name="coverage" content="Columbus, Ohio; Central Ohio; Ohio; United States; Worldwide" />
-      <meta name="subject" content="Ohio web development, website development, frontend development, React development, Next.js development, SEO, AEO, and GEO" />
       <meta name="description" content={description} />
 
       {/* Canonical and Title */}
@@ -555,7 +481,6 @@ function CustomHead({ title = '', description, keywords, project, pageType, arti
 CustomHead.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  keywords: PropTypes.arrayOf(PropTypes.string),
   project: PropTypes.shape({
     title: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
@@ -600,7 +525,6 @@ CustomHead.propTypes = {
 };
 
 CustomHead.defaultProps = {
-  keywords: [],
   project: null,
   pageType: 'home',
   article: null,

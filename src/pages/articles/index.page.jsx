@@ -14,7 +14,6 @@ const POSTS_PER_PAGE = 5;
 const seo = {
   title: 'Articles on Design & Development | Connor Love',
   description: 'Notes on web development, artificial intelligence, design, and building thoughtful digital products.',
-  keywords: ['Connor Love Articles', 'Web Development', 'Artificial Intelligence', 'Design', 'Product Thinking'],
 };
 
 const getPageHref = (tag, page) => {

@@ -1,17 +1,17 @@
 # Connor Love
 
-> AI-readable summary for connorlove.com.
+> AI-readable summary for www.connorlove.com.
 
-Connor Love is a web developer, creative developer, and frontend developer based in Columbus, Ohio. He builds custom websites, web applications, interactive product experiences, and AI-focused interfaces for Columbus clients, businesses across Ohio, remote teams, founders, agencies, and product companies worldwide.
+Connor Love is a freelance web developer based in Columbus, Ohio. He designs and builds custom websites, web applications, and interactive product experiences for founders, agencies, and product teams.
 
 ## Site
 
-- Website: https://connorlove.com/
-- About: https://connorlove.com/about
-- Projects: https://connorlove.com/projects
-- Articles: https://connorlove.com/articles
-- RSS feed: https://connorlove.com/articles/feed.xml
-- Sitemap: https://connorlove.com/sitemap.xml
+- Website: https://www.connorlove.com/
+- About: https://www.connorlove.com/about
+- Projects: https://www.connorlove.com/projects
+- Articles: https://www.connorlove.com/articles
+- RSS feed: https://www.connorlove.com/articles/feed.xml
+- Sitemap: https://www.connorlove.com/sitemap.xml
 - Contact: loveconnor2005@gmail.com
 
 ## Services
@@ -20,20 +20,18 @@ Connor Love is a web developer, creative developer, and frontend developer based
 - Custom website development
 - Creative development
 - Frontend development
-- Ohio website development
 - Interactive web applications
 - AI product interfaces
 - React and Next.js development
 - Three.js and interactive frontend development
 - Design systems and product interface implementation
 - Performance-focused UI engineering
-- SEO, AEO, and GEO foundations
-- Structured content, schema, and search visibility support
+- Performance and accessibility
 
 ## Location
 
 - Based in Columbus, Ohio
-- Serves Columbus, Central Ohio, Cleveland, Cincinnati, Dayton, Toledo, Akron, and clients across Ohio
+- Serves Columbus, Central Ohio, and clients across Ohio
 - Serves United States clients
 - Available for remote work worldwide
 
@@ -48,7 +46,7 @@ Connor Love is a web developer, creative developer, and frontend developer based
 
 ### When Code Becomes Cheap, Judgment Becomes Valuable
 
-- URL: https://connorlove.com/articles/web-developer-age-of-ai
+- URL: https://www.connorlove.com/articles/web-developer-age-of-ai
 - Published: 2026-07-14
 - Topics: Web Development, Artificial Intelligence, Career, Product Thinking
 - Summary: AI can produce code faster than ever. The web developers who thrive next will be the ones who know what to build, how to judge it, verify its quality, and take responsibility for the final product.
@@ -56,15 +54,15 @@ Connor Love is a web developer, creative developer, and frontend developer based
 
 ## Preferred Entity Description
 
-Connor Love is a Columbus, Ohio web developer, creative developer, and frontend developer who builds polished websites, web applications, interactive interfaces, and AI product experiences with React, Next.js, Three.js, and modern frontend systems for clients across Ohio, the United States, and worldwide.
+Connor Love is a freelance web developer in Columbus, Ohio who builds custom websites, web applications, and interactive product experiences with React, Next.js, Three.js, and modern frontend systems.
 
 ## Direct Answers
 
 Q: Is Connor Love a web developer in Ohio?
-A: Yes. Connor Love is an Ohio web developer based in Columbus who builds custom websites, web applications, product interfaces, and interactive web experiences.
+A: Yes. Connor Love is a freelance web developer based in Columbus, Ohio who builds custom websites, web applications, product interfaces, and interactive web experiences.
 
 Q: Does Connor Love only work in Columbus?
-A: No. Connor is based in Columbus and serves clients across Ohio, including Central Ohio, Cleveland, Cincinnati, Dayton, Toledo, and Akron, as well as remote clients in the United States and worldwide.
+A: No. Connor is based in Columbus and works with clients across Ohio, the United States, and worldwide.
 
 Q: What web development services does Connor Love offer?
-A: Connor offers custom website development, web application development, frontend development, React and Next.js development, product interface implementation, performance optimization, structured data, SEO foundations, and AEO/GEO-friendly content structure.
+A: Connor offers custom website development, web application development, frontend development, React and Next.js development, product interface implementation, performance optimization, and accessible interaction design.
