@@ -41,8 +41,9 @@ const nextConfig = {
           value: 'nosniff',
         },
         {
-          key: 'X-Frame-Options',
-          value: 'SAMEORIGIN',
+          // Allow the live portfolio inside Connor's virtual desktop.
+          key: 'Content-Security-Policy',
+          value: "frame-ancestors 'self' https://experience.connorlove.com https://desk.connorlove.com http://localhost:5173 http://127.0.0.1:5173 http://localhost:4173 http://127.0.0.1:4173",
         },
         {
           key: 'X-XSS-Protection',
