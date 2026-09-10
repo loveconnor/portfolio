@@ -5,6 +5,7 @@ import MenuButton from '@src/components/dom/navbar/components/MenuButton';
 import MenuLinks from '@src/components/dom/navbar/components/MenuLinks';
 import clsx from 'clsx';
 import styles from '@src/components/dom/navbar/styles/index.module.scss';
+import menuButtonStyles from '@src/components/dom/navbar/styles/menuButton.module.scss';
 import { useCallback } from 'react';
 import useIsMobile from '@src/hooks/useIsMobile';
 import { useRouter } from 'next/router';
@@ -49,6 +50,9 @@ function Navbar() {
           </Link>
 
           <div className={styles.rightContainer}>
+            <a href="https://room.connorlove.com" className={clsx('p-xs', menuButtonStyles.button, styles.deskLink)}>
+              <span className={clsx('p-x', menuButtonStyles.label)}>View in 3D</span>
+            </a>
             {!isMobile && <ButtonLink href={BOOK_CALL_URL} label="BOOK A CALL" target />}
             <MenuButton />
           </div>

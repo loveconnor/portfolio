@@ -32,6 +32,25 @@
       display: flex;
       gap: var(--layout-columns-gap);
       align-items: center;
+
+      .deskLink {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        min-height: 24px;
+        white-space: nowrap;
+        text-decoration: none;
+
+        &:focus-visible {
+          outline: 2px solid var(--black);
+          outline-offset: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
+      }
     }
   }
 }
