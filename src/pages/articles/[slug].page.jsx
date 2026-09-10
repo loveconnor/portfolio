@@ -8,11 +8,17 @@ import { getAllArticles, getArticleBySlug } from '@src/lib/articles';
 import formatArticleDate from '@src/utils/articles';
 import remarkGfm from 'remark-gfm';
 import SamenessMachine from '@src/pages/articles/components/SamenessMachine';
+import ArticleAnimation from '@src/pages/articles/components/ArticleAnimation';
 import styles from '@src/pages/articles/styles/article.module.scss';
 
 const articleImageDimensions = {
   '/articles/internet-sameness/default-websites-transparent.png': { width: 1462, height: 754 },
   '/articles/internet-sameness/purpose-shaped-websites-transparent.png': { width: 1450, height: 832 },
+  '/articles/room/daylight.webp': { width: 1440, height: 900 },
+  '/articles/room/desktop.webp': { width: 1440, height: 900 },
+  '/articles/room/night.webp': { width: 1440, height: 900 },
+  '/articles/room/entrance.mp4': { width: 960, height: 600, poster: '/articles/room/entrance.webp' },
+  '/articles/room/book.mp4': { width: 960, height: 600, poster: '/articles/room/book.webp' },
 };
 
 const markdownComponents = {
@@ -23,6 +29,10 @@ const markdownComponents = {
   },
   img: ({ src, alt, title }) => {
     const dimensions = articleImageDimensions[src] || { width: 1536, height: 1024 };
+
+    if (dimensions.poster) {
+      return <ArticleAnimation src={src} poster={dimensions.poster} alt={alt || ''} title={title} width={dimensions.width} height={dimensions.height} />;
+    }
 
     return (
       <figure className={styles.articleFigure}>

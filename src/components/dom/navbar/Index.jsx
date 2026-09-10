@@ -50,10 +50,10 @@ function Navbar() {
           </Link>
 
           <div className={styles.rightContainer}>
+            {!isMobile && <ButtonLink href={BOOK_CALL_URL} label="BOOK A CALL" target />}
             <a href="https://room.connorlove.com" className={clsx('p-xs', menuButtonStyles.button, styles.deskLink)}>
               <span className={clsx('p-x', menuButtonStyles.label)}>View in 3D</span>
             </a>
-            {!isMobile && <ButtonLink href={BOOK_CALL_URL} label="BOOK A CALL" target />}
             <MenuButton />
           </div>
         </div>

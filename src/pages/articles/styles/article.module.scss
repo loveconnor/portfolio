@@ -144,7 +144,8 @@ $muted: color-mix(in srgb, var(--black) 64%, transparent);
   margin-block: var(--typeset-flow);
   margin-inline: 0;
 
-  img {
+  img,
+  video {
     display: block;
     width: 100%;
     height: auto;
