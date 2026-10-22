@@ -9,6 +9,8 @@ tags:
   - Tokenization
   - Natural Language Processing
   - Machine Learning
+cover: '/tokenizer/project.webp'
+coverAlt: 'The tokenizer app comparing token counts across ten tokenizers'
 draft: false
 ---
 

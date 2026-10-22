@@ -108,6 +108,8 @@ const readArticleFile = (fileName) => {
     readingTime: getReadingTime(content),
     wordCount: getWordCount(content),
     ogImage: metadata.ogImage ? String(metadata.ogImage) : `/articles/${slug}-og.png`,
+    cover: metadata.cover ? String(metadata.cover) : null,
+    coverAlt: metadata.coverAlt ? String(metadata.coverAlt) : '',
     content: getRenderableContent(content, title, subtitle),
   };
 };

@@ -9,6 +9,8 @@ tags:
   - Creative Development
   - Artificial Intelligence
   - Product Thinking
+cover: "/articles/internet-sameness/default-websites-transparent.png"
+coverAlt: "Three fictional product websites with different accent colors but nearly identical layouts"
 draft: false
 ---
 

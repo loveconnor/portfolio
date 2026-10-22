@@ -47,8 +47,11 @@ function MenuLinks() {
         )
         .to(layout, { opacity: isMobile ? 0.05 : 0.3, height: '90svh' }, 0)
         .to(scrollbar, { opacity: 0, right: '46vw', scale: 0.9 }, 0)
-        .to(
+        // An explicit start state makes closing the menu restore a visible header,
+        // even when the menu was opened while the intro still had the header hidden.
+        .fromTo(
           header,
+          { autoAlpha: 1, left: 0, top: 0, scale: 1 },
           {
             autoAlpha: 0,
             left: '-40vw',
@@ -62,39 +65,43 @@ function MenuLinks() {
     [isMobile],
   );
 
-  useEffect(() => {
+  const contextRef = useRef(null);
+
+  // The timeline is built on the first open, not on mount. Its header fromTo renders its start
+  // state immediately, which would reveal the header during the intro if it ran on mount.
+  const buildTimeline = useCallback(() => {
     const tl = gsap.timeline({
       paused: true,
       defaults: { duration: 0.92, ease: 'expo.inOut' },
     });
-    timeline.current = tl;
-    const refs = { menuRef, menuLinksItemsRef };
-    const ctx = gsap.context(() => {
-      setupMenuAnimation(tl, refs);
+    contextRef.current = gsap.context(() => {
+      setupMenuAnimation(tl, { menuRef, menuLinksItemsRef });
     });
-
-    return () => {
-      ctx.kill();
-      if (tl) {
-        tl.kill();
-      }
-    };
+    timeline.current = tl;
+    return tl;
   }, [setupMenuAnimation]);
 
   useEffect(() => {
-    const tl = timeline.current;
-    if (!tl || tl.getChildren().length === 0) {
-      gsap.set(menuRef.current, { autoAlpha: isMenuOpen ? 1 : 0 });
-      gsap.set(menuLinksItemsRef.current, { x: isMenuOpen ? 0 : '-100%' });
-      return;
+    if (!useStore.getState().isMenuOpen) {
+      gsap.set(menuRef.current, { autoAlpha: 0 });
+      gsap.set(menuLinksItemsRef.current, { x: '-100%' });
     }
 
+    return () => {
+      timeline.current?.kill();
+      contextRef.current?.kill();
+      timeline.current = null;
+      contextRef.current = null;
+    };
+  }, [buildTimeline]);
+
+  useEffect(() => {
     if (isMenuOpen) {
-      tl.play();
+      (timeline.current || buildTimeline()).play();
     } else {
-      tl.reverse();
+      timeline.current?.reverse();
     }
-  }, [isMenuOpen]);
+  }, [isMenuOpen, buildTimeline]);
 
   const goToBottom = () => {
     setIsMenuOpen(false);

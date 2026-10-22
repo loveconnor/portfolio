@@ -16,8 +16,7 @@ function Quote() {
       <h3 ref={textRef} className={clsx(styles.text, 'h3')}>
         {!isLoading && (
           <TextOpacity textRef={textRef.current} trigger={rootRef.current}>
-            When starting a new project, I focus on how everything will work, feel, and scale. With experience across design and development, I choose tools that support performance, clarity, and
-            long-term growth.
+            Every project starts with the problem: who it is for, what success looks like, and which constraints are real. I choose the tools after that.
           </TextOpacity>
         )}
       </h3>

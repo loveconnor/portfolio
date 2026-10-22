@@ -11,6 +11,16 @@
   width: 100%;
   pointer-events: none;
   scale: 1;
+
+  // The intro and page-transition timelines can fade the header back in while the menu is open.
+  // !important outranks their inline styles so the header never covers the menu's close button.
+  &.menuOpen {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition:
+      opacity 0.3s ease,
+      visibility 0s linear 0.3s;
+  }
   .innerHeader {
     height: 3.1vw;
     @include mobile {

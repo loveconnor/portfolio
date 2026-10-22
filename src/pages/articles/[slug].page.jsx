@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import AppearTitle from '@src/components/animationComponents/appearTitle/Index';
 import CustomHead from '@src/components/dom/CustomHead';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -53,7 +54,9 @@ function ArticleContent({ content }) {
       </ReactMarkdown>
       {afterDemo !== undefined && (
         <>
-          <SamenessMachine />
+          <div className={styles.wide}>
+            <SamenessMachine />
+          </div>
           <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
             {afterDemo}
           </ReactMarkdown>
@@ -69,40 +72,37 @@ function Page({ article }) {
       <CustomHead title={`${article.title} | Connor Love`} description={article.description} pageType="articles" article={article} />
 
       <section className={clsx(styles.hero, 'layout-grid-inner')}>
-        <Link className={clsx(styles.backLink, 'p-x')} scroll={false} href="/articles">
+        <Link className={clsx(styles.backLink, 'p-l')} scroll={false} href="/articles">
           <span aria-hidden="true">←</span> All articles
         </Link>
-
         <div className={styles.heading}>
-          <time className={clsx(styles.meta, 'p-x')} dateTime={article.dateReleased}>
-            {formatArticleDate(article.dateReleased, true)}
-          </time>
-          <h1 className={clsx(styles.title, 'h1')}>{article.title}</h1>
-          <p className={clsx(styles.subtitle, 'h5')}>{article.subtitle || article.description}</p>
+          <AppearTitle>
+            <h1 className="h2">{article.title}</h1>
+          </AppearTitle>
         </div>
-      </section>
-
-      <section className={clsx(styles.articleSection, 'layout-grid-inner')}>
-        <aside className={styles.articleAside} aria-label="Article details">
+        <div className={styles.subtitle}>
+          <AppearTitle>
+            <p className="h6">{article.subtitle || article.description}</p>
+          </AppearTitle>
+        </div>
+        <dl className={styles.meta}>
           <div>
-            <p className={clsx(styles.asideLabel, 'p-x')}>Written by</p>
-            <p className="p-l">{article.author}</p>
+            <dt className="p-l">Published</dt>
+            <dd className="p-l">
+              <time dateTime={article.dateReleased}>{formatArticleDate(article.dateReleased)}</time>
+            </dd>
           </div>
           {article.tags.length > 0 && (
             <div>
-              <p className={clsx(styles.asideLabel, 'p-x')}>Topics</p>
-              <ul className={styles.topicList}>
-                {article.tags.map((tag) => (
-                  <li className="p-x" key={tag}>
-                    {tag}
-                  </li>
-                ))}
-              </ul>
+              <dt className="p-l">Topics</dt>
+              <dd className="p-l">{article.tags.join(', ')}</dd>
             </div>
           )}
-        </aside>
+        </dl>
+      </section>
 
-        <article className={clsx(styles.articleBody, 'typeset', 'typeset-docs')}>
+      <section className={clsx(styles.articleSection, 'layout-grid-inner')}>
+        <article className={clsx(styles.articleBody, 'typeset')}>
           <ArticleContent content={article.content} />
         </article>
       </section>

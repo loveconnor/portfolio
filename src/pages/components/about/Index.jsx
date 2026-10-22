@@ -68,18 +68,18 @@ function About() {
         <div className={clsx(styles.descWrapperBottom)}>
           {!isMobile ? (
             <AppearTitle key="desktop-descWrapperBottom">
-              <p className="h6">A creative developer focused on building modern</p>
-              <p className="h6">web experiences with a strong balance of design</p>
-              <p className="h6">and engineering. I specialize in creating fast,</p>
-              <p className="h6">interactive applications that are clean, scalable,</p>
-              <p className="h6">and built to perform.</p>
+              <p className="h6">Alongside client work, I&apos;m building Swipz, an app</p>
+              <p className="h6">that helps students decide where to eat, and</p>
+              <p className="h6">Handwork, an AI coding agent for the terminal.</p>
+              <p className="h6">Code keeps getting cheaper, so I focus on</p>
+              <p className="h6">knowing what it is for.</p>
             </AppearTitle>
           ) : (
             <AppearTitle key="mobile-descWrapperBottom">
-              <p className="h6">A creative developer focused on building modern web</p>
-              <p className="h6">experiences with a strong balance of design and</p>
-              <p className="h6">engineering. I specialize in creating fast, interactive</p>
-              <p className="h6">applications that are clean, scalable, and built to perform.</p>
+              <p className="h6">Alongside client work, I&apos;m building Swipz, an app that</p>
+              <p className="h6">helps students decide where to eat, and Handwork, an AI</p>
+              <p className="h6">coding agent for the terminal. Code keeps getting</p>
+              <p className="h6">cheaper, so I focus on knowing what it is for.</p>
             </AppearTitle>
           )}
           <div className={clsx(styles.buttonContainer)}>

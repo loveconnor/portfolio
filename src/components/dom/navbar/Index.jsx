@@ -15,7 +15,7 @@ import { useStore } from '@src/store';
 function Navbar() {
   const isMobile = useIsMobile();
   const router = useRouter();
-  const [lenis] = useStore(useShallow((state) => [state.lenis]));
+  const [lenis, isMenuOpen] = useStore(useShallow((state) => [state.lenis, state.isMenuOpen]));
 
   const scrollToPosition = useCallback(
     (position, duration = 1.5) => {
@@ -43,7 +43,7 @@ function Navbar() {
     <>
       <MenuLinks />
 
-      <header className={styles.root} role="banner">
+      <header className={clsx(styles.root, isMenuOpen && styles.menuOpen)} role="banner">
         <div className={styles.innerHeader}>
           <Link onClick={goToTop} aria-label="Go home" scroll={false} href="/">
             <span className={clsx('bold', 'h4')}>CONNOR</span>

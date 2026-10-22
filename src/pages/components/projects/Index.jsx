@@ -23,7 +23,7 @@ function Projects() {
   const rootRef = useRef();
   const projectRefs = useRef([]);
 
-  const selectedProjectIds = ['honestui', 'clove-colors', 'tokenizer'];
+  const selectedProjectIds = ['honestui', 'swipz', 'handwork'];
   const newProjects = selectedProjectIds.map((projectId) => projects.find((project) => project.id === projectId)).filter(Boolean);
 
   const setupProjectAnimations = () => {

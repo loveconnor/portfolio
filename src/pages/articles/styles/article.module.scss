@@ -1,148 +1,165 @@
 @import '@src/styles/functions';
 
-$rule: color-mix(in srgb, var(--black) 24%, transparent);
-$muted: color-mix(in srgb, var(--black) 64%, transparent);
+// Figures extend four columns left of the text column so images get room without
+// pulling the reading column off the shared column-9 line.
+$figure-bleed: calc(4 * (var(--layout-column-width) + var(--layout-columns-gap)));
 
 .hero {
-  min-height: 72svh;
-  padding-top: calc(var(--layout-columns-gap) * 5.5);
-  padding-bottom: calc(var(--layout-columns-gap) * 2.5);
-  align-content: space-between;
+  row-gap: calc(var(--layout-columns-gap) * 1.5);
+  padding-top: calc(var(--layout-columns-gap) * 6);
   background-color: var(--white);
 
   @include mobile {
-    min-height: auto;
-    padding-top: calc(var(--layout-columns-gap) * 5);
-    padding-bottom: calc(var(--layout-columns-gap) * 4);
+    row-gap: var(--layout-columns-gap);
+    padding-top: calc(var(--layout-columns-gap) * 4);
   }
 }
 
 .backLink {
-  grid-column: 1 / 4;
-  align-self: start;
+  grid-column: 1 / 17;
   display: inline-flex;
-  gap: 0.65em;
+  gap: 0.5em;
   width: fit-content;
-  padding: 0.6em 0;
 
   &:hover {
-    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 6px;
+    outline: 2px solid var(--black);
+    outline-offset: 4px;
   }
 
   @include mobile {
     grid-column: 1 / 7;
-    margin-left: calc(var(--layout-columns-gap) * 2);
   }
 }
 
 .heading {
-  grid-column: 3 / 16;
-  align-self: end;
-  margin-top: calc(var(--layout-columns-gap) * 4);
+  grid-column: 1 / 14;
+  margin-top: var(--layout-columns-gap);
+
+  h1 {
+    text-wrap: balance;
+  }
 
   @include mobile {
     grid-column: 1 / 7;
-    margin-top: calc(var(--layout-columns-gap) * 3);
-    padding-left: calc(var(--layout-columns-gap) * 2);
-  }
-}
-
-.meta {
-  max-width: 90ch;
-  color: var(--accent-dark);
-  font-variant-numeric: tabular-nums;
-}
-
-.title {
-  max-width: 20ch;
-  margin-top: calc(var(--layout-columns-gap) * 1.25);
-  font-size: clamp(3.75rem, 5.2vw, 6.75rem);
-  line-height: 1.08;
-  letter-spacing: 0;
-  word-spacing: normal;
-  text-align: start;
-  text-wrap: pretty;
-
-  @include mobile {
-    max-width: 16ch;
-    font-size: 9vw;
-    line-height: 1.15;
   }
 }
 
 .subtitle {
-  max-width: 46ch;
-  margin-top: calc(var(--layout-columns-gap) * 1.5);
-  color: $muted;
+  grid-column: 9 / 16;
 
   @include mobile {
-    max-width: 29ch;
+    grid-column: 1 / 7;
+  }
+}
+
+.meta {
+  grid-column: 1 / 17;
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  column-gap: var(--layout-columns-gap);
+  margin-top: var(--layout-columns-gap);
+  padding-top: calc(var(--layout-columns-gap) * 0.75);
+  border-top: 1px solid var(--black);
+
+  > div:first-child {
+    grid-column: 1 / 9;
+  }
+
+  > div:nth-child(2) {
+    grid-column: 9 / 16;
+  }
+
+  dt {
+    color: var(--secondary);
+  }
+
+  @include mobile {
+    grid-column: 1 / 7;
+    grid-template-columns: 1fr;
+    row-gap: calc(var(--layout-columns-gap) * 0.5);
+
+    > div:first-child,
+    > div:nth-child(2) {
+      grid-column: 1 / -1;
+    }
   }
 }
 
 .articleSection {
+  padding-top: calc(var(--layout-columns-gap) * 2);
+  padding-bottom: calc(var(--layout-columns-gap) * 6);
   background-color: var(--white);
-  padding-top: calc(var(--layout-columns-gap) * 4);
-  padding-bottom: calc(var(--layout-columns-gap) * 5);
-}
-
-.articleAside {
-  grid-column: 2 / 5;
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--layout-columns-gap) * 2.5);
-  padding-top: 0.1rem;
 
   @include mobile {
-    grid-column: 1 / 7;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: calc(var(--layout-columns-gap) * 2);
-    padding: 0 0 calc(var(--layout-columns-gap) * 3) calc(var(--layout-columns-gap) * 2);
+    padding-top: calc(var(--layout-columns-gap) * 2);
+    padding-bottom: calc(var(--layout-columns-gap) * 4);
   }
 }
 
-.asideLabel {
-  margin-bottom: calc(var(--layout-columns-gap) * 0.5);
-  color: $muted;
-}
-
-.topicList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-
-  li {
-    padding: 0.35rem 0.65rem;
-    border: 1px solid $rule;
-    border-radius: 999px;
-  }
-}
-
+// Body text follows the site's p-l scale, with a 1rem floor so long reading stays legible on phones.
 .articleBody {
-  grid-column: 6 / 14;
-  width: 100%;
-  max-width: 42em;
+  --typeset-flow: 1.1em;
+
+  grid-column: 9 / 16;
   min-width: 0;
+  color: var(--black);
+  font-size: max(1rem, 1.15vw);
   font-weight: 400;
+  line-height: 1.6;
   user-select: text;
 
   @include mobile {
     grid-column: 1 / 7;
-    padding-left: calc(var(--layout-columns-gap) * 2);
+  }
+
+  h2 {
+    margin-top: 2.4em;
+    font-size: max(1.4rem, 1.9vw);
+    line-height: 1.3;
+  }
+
+  h3 {
+    margin-top: 2em;
+    font-size: max(1.15rem, 1.5vw);
+    line-height: 1.35;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+
+    &:hover {
+      text-decoration-thickness: 2px;
+    }
   }
 }
 
+@mixin bleed {
+  width: calc(100% + #{$figure-bleed});
+  margin-block: calc(var(--typeset-flow) * 2);
+  margin-inline: calc(-1 * #{$figure-bleed}) 0;
+
+  @include mobile {
+    width: 100%;
+    margin-inline: 0;
+  }
+}
+
+.wide {
+  @include bleed;
+}
+
 .articleFigure {
+  @include bleed;
+
   display: grid;
-  row-gap: 0.35rem;
-  margin-block: var(--typeset-flow);
-  margin-inline: 0;
+  row-gap: calc(var(--layout-columns-gap) * 0.5);
 
   img,
   video {
@@ -150,15 +167,21 @@ $muted: color-mix(in srgb, var(--black) 64%, transparent);
     width: 100%;
     height: auto;
     margin: 0;
+    border-radius: calc(var(--layout-columns-gap) * 0.5);
   }
 
   figcaption {
-    max-width: 62ch;
-    margin: 0 auto;
-    color: $muted;
-    font-size: 0.78rem;
+    margin: 0;
+    padding-left: $figure-bleed;
+    color: var(--black);
+    font-size: max(0.875rem, 0.95vw);
     line-height: 1.45;
-    text-align: center;
-    text-wrap: balance;
+    text-align: start;
+  }
+
+  @include mobile {
+    figcaption {
+      padding-left: 0;
+    }
   }
 }

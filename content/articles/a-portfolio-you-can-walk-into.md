@@ -10,6 +10,8 @@ tags:
   - Web development
   - Interaction design
 ogImage: '/articles/room/cover.jpg'
+cover: '/articles/room/cover.jpg'
+coverAlt: 'The 3D room seen from above, with a desk and computer, a bookshelf, a reading chair, and a project pinboard'
 draft: false
 ---
 

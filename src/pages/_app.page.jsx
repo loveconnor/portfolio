@@ -129,6 +129,8 @@ function MyApp({ Component, pageProps, router }) {
         style={{ zIndex: 0 }}
         resize={{ debounce: { resize: 0, scroll: 0 }, polyfill: undefined }}
         className={styles.canvasContainer}
+        eventSource={mainRef}
+        eventPrefix="client"
         dpr={[0.5, 1.5]}
       >
         <View.Port />

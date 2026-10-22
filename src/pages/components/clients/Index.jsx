@@ -74,14 +74,10 @@ function Clients() {
             <h3 className={clsx('h4', 'bold')}>Modern Telecom</h3>
           </AppearTitle>
           <AppearTitle>
-            <div className="p-l">Lorem ipsum dolor sit amet, consectetur</div>
-            <div className="p-l">adipiscing elit. Sed do eiusmod tempor</div>
-            <div className="p-l">incididunt ut labore et dolore magna aliqua.</div>
-            <div className="p-l">Ut enim ad minim veniam, quis nostrud</div>
-            <div className="p-l">exercitation ullamco laboris nisi ut aliquip</div>
-            <div className="p-l">ex ea commodo consequat. Duis aute irure</div>
-            <div className="p-l">dolor in reprehenderit in voluptate velit</div>
-            <div className="p-l">esse cillum dolore eu fugiat nulla pariatur.</div>
+            <p className="p-l">
+              Modern Telecom provides business phone and internet services for companies and organizations. They design and manage communication systems that keep teams connected, including VoIP,
+              high-speed internet, and network solutions. Focused on reliability and support, they help businesses stay connected and operate efficiently.
+            </p>
           </AppearTitle>
         </div>
       ) : null}

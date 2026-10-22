@@ -4,7 +4,6 @@ import Overview from '@src/pages/about/components/overview/Overview';
 import Services from '@src/pages/about/components/services/Services';
 import Process from '@src/pages/about/components/process/Process';
 import CustomHead from '@src/components/dom/CustomHead';
-import SeoContent from '@src/pages/components/seo/Index';
 
 const seo = {
   title: 'About Connor Love | Ohio Web Developer & Frontend Engineer',
@@ -19,7 +18,6 @@ function Page() {
       <Overview />
       <Services />
       <Process />
-      <SeoContent variant="about" />
     </>
   );
 }

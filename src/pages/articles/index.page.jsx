@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import AppearTitle from '@src/components/animationComponents/appearTitle/Index';
 import CustomHead from '@src/components/dom/CustomHead';
 import ButtonLink from '@src/components/animationComponents/buttonLink/Index';
+import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@src/components/ui/DropdownMenu';
@@ -9,7 +11,7 @@ import formatArticleDate from '@src/utils/articles';
 import { useRouter } from 'next/router';
 import styles from '@src/pages/articles/styles/articles.module.scss';
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 6;
 
 const seo = {
   title: 'Articles on Design & Development | Connor Love',
@@ -23,25 +25,22 @@ const getPageHref = (tag, page) => {
   return query.size ? `/articles?${query.toString()}` : '/articles';
 };
 
-function ArticleRow({ article }) {
+function ArticleCard({ article }) {
   return (
-    <article className={styles.articleItem}>
-      <Link className={styles.articleRow} scroll={false} href={`/articles/${article.slug}`} aria-label={`Read ${article.title}`}>
-        <div className={styles.articleDetails}>
-          <time className="p-x" dateTime={article.dateReleased}>
-            {formatArticleDate(article.dateReleased)}
-          </time>
-          <p className={clsx(styles.author, 'p-x')}>By {article.author}</p>
+    <article>
+      <Link className={styles.card} scroll={false} href={`/articles/${article.slug}`}>
+        <div className={styles.cover}>
+          {article.cover ? (
+            <Image src={article.cover} alt={article.coverAlt} fill sizes="(max-width: 768px) 100vw, 50vw" />
+          ) : (
+            <p className={clsx(styles.coverText, 'h4')}>{article.subtitle || article.description}</p>
+          )}
         </div>
-
-        <div className={styles.articleCopy}>
-          {article.tags.length > 0 && <p className={clsx(styles.tags, 'p-x')}>{article.tags.join(' · ')}</p>}
-          <h2 className={clsx(styles.articleTitle, 'h4')}>{article.title}</h2>
-          <p className={clsx(styles.articleDescription, 'p-l')}>{article.description}</p>
-          <span className={clsx(styles.readLink, 'p-x')}>
-            Read article <span aria-hidden="true">↗</span>
-          </span>
-        </div>
+        <time className={clsx(styles.date, 'h6')} dateTime={article.dateReleased}>
+          {formatArticleDate(article.dateReleased)}
+        </time>
+        <h2 className={clsx(styles.cardTitle, 'h4')}>{article.title}</h2>
+        <p className={clsx(styles.cardDescription, 'p-l')}>{article.description}</p>
       </Link>
     </article>
   );
@@ -66,42 +65,47 @@ function Page({ articles }) {
       <CustomHead {...seo} pageType="articles" articles={articles} />
 
       <section className={clsx(styles.hero, 'layout-grid-inner')}>
-        <p className={clsx(styles.eyebrow, 'p-x')}>Notes on design & development</p>
-        <h1 className={clsx(styles.pageTitle, 'h1')}>Articles</h1>
-        <p className={clsx(styles.intro, 'h5')}>Ideas, experiments, and practical lessons from making digital products for the web.</p>
+        <div className={styles.heading}>
+          <AppearTitle>
+            <p className="h6">Notes on design and development</p>
+            <h1 className="h1">Articles</h1>
+          </AppearTitle>
+        </div>
+        <div className={styles.intro}>
+          <AppearTitle>
+            <p className="h6">Ideas, experiments, and practical lessons from making digital products for the web.</p>
+          </AppearTitle>
+        </div>
       </section>
 
       <section className={clsx(styles.archive, 'layout-grid-inner')} aria-label="Article archive">
         <div className={styles.archiveHeader}>
           <div className={styles.archiveActions}>
             {tags.length > 0 && (
-              <div className={styles.filter}>
-                <span className="p-x">Filter by topic</span>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button type="button" className={clsx(styles.topicTrigger, 'p-x')} aria-label="Filter articles by topic">
-                      <span>{selectedTag || 'All topics'}</span>
-                      <span className={styles.chevron} aria-hidden="true">
-                        <svg viewBox="0 0 20 20">
-                          <path d="m5 7.5 5 5 5-5" />
-                        </svg>
-                      </span>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuRadioGroup value={selectedTag} onValueChange={handleTagChange}>
-                      <DropdownMenuRadioItem className="p-x" value="">
-                        All topics
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button type="button" className={clsx(styles.topicTrigger, 'p-x')} aria-label="Filter articles by topic">
+                    <span>{selectedTag || 'All topics'}</span>
+                    <span className={styles.chevron} aria-hidden="true">
+                      <svg viewBox="0 0 20 20">
+                        <path d="m5 7.5 5 5 5-5" />
+                      </svg>
+                    </span>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  <DropdownMenuRadioGroup value={selectedTag} onValueChange={handleTagChange}>
+                    <DropdownMenuRadioItem className="p-x" value="">
+                      All topics
+                    </DropdownMenuRadioItem>
+                    {tags.map((tag) => (
+                      <DropdownMenuRadioItem className="p-x" value={tag} key={tag}>
+                        {tag}
                       </DropdownMenuRadioItem>
-                      {tags.map((tag) => (
-                        <DropdownMenuRadioItem className="p-x" value={tag} key={tag}>
-                          {tag}
-                        </DropdownMenuRadioItem>
-                      ))}
-                    </DropdownMenuRadioGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
+                    ))}
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
             )}
             <ButtonLink href="/articles/feed.xml" label="RSS FEED" reloadDocument />
           </div>
@@ -109,7 +113,7 @@ function Page({ articles }) {
 
         <div className={styles.articleList}>
           {visibleArticles.length > 0 ? (
-            visibleArticles.map((article) => <ArticleRow article={article} key={article.slug} />)
+            visibleArticles.map((article) => <ArticleCard article={article} key={article.slug} />)
           ) : (
             <div className={styles.emptyState}>
               <h3 className="h4">No articles found.</h3>

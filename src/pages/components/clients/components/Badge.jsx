@@ -4,8 +4,8 @@ import * as THREE from 'three';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 import { PerspectiveCamera, View, useGLTF, useTexture } from '@react-three/drei';
-import { extend, useFrame } from '@react-three/fiber';
-import { useRef, useState } from 'react';
+import { extend, useFrame, useThree } from '@react-three/fiber';
+import { useEffect, useRef, useState } from 'react';
 
 import { useIntersection } from 'react-use';
 import useScroll from '@src/hooks/useScroll';
@@ -60,15 +60,21 @@ function Band({ maxSpeed = 50, minSpeed = 10, name, intersected }) {
   const j2 = useRef();
   const j3 = useRef();
   const card = useRef();
+  const vec = new THREE.Vector3();
   const ang = new THREE.Vector3();
   const rot = new THREE.Vector3();
+  const dir = new THREE.Vector3();
   const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 2, linearDamping: 2 };
   const { nodes, materials } = useGLTF(`/model/Tag.glb`);
 
   const texture = useTexture(`/model/Band${name}.png`);
   const tag = useTexture(`/model/Tag${name}.png`);
 
+  const { width, height } = useThree((state) => state.size);
+
   const [curve] = useState(() => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]));
+  const [dragged, drag] = useState(false);
+  const [hovered, hover] = useState(false);
 
   const scrollDirection = useRef(0);
   const isScrolling = useRef(false);
@@ -88,8 +94,22 @@ function Band({ maxSpeed = 50, minSpeed = 10, name, intersected }) {
     speed.current = velocity;
   });
 
+  useEffect(() => {
+    if (!hovered) return undefined;
+    document.body.style.cursor = dragged ? 'grabbing' : 'grab';
+    return () => {
+      document.body.style.cursor = 'auto';
+    };
+  }, [hovered, dragged]);
+
   useFrame((state, delta) => {
-    if (isScrolling.current && intersected) {
+    if (dragged) {
+      vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
+      dir.copy(vec).sub(state.camera.position).normalize();
+      vec.add(dir.multiplyScalar(state.camera.position.length()));
+      [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
+      card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
+    } else if (isScrolling.current && intersected) {
       const moveDistance = Math.abs(speed.current) * 0.005;
       const directionVector = scrollDirection.current === 1 ? 1 : -1;
       card.current.applyImpulse({ x: directionVector * moveDistance, y: 0, z: 0 }, true);
@@ -135,9 +155,22 @@ function Band({ maxSpeed = 50, minSpeed = 10, name, intersected }) {
         <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}>
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type="dynamic">
+        <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
-          <group scale={2.25} position={[0, -1.2, -0.05]}>
+          <group
+            scale={2.25}
+            position={[0, -1.2, -0.05]}
+            onPointerOver={() => hover(true)}
+            onPointerOut={() => hover(false)}
+            onPointerUp={(e) => {
+              e.target.releasePointerCapture(e.pointerId);
+              drag(false);
+            }}
+            onPointerDown={(e) => {
+              e.target.setPointerCapture(e.pointerId);
+              drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())));
+            }}
+          >
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial map={tag} clearcoat={1} clearcoatRoughness={0.15} roughness={0.5} metalness={0.4} />
             </mesh>
@@ -148,7 +181,7 @@ function Band({ maxSpeed = 50, minSpeed = 10, name, intersected }) {
       </group>
       <mesh ref={band}>
         <meshLineGeometry />
-        <meshLineMaterial color="white" resolution={[1, 1]} depthTest={false} useMap map={texture} repeat={[-3, 1]} lineWidth={1} />
+        <meshLineMaterial color="white" resolution={[width, height]} depthTest={false} useMap map={texture} repeat={[-3, 1]} lineWidth={1} />
       </mesh>
     </>
   );

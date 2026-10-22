@@ -1,54 +1,48 @@
 @import '@src/styles/functions';
 
-$muted: color-mix(in srgb, var(--black) 64%, transparent);
-$hover: color-mix(in srgb, var(--black) 3%, var(--white));
-
 .hero {
-  min-height: 56svh;
+  row-gap: calc(var(--layout-columns-gap) * 1.5);
   padding-top: calc(var(--layout-columns-gap) * 6);
-  padding-bottom: calc(var(--layout-columns-gap) * 3);
-  align-content: end;
-  row-gap: var(--layout-columns-gap);
   background-color: var(--white);
 
   @include mobile {
-    min-height: auto;
-    padding-top: calc(var(--layout-columns-gap) * 6.5);
+    row-gap: var(--layout-columns-gap);
+    padding-top: calc(var(--layout-columns-gap) * 4);
   }
 }
 
-.eyebrow,
-.pageTitle {
+.heading {
   grid-column: 1 / 9;
-  padding-left: var(--layout-columns-gap);
+
+  p {
+    color: var(--secondary);
+  }
 
   @include mobile {
     grid-column: 1 / 7;
-    padding-left: calc(var(--layout-columns-gap) * 2);
   }
 }
 
-.eyebrow {
-  color: var(--accent-dark);
-}
-
+// Shares the title's row and sits on its baseline, so the header reads as one block.
 .intro {
-  grid-column: 10 / 17;
+  grid-column: 9 / 16;
   align-self: end;
-  max-width: 29ch;
+  padding-bottom: 0.6em;
 
   @include mobile {
     grid-column: 1 / 7;
-    max-width: 27ch;
-    margin-top: var(--layout-columns-gap);
-    padding-left: calc(var(--layout-columns-gap) * 2);
+    padding-bottom: 0;
   }
 }
 
 .archive {
+  padding-top: calc(var(--layout-columns-gap) * 2);
+  padding-bottom: calc(var(--layout-columns-gap) * 6);
   background-color: var(--white);
-  padding-top: calc(var(--layout-columns-gap) * 3);
-  padding-bottom: calc(var(--layout-columns-gap) * 5);
+
+  @include mobile {
+    padding-bottom: calc(var(--layout-columns-gap) * 4);
+  }
 }
 
 .archiveHeader,
@@ -62,34 +56,13 @@ $hover: color-mix(in srgb, var(--black) 3%, var(--white));
 }
 
 .archiveHeader {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  gap: calc(var(--layout-columns-gap) * 2);
-  padding: 0 calc(var(--layout-columns-gap) * 2) calc(var(--layout-columns-gap) * 1.5);
-
-  @include mobile {
-    align-items: stretch;
-    flex-direction: column;
-    padding: 0 0 calc(var(--layout-columns-gap) * 1.5) calc(var(--layout-columns-gap) * 2);
-  }
+  padding-bottom: calc(var(--layout-columns-gap) * 1.5);
 }
 
 .archiveActions {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: var(--layout-columns-gap);
-
-  @include mobile {
-    align-items: stretch;
-    flex-direction: column;
-  }
-}
-
-.filter {
-  display: grid;
-  gap: 0.45rem;
-  color: $muted;
 }
 
 .topicTrigger {
@@ -108,9 +81,7 @@ $hover: color-mix(in srgb, var(--black) 3%, var(--white));
   box-shadow:
     0 0.32vw 0.52vw #00000014,
     0 0.12vw 0.22vw #0000001a;
-  transition:
-    background-color 180ms ease,
-    color 180ms ease;
+  transition: background-color 0.35s cubic-bezier(0.4, 0, 0.1, 1);
 
   &:hover,
   &[data-state='open'] {
@@ -118,12 +89,13 @@ $hover: color-mix(in srgb, var(--black) 3%, var(--white));
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--black);
     outline-offset: 3px;
   }
 
   @include mobile {
-    width: 100%;
+    min-width: 0;
+    flex: 1;
     height: 9vw;
     padding: 0 4vw;
   }
@@ -154,130 +126,118 @@ $hover: color-mix(in srgb, var(--black) 3%, var(--white));
 }
 
 .articleList {
-  padding: 0 var(--layout-columns-gap);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--layout-columns-gap);
+  row-gap: calc(var(--layout-columns-gap) * 3);
 
   @include mobile {
-    padding: 0;
+    grid-template-columns: 1fr;
+    row-gap: calc(var(--layout-columns-gap) * 2);
   }
 }
 
-.articleRow {
-  display: grid;
-  grid-template-columns: repeat(16, minmax(0, 1fr));
-  gap: var(--layout-columns-gap);
-  padding: calc(var(--layout-columns-gap) * 2.5) calc(var(--layout-columns-gap) * 2);
-  border-radius: calc(var(--layout-columns-gap) * 1.25);
+.card {
+  display: block;
   color: inherit;
-  transition:
-    background-color 180ms ease,
-    color 180ms ease;
 
   &:hover {
-    background-color: $hover;
+    .cover img {
+      transform: scale(1.03);
+    }
 
-    .articleTitle,
-    .readLink {
-      color: var(--accent);
+    .cardTitle {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.15em;
     }
   }
 
   &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
+    outline: 2px solid var(--black);
+    outline-offset: 6px;
+    border-radius: var(--layout-columns-gap);
+  }
+}
+
+// Same rounded image treatment as the landing page's work and project cards.
+.cover {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-radius: var(--layout-columns-gap);
+  background-color: color-mix(in srgb, var(--black) 6%, var(--white));
+
+  img {
+    object-fit: cover;
+    object-position: left center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.1, 1);
   }
 
   @include mobile {
-    grid-template-columns: 1fr;
-    padding: calc(var(--layout-columns-gap) * 2);
-    border-radius: calc(var(--layout-columns-gap) * 1.5);
+    border-radius: calc(var(--layout-columns-gap) * 0.5);
   }
 }
 
-.articleDetails {
-  grid-column: 1 / 5;
-  color: $muted;
-
-  @include mobile {
-    grid-column: auto;
-    display: flex;
-    justify-content: space-between;
-    gap: var(--layout-columns-gap);
-  }
-}
-
-.author {
-  margin-top: calc(var(--layout-columns-gap) * 0.65);
-
-  @include mobile {
-    margin-top: 0;
-  }
-}
-
-.articleCopy {
-  grid-column: 6 / 15;
-  min-width: 0;
-
-  @include mobile {
-    grid-column: auto;
-  }
-}
-
-.tags {
-  color: var(--accent-dark);
-}
-
-.articleTitle {
-  max-width: 24ch;
-  margin-top: calc(var(--layout-columns-gap) * 0.65);
+// Articles without a cover image show their own subtitle on the site's dark panel.
+.coverText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  margin: 0;
+  padding: calc(var(--layout-columns-gap) * 1.5);
+  background-color: var(--black);
+  color: var(--white);
   text-wrap: balance;
-  transition: color 180ms ease;
 }
 
-.articleDescription {
-  max-width: 55ch;
+.date {
+  display: block;
   margin-top: var(--layout-columns-gap);
-  color: $muted;
 }
 
-.readLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  margin-top: calc(var(--layout-columns-gap) * 1.5);
+.cardTitle {
+  max-width: 24ch;
+  margin-top: calc(var(--layout-columns-gap) * 0.25);
+  text-wrap: balance;
+}
 
-  transition: color 180ms ease;
+.cardDescription {
+  max-width: 48ch;
+  margin-top: calc(var(--layout-columns-gap) * 0.5);
 }
 
 .emptyState {
+  grid-column: 1 / -1;
   display: grid;
-  gap: var(--layout-columns-gap);
-  padding: calc(var(--layout-columns-gap) * 3) calc(var(--layout-columns-gap) * 2);
-  border-radius: calc(var(--layout-columns-gap) * 1.25);
-  background-color: $hover;
+  gap: calc(var(--layout-columns-gap) * 0.5);
 }
 
 .pagination {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  margin-top: calc(var(--layout-columns-gap) * 2);
+  margin-top: var(--layout-columns-gap);
 
   > :last-child {
     justify-self: end;
   }
 
   a:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--black);
     outline-offset: 5px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .articleRow,
-  .articleTitle,
-  .readLink,
   .topicTrigger,
-  .chevron {
+  .chevron,
+  .cover img {
     transition: none;
+  }
+
+  .card:hover .cover img {
+    transform: none;
   }
 }
