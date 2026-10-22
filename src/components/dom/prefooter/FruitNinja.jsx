@@ -8,9 +8,6 @@ import { useThree } from '@react-three/fiber';
 
 const FRUIT_LIFETIME = 10_000;
 
-
-
-// this is unchanged from the original
 function Lighting() {
   return (
     <>
@@ -33,7 +30,6 @@ function Lighting() {
   );
 }
 
-// This is new
 function TimedFruit({ id, onExpire, positionX, image, imageSliced }) {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,13 +39,7 @@ function TimedFruit({ id, onExpire, positionX, image, imageSliced }) {
     return () => clearTimeout(timer);
   }, [id, onExpire]);
 
-  return (
-    <Sticker
-      positionX={positionX}
-      image={image}
-      imageSliced={imageSliced}
-    />
-  );
+  return <Sticker positionX={positionX} image={image} imageSliced={imageSliced} />;
 }
 
 function useFruitSpawner(viewportWidth, textureCount, isMobile) {
@@ -60,22 +50,24 @@ function useFruitSpawner(viewportWidth, textureCount, isMobile) {
   }, []);
 
   useEffect(() => {
-    const getRandomNumber = (min, max) =>
-      Math.floor(Math.random() * (max - min + 1)) + min;
+    const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-    if (textureCount === 0) return;
+    if (textureCount === 0) return undefined;
 
-    const spawnTimer = setInterval(() => {
-      const halfWidth = Math.max(0, viewportWidth / 2 - 1);
+    const spawnTimer = setInterval(
+      () => {
+        const halfWidth = Math.max(0, viewportWidth / 2 - 1);
 
-      const batch = Array.from({ length: getRandomNumber(1, 6) }, () => ({
-        id: crypto.randomUUID(),
-        positionX: (Math.random() * 2 - 1) * halfWidth,
-        textureIndex: getRandomNumber(0, textureCount - 1),
-      }));
+        const batch = Array.from({ length: getRandomNumber(1, 6) }, () => ({
+          id: crypto.randomUUID(),
+          positionX: (Math.random() * 2 - 1) * halfWidth,
+          textureIndex: getRandomNumber(0, textureCount - 1),
+        }));
 
-      setFruits((current) => [...current, ...batch]);
-    }, isMobile ? 5000 : 3000);
+        setFruits((current) => [...current, ...batch]);
+      },
+      isMobile ? 5000 : 3000,
+    );
 
     return () => clearInterval(spawnTimer);
   }, [viewportWidth, textureCount, isMobile]);
@@ -113,32 +105,16 @@ function FruitNinja() {
     '/logos/sliced/vscodeSliced.webp',
   ]);
 
-  const { fruits, removeFruit } = useFruitSpawner(
-    viewport.width,
-    textures.length,
-    isMobile
-  );
+  const { fruits, removeFruit } = useFruitSpawner(viewport.width, textures.length, isMobile);
 
   return (
     <>
       <PerspectiveCamera makeDefault position={[0, 0, 10]} />
       <Lighting />
 
-      <Physics
-        interpolate
-        timeStep={1 / 60}
-        gravity={[0, -15, 0]}
-        colliders={false}
-      >
+      <Physics interpolate timeStep={1 / 60} gravity={[0, -15, 0]} colliders={false}>
         {fruits.map((fruit) => (
-          <TimedFruit
-            key={fruit.id}
-            id={fruit.id}
-            onExpire={removeFruit}
-            positionX={fruit.positionX}
-            image={textures[fruit.textureIndex]}
-            imageSliced={slicedTextures[fruit.textureIndex]}
-          />
+          <TimedFruit key={fruit.id} id={fruit.id} onExpire={removeFruit} positionX={fruit.positionX} image={textures[fruit.textureIndex]} imageSliced={slicedTextures[fruit.textureIndex]} />
         ))}
       </Physics>
     </>
