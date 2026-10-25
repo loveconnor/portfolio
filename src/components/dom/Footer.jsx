@@ -1,4 +1,5 @@
 import AppearTitle from '@src/components/animationComponents/appearTitle/Index';
+import BrandMark from '@src/components/dom/BrandMark';
 import { CONTACT_EMAIL } from '@src/constants/contact';
 import LinkText from '@src/components/animationComponents/linkText/Index';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -16,7 +17,9 @@ import { useStore } from '@src/store';
 import { useWindowSize } from '@darkroom.engineering/hamo';
 
 const Time = dynamic(() => import('@src/components/dom/Time'), { ssr: false });
-const GoTop = dynamic(() => import('@src/components/dom/GoTop'), { ssr: false });
+const GoTop = dynamic(() => import('@src/components/dom/GoTop'), {
+  ssr: false,
+});
 
 function Footer() {
   const isMobile = useIsMobile();
@@ -75,7 +78,11 @@ function Footer() {
                 scroller: document?.querySelector('main'),
               });
             } else {
-              gsap.set(footerEl, { transform: 'translate(0%, 0%)', yPercent: 0, height: 'auto' });
+              gsap.set(footerEl, {
+                transform: 'translate(0%, 0%)',
+                yPercent: 0,
+                height: 'auto',
+              });
             }
           });
         }
@@ -154,7 +161,13 @@ function Footer() {
           <div className={clsx('p-x', styles.middleText)}>Currently available for limited projects</div>
         </AppearTitle>
       </div>
-      <div className={styles.middleContainer} style={{ gridColumn: '13 / 17', textAlign: isMobile ? 'left' : 'right' }}>
+      <div
+        className={styles.middleContainer}
+        style={{
+          gridColumn: '13 / 17',
+          textAlign: isMobile ? 'left' : 'right',
+        }}
+      >
         <AppearTitle isFooter>
           <div className="p-x">© 2026 · Connor Love</div>
           <div className={clsx('p-x', styles.middleText)}>All Rights Reserved</div>
@@ -162,6 +175,7 @@ function Footer() {
       </div>
 
       <div className={styles.connor}>
+        <BrandMark className={styles.brandMark} />
         <span>CONNOR</span>
       </div>
       <div className={styles.goToTop}>

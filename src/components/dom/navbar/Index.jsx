@@ -1,4 +1,5 @@
 import ButtonLink from '@src/components/animationComponents/buttonLink/Index';
+import BrandMark from '@src/components/dom/BrandMark';
 import { BOOK_CALL_URL } from '@src/constants/contact';
 import Link from 'next/link';
 import MenuButton from '@src/components/dom/navbar/components/MenuButton';
@@ -45,8 +46,8 @@ function Navbar() {
 
       <header className={clsx(styles.root, isMenuOpen && styles.menuOpen)} role="banner">
         <div className={styles.innerHeader}>
-          <Link onClick={goToTop} aria-label="Go home" scroll={false} href="/">
-            <span className={clsx('bold', 'h4')}>CONNOR</span>
+          <Link onClick={goToTop} className={styles.brandLink} aria-label="Connor Love — home" scroll={false} href="/">
+            <BrandMark className={styles.brandMark} />
           </Link>
 
           <div className={styles.rightContainer}>

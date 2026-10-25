@@ -148,20 +148,34 @@
   }
 
   .connor {
+    display: flex;
+    align-items: center;
+    gap: 1.5vw;
+
     @include mobile {
       grid-column: 1 / 6;
-      font-size: 22.2vw;
+      font-size: 13.5vw;
       line-height: 17.428vw;
     }
     align-self: flex-end;
     grid-column: 1 / 13;
 
-    font-size: 15.2vw;
+    font-size: 12.3vw;
     line-height: 12.628vw;
     transform: translate(-0.3vw, 2.1vw);
     color: var(--white);
     > span {
       display: inherit;
+    }
+    .brandMark {
+      display: block;
+      flex-shrink: 0;
+      width: 8vw;
+      height: auto;
+
+      @include mobile {
+        width: 10vw;
+      }
     }
   }
   .goToTop {

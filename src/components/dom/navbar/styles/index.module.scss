@@ -36,6 +36,27 @@
     > a {
       pointer-events: all;
     }
+    .brandLink {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      min-width: 44px;
+      min-height: 44px;
+      color: var(--black);
+      background-color: var(--white);
+      border-radius: 8px;
+
+      &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 4px;
+      }
+    }
+    .brandMark {
+      display: block;
+      width: clamp(32px, 2.8vw, 48px);
+      height: auto;
+    }
     .rightContainer {
       pointer-events: all;
 

@@ -287,7 +287,13 @@ const getArticleSchema = ({ canonicalUrl, title, description, article, articles 
 
 const getSchema = ({ canonicalUrl, title, description, project, pageType, article, articles }) => {
   if (pageType === 'articles') {
-    return getArticleSchema({ canonicalUrl, title, description, article, articles });
+    return getArticleSchema({
+      canonicalUrl,
+      title,
+      description,
+      article,
+      articles,
+    });
   }
 
   const breadcrumbId = `${canonicalUrl}#breadcrumb`;
@@ -451,6 +457,7 @@ function CustomHead({ title = '', description, project, pageType, article, artic
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
       <link rel="manifest" href="/site.webmanifest" />
       <link rel="alternate" type="text/plain" href={`${SITE_URL}/llms.txt`} title="AI-readable site summary" />
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#333333" />
